@@ -4,9 +4,10 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
+        "postbuild": "node -e \"require('fs').copyFileSync('./dist/index.html', './dist/404.html')\"",
         "preview": "vite preview",
         "lint": "eslint --fix . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-        "deploy": "vite build && cp dist/index.html dist/404.html && gh-pages -d dist"
+        "deploy": "npm run build && gh-pages -d dist"
     },
     "dependencies": {
         "@primeuix/themes": "^1.0.0",
@@ -23,6 +24,7 @@
         "@vitejs/plugin-vue": "^5.0.5",
         "@vue/eslint-config-prettier": "^9.0.0",
         "autoprefixer": "^10.4.19",
+        "copyfiles": "^2.4.1",
         "eslint": "^8.57.0",
         "eslint-plugin-vue": "^9.23.0",
         "gh-pages": "^6.3.0",

@@ -7,7 +7,7 @@ const router = createRouter({
         // PUBLIC ROUTES
         {
             path: '/',
-            name: 'home',
+            name: 'landing',
             component: () => import('@/views/Landing.vue')
         },
         {
