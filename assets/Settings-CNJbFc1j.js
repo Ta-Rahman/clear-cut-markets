@@ -1,1 +1,0 @@
-import{h as t,e,o as a}from"./index-Dbrdqeje.js";const n={class:"grid"},l={__name:"Settings",setup(o){return(r,s)=>(a(),t("div",n,s[0]||(s[0]=[e("div",{class:"col-12"},[e("div",{class:"card"},[e("h5",null,"Settings"),e("p",null,"Manage your account settings and preferences.")])],-1)])))}};export{l as default};

@@ -1,0 +1,1 @@
+import{h as t,e,o}from"./index-DxfVBfay.js";const a={class:"grid"},c={__name:"Modules",setup(n){return(l,s)=>(o(),t("div",a,s[0]||(s[0]=[e("div",{class:"col-12"},[e("div",{class:"card"},[e("h5",null,"My Investment Modules"),e("p",null,"Manage your investment tracking modules here.")])],-1)])))}};export{c as default};
