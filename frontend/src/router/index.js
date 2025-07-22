@@ -1,8 +1,8 @@
 import AppLayout from '@/layout/AppLayout.vue';
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router'; // Changed import
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(), // Changed from createWebHistory()
     routes: [
         // PUBLIC ROUTES
         {

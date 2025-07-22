@@ -8,25 +8,36 @@
             </p>
         </div>
 
-        <!-- Pricing Toggle -->
-        <div class="flex justify-center mb-8 fade-in stagger-2">
-            <div class="inline-flex items-center bg-white rounded-lg p-1 shadow-sm">
+        <!-- Enhanced Pricing Toggle with animation -->
+        <div class="flex justify-center mb-8">
+            <div class="inline-flex items-center bg-white rounded-lg p-1 shadow-sm relative">
+                <!-- Sliding background indicator -->
+                <div 
+                    class="absolute h-full bg-violet-600 rounded-md transition-all duration-300 ease-out"
+                    :style="{
+                        width: '50%',
+                        transform: billingPeriod === 'monthly' ? 'translateX(0)' : 'translateX(100%)'
+                    }"
+                ></div>
+                
                 <button 
                     @click="billingPeriod = 'monthly'"
-                    :class="['px-4 py-2 rounded-md transition-all', billingPeriod === 'monthly' ? 'bg-violet-600 text-white' : 'text-gray-600']">
+                    :class="['relative z-10 px-4 py-2 rounded-md transition-all duration-300', 
+                             billingPeriod === 'monthly' ? 'text-white' : 'text-gray-600']">
                     Monthly
                 </button>
                 <button 
                     @click="billingPeriod = 'annual'"
-                    :class="['px-4 py-2 rounded-md transition-all', billingPeriod === 'annual' ? 'bg-violet-600 text-white' : 'text-gray-600']">
-                    Annual <span class="text-xs ml-1">(Save 20%)</span>
+                    :class="['relative z-10 px-4 py-2 rounded-md transition-all duration-300', 
+                             billingPeriod === 'annual' ? 'text-white' : 'text-gray-600']">
+                    Annual
                 </button>
             </div>
         </div>
 
-        <<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             <!-- Essential Plan - 3 Modules -->
-            <div class="p-0 md:p-4 fade-left stagger-3">
+                <div class="p-0 md:p-4">
                 <div class="relative p-8 flex flex-col bg-white rounded-2xl border-2 border-gray-200 hover:border-violet-500 duration-300 transition-all cursor-pointer h-full">
                     <div class="text-gray-900 text-center mb-8">
                         <h3 class="text-3xl font-bold">Essential</h3>
@@ -41,10 +52,14 @@
                         <p class="text-sm text-transparent" v-else>-</p>
                     </div>
                     
-                    <!-- Price -->
+                    <!-- Animated Price -->
                     <div class="mb-8 flex flex-col items-center gap-4">
                         <div class="flex items-baseline">
-                            <span class="text-5xl font-bold text-gray-900">€{{ billingPeriod === 'annual' ? '20' : '25' }}</span>
+                            <span class="text-5xl font-bold text-gray-900">
+                                €<transition name="price-fade" mode="out-in">
+                                    <span :key="billingPeriod">{{ billingPeriod === 'annual' ? '20' : '25' }}</span>
+                                </transition>
+                            </span>
                             <span class="text-gray-600 ml-2">per month</span>
                         </div>
                         <Button 
@@ -100,8 +115,8 @@
             </div>
 
             <!-- Professional Plan - 6 Modules - Most Popular -->
-            <div class="p-0 md:p-4 scale-in stagger-4">
-                <div class="relative p-8 flex flex-col bg-white rounded-2xl border-2 border-violet-500 shadow-xl duration-300 transition-all cursor-pointer h-full">
+            <div class="p-0 md:p-4">
+                <div class="relative p-8 flex flex-col bg-white rounded-2xl border-2 border-gray-200 hover:border-violet-500 duration-300 transition-all cursor-pointer h-full">
                     <!-- Popular Badge -->
                     <div class="absolute -top-4 left-1/2 -translate-x-1/2">
                         <Chip label="Most Popular" class="bg-violet-600 text-white px-4 py-2" />
@@ -118,11 +133,15 @@
                         <p class="text-sm text-gray-500 mt-1">€{{ billingPeriod === 'annual' ? '6.00' : '7.50' }} per module</p>
                         <p class="text-sm text-green-600 font-semibold">Save {{ billingPeriod === 'annual' ? '€108/year' : '10%' }}</p>
                     </div>
-                    
-                    <!-- Price -->
+
+                                        <!-- Animated Price -->
                     <div class="mb-8 flex flex-col items-center gap-4">
                         <div class="flex items-baseline">
-                            <span class="text-5xl font-bold text-gray-900">€{{ billingPeriod === 'annual' ? '36' : '45' }}</span>
+                            <span class="text-5xl font-bold text-gray-900">
+                                €<transition name="price-fade" mode="out-in">
+                                    <span :key="billingPeriod">{{ billingPeriod === 'annual' ? '36' : '45' }}</span>
+                                </transition>
+                            </span>
                             <span class="text-gray-600 ml-2">per month</span>
                         </div>
                         <Button 
@@ -185,7 +204,7 @@
             </div>
 
             <!-- Advanced Plan - 9 Modules -->
-            <div class="p-0 md:p-4 fade-right stagger-5">
+            <div class="p-0 md:p-4">
                 <div class="relative p-8 flex flex-col bg-white rounded-2xl border-2 border-gray-200 hover:border-violet-500 duration-300 transition-all cursor-pointer h-full">
                     <div class="text-gray-900 text-center mb-8">
                         <h3 class="text-3xl font-bold">Advanced</h3>
@@ -198,11 +217,15 @@
                         <p class="text-sm text-gray-500 mt-1">€{{ billingPeriod === 'annual' ? '5.78' : '7.22' }} per module</p>
                         <p class="text-sm text-green-600 font-semibold">Save {{ billingPeriod === 'annual' ? '€156/year' : '13%' }}</p>
                     </div>
-                    
-                    <!-- Price -->
+
+                                        <!-- Animated Price -->
                     <div class="mb-8 flex flex-col items-center gap-4">
                         <div class="flex items-baseline">
-                            <span class="text-5xl font-bold text-gray-900">€{{ billingPeriod === 'annual' ? '52' : '65' }}</span>
+                            <span class="text-5xl font-bold text-gray-900">
+                                €<transition name="price-fade" mode="out-in">
+                                    <span :key="billingPeriod">{{ billingPeriod === 'annual' ? '52' : '65' }}</span>
+                                </transition>
+                            </span>
                             <span class="text-gray-600 ml-2">per month</span>
                         </div>
                         <Button 
@@ -304,5 +327,28 @@ const contactSales = () => {
 </script>
 
 <style scoped>
-/* No component-specific styles needed - all using Tailwind */
+/* Price transition animation */
+.price-fade-enter-active,
+.price-fade-leave-active {
+    transition: all 0.3s ease;
+}
+
+.price-fade-enter-from {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.price-fade-leave-to {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+/* Optional: Add a subtle scale animation to the cards when switching */
+.pricing-card-transition {
+    transition: transform 0.3s ease;
+}
+
+.pricing-card-transition:active {
+    transform: scale(0.98);
+}
 </style>
