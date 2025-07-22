@@ -2,14 +2,14 @@
     <!-- Enhanced Pricing Section with Toggle -->
     <div id="pricing" class="py-12 px-4 md:px-6 lg:px-8 bg-gray-50">
         <div class="text-center mb-12">
-            <h2 class="text-gray-900 font-bold mb-3 text-4xl">Simple Module-Based Pricing</h2>
-            <p class="text-gray-600 text-xl max-w-2xl mx-auto">
+            <h2 class="text-gray-900 font-bold mb-3 text-4xl fade-up">Simple Module-Based Pricing</h2>
+            <p class="text-gray-600 text-xl max-w-2xl mx-auto fade-up stagger-1">
                 Choose the plan that fits your portfolio. Save 95% compared to Industry standard tools.
             </p>
         </div>
 
         <!-- Pricing Toggle -->
-        <div class="flex justify-center mb-8">
+        <div class="flex justify-center mb-8 fade-in stagger-2">
             <div class="inline-flex items-center bg-white rounded-lg p-1 shadow-sm">
                 <button 
                     @click="billingPeriod = 'monthly'"
@@ -24,9 +24,9 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             <!-- Essential Plan - 3 Modules -->
-            <div class="p-0 md:p-4">
+            <div class="p-0 md:p-4 fade-left stagger-3">
                 <div class="relative p-8 flex flex-col bg-white rounded-2xl border-2 border-gray-200 hover:border-violet-500 duration-300 transition-all cursor-pointer h-full">
                     <div class="text-gray-900 text-center mb-8">
                         <h3 class="text-3xl font-bold">Essential</h3>
@@ -100,7 +100,7 @@
             </div>
 
             <!-- Professional Plan - 6 Modules - Most Popular -->
-            <div class="p-0 md:p-4">
+            <div class="p-0 md:p-4 scale-in stagger-4">
                 <div class="relative p-8 flex flex-col bg-white rounded-2xl border-2 border-violet-500 shadow-xl duration-300 transition-all cursor-pointer h-full">
                     <!-- Popular Badge -->
                     <div class="absolute -top-4 left-1/2 -translate-x-1/2">
@@ -185,7 +185,7 @@
             </div>
 
             <!-- Advanced Plan - 9 Modules -->
-            <div class="p-0 md:p-4">
+            <div class="p-0 md:p-4 fade-right stagger-5">
                 <div class="relative p-8 flex flex-col bg-white rounded-2xl border-2 border-gray-200 hover:border-violet-500 duration-300 transition-all cursor-pointer h-full">
                     <div class="text-gray-900 text-center mb-8">
                         <h3 class="text-3xl font-bold">Advanced</h3>

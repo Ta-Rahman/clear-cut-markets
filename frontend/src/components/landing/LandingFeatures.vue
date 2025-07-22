@@ -1,12 +1,13 @@
 <template>
     <!-- Features Section with Icons -->
     <div id="features" class="px-4 py-8 md:px-6 lg:px-8 bg-gray-50">
-        <h2 class="text-center text-gray-900 text-3xl font-bold mb-6">Why Choose Clear Cut Markets?</h2>
+        <h2 class="text-center text-gray-900 text-3xl font-bold mb-6 fade-up">Why Choose Clear Cut Markets?</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
             <div v-for="(feature, index) in features" :key="index" 
                  :class="[
                      'text-center p-6 bg-white rounded-xl transition-all duration-300 hover:shadow-xl hover:scale-105',
-                     `animate-fade-in-up animation-delay-${index * 100}`
+                     'fade-up',
+                     `stagger-${(index % 3) + 1}`
                  ]"
                  @mouseenter="hoveredFeature = index"
                  @mouseleave="hoveredFeature = null">

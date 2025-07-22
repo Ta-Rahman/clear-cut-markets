@@ -31,7 +31,10 @@
         <LandingFeatures />
         <LandingPricing />
         <LandingFAQ />
-        <LandingStickyCTA v-if="showStickyBar" />
+        <!-- Wrap LandingStickyCTA in a Transition -->
+        <Transition name="sticky-slide">
+            <LandingStickyCTA v-if="showStickyBar" />
+        </Transition>
     </div>
 </template>
 
@@ -77,7 +80,17 @@ const animateValue = (ref, start, end, duration) => {
 
 // Check if sticky bar should be shown
 const checkStickyBar = () => {
-    showStickyBar.value = window.scrollY > window.innerHeight;
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    
+    // Multiple conditions for showing sticky bar
+    const hasScrolledEnough = scrollY > windowHeight * 2; // Scrolled 2 viewports
+    const nearBottom = scrollY > documentHeight - windowHeight * 1.5; // Near bottom
+    const pastPricing = document.getElementById('pricing') && 
+                        scrollY > document.getElementById('pricing').offsetTop;
+    
+    showStickyBar.value = (hasScrolledEnough && pastPricing) || nearBottom;
 };
 
 onMounted(() => {
@@ -102,9 +115,26 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* Global landing page styles */
+/* Sticky bar transition */
+.sticky-slide-enter-active {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sticky-slide-leave-active {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sticky-slide-enter-from {
+    transform: translateY(100%);
+}
+
+.sticky-slide-leave-to {
+    transform: translateY(100%);
+}
+
+/* Smooth padding transition */
 .sticky-bar-padding {
-    transition: padding-bottom 0.3s ease;
+    transition: padding-bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Text gradient effect */

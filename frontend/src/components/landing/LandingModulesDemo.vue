@@ -2,8 +2,8 @@
     <!-- Interactive Demo Section -->
     <div class="px-4 py-8 md:px-6 lg:px-8">
         <div class="text-center mb-6">
-            <h2 class="text-4xl font-bold text-gray-900 mb-3">Your Investment Modules</h2>
-            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            <h2 class="text-4xl font-bold text-gray-900 mb-3 fade-up">Your Investment Modules</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto fade-up stagger-1">
                 Each module is a complete investment tracking system. Choose what matters to you.
             </p>
         </div>
@@ -13,7 +13,8 @@
                 <div v-for="(module, index) in demoModules" :key="module.symbol" 
                      :class="[
                          'p-4',
-                         `animate-fade-in-up animation-delay-${index * 200}`
+                         'fade-up',
+                         `stagger-${index + 2}`
                      ]">
                     
                     <!-- Enhanced Module Card with tooltips -->

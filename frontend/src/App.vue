@@ -5,6 +5,67 @@
 </template>
 
 <style>
+
+#features .rounded-xl:hover h3,
+#features .rounded-xl:hover p {
+    font-weight: inherit !important;
+}
+
+/* Scroll Animation Classes */
+.fade-up,
+.fade-in,
+.fade-left,
+.fade-right,
+.scale-in {
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-up {
+    transform: translateY(30px);
+}
+
+.fade-left {
+    transform: translateX(30px);
+}
+
+.fade-right {
+    transform: translateX(-30px);
+}
+
+.scale-in {
+    transform: scale(0.9);
+}
+
+/* When elements come into view */
+.fade-up.animate-in,
+.fade-in.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-left.animate-in {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.fade-right.animate-in {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.scale-in.animate-in {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Stagger animations for multiple elements */
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+.stagger-5 { transition-delay: 0.5s; }
+
 /* Dark mode overrides for Tailwind-like classes */
 .app-dark .dark\:bg-gray-900\/90 {
     background-color: rgba(17, 24, 39, 0.9);
@@ -265,7 +326,7 @@
 
 /* Fix the sticky bar button */
 .app-dark .bg-white.text-violet-600 {
-    background-color: #16a34a !important;
+    background-color: #86efac !important;
     color: #7c3aed !important;
 }
 
@@ -276,7 +337,7 @@
 
 /* Alternative: Make the button more prominent in dark mode */
 .app-dark .fixed.bottom-0 .p-button {
-    background-color: #16a34a !important;
+    background-color: #86efac !important;
     color: #000000 !important;
     font-weight: 600 !important;
 }

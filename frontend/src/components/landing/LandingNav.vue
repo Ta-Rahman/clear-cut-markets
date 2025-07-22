@@ -24,10 +24,14 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
+import { useScrollAnimation } from '@/composables/useScrollAnimation';
 import Button from 'primevue/button';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
+
+// Initialize scroll animations
+const { observeElements } = useScrollAnimation();
 
 // Check if we're in dark mode by checking for the app-dark class
 const isDark = computed(() => {
