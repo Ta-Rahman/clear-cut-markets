@@ -11,7 +11,7 @@
             </h1>
             
             <p class="text-xl text-gray-600 mb-6 max-w-3xl mx-auto animate-fade-in-down animation-delay-200">
-                Professional investment monitoring for 95% less than Bloomberg Terminal. 
+                Professional investment monitoring for 95% less than competitors*. 
                 Focus on your top investments with AI-powered insights.
             </p>
             
@@ -44,29 +44,26 @@
             </Transition>
 
             <!-- Live Stats -->
-            <div class="mt-6 animate-fade-in-up animation-delay-500">
-                <div class="flex justify-center items-center gap-4 flex-wrap">
-                    <div class="text-center px-6">
-                        <h3 class="text-4xl font-bold text-primary mb-1">{{ animatedWaitlist }}+</h3>
-                        <p class="text-gray-600 text-sm m-0">On Waitlist</p>
-                    </div>
-                    <div class="w-px h-10 bg-gray-300 self-center hidden sm:block"></div>
-                    <div class="text-center px-6">
-                        <h3 class="text-4xl font-bold text-primary mb-1">${{ animatedSaved }}k</h3>
-                        <p class="text-gray-600 text-sm m-0">Saved vs competitors</p>
-                    </div>
-                    <div class="w-px h-10 bg-gray-300 self-center hidden sm:block"></div>
-                    <div class="text-center px-6">
-                        <h3 class="text-4xl font-bold text-primary mb-1">{{ animatedModules }}</h3>
-                        <p class="text-gray-600 text-sm m-0">Possible Modules</p>
-                    </div>
-                    <div class="w-px h-10 bg-gray-300 self-center hidden sm:block"></div>
-                    <div class="text-center px-6">
-                        <h3 class="text-4xl font-bold text-primary mb-1">{{ animatedSources }}+</h3>
-                        <p class="text-gray-600 text-sm m-0">Data Sources</p>
-                    </div>
-                </div>
-            </div>
+<div class="mt-8 animate-fade-in-up animation-delay-500">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-y-6 max-w-3xl mx-auto">
+        <div class="text-center px-4">
+            <h3 class="text-4xl font-bold text-primary mb-1">{{ animatedWaitlist }}+</h3>
+            <p class="text-gray-600 dark:text-gray-400 text-sm m-0">On Waitlist</p>
+        </div>
+        <div class="text-center px-4">
+            <h3 class="text-4xl font-bold text-primary mb-1">${{ animatedSaved }}k</h3>
+            <p class="text-gray-600 dark:text-gray-400 text-sm m-0">Saved vs Competitors</p>
+        </div>
+        <div class="text-center px-4">
+            <h3 class="text-4xl font-bold text-primary mb-1">{{ animatedModules }}</h3>
+            <p class="text-gray-600 dark:text-gray-400 text-sm m-0">Possible Modules</p>
+        </div>
+        <div class="text-center px-4">
+            <h3 class="text-4xl font-bold text-primary mb-1">{{ animatedSources }}+</h3>
+            <p class="text-gray-600 dark:text-gray-400 text-sm m-0">Data Sources</p>
+        </div>
+    </div>
+</div>
         </div>
     </div>
 </template>

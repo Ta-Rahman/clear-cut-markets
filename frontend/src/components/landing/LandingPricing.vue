@@ -37,7 +37,7 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             <!-- Essential Plan - 3 Modules -->
-                <div class="p-0 md:p-4">
+                <div class="p-0 md:p-4 fade-up stagger-1">
                 <div class="relative p-8 flex flex-col bg-white rounded-2xl border-2 border-gray-200 hover:border-violet-500 duration-300 transition-all cursor-pointer h-full">
                     <div class="text-gray-900 text-center mb-8">
                         <h3 class="text-3xl font-bold">Essential</h3>
@@ -115,8 +115,8 @@
             </div>
 
             <!-- Professional Plan - 6 Modules - Most Popular -->
-            <div class="p-0 md:p-4">
-                <div class="relative p-8 flex flex-col bg-white rounded-2xl border-2 border-gray-200 hover:border-violet-500 duration-300 transition-all cursor-pointer h-full">
+    <div class="p-0 md:p-4 fade-up stagger-2">
+        <div class="relative p-8 flex flex-col bg-white rounded-2xl border-2 border-gray-200 hover:border-violet-500 duration-300 transition-all cursor-pointer h-full">
                     <!-- Popular Badge -->
                     <div class="absolute -top-4 left-1/2 -translate-x-1/2">
                         <Chip label="Most Popular" class="bg-violet-600 text-white px-4 py-2" />
@@ -204,8 +204,8 @@
             </div>
 
             <!-- Advanced Plan - 9 Modules -->
-            <div class="p-0 md:p-4">
-                <div class="relative p-8 flex flex-col bg-white rounded-2xl border-2 border-gray-200 hover:border-violet-500 duration-300 transition-all cursor-pointer h-full">
+    <div class="p-0 md:p-4 fade-up stagger-3">
+        <div class="relative p-8 flex flex-col bg-white rounded-2xl border-2 border-gray-200 hover:border-violet-500 duration-300 transition-all cursor-pointer h-full">
                     <div class="text-gray-900 text-center mb-8">
                         <h3 class="text-3xl font-bold">Advanced</h3>
                         <p class="text-gray-600 mt-2">For portfolio managers</p>
