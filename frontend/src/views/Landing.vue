@@ -1,9 +1,7 @@
 <template>
     <div class="relative overflow-x-hidden sticky-bar-padding" :style="{ paddingBottom: showStickyBar ? '96px' : '0' }">
-        <!-- Animated Background -->
         <div class="fixed inset-0 bg-gradient-to-br from-violet-500 to-purple-600 opacity-5 -z-10"></div>
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <!-- Aurora-like gradient bands -->
             <div class="absolute inset-0">
                 <div class="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-violet-500/[0.07] via-transparent to-transparent"></div>
                 <div class="absolute bottom-0 right-0 w-full h-1/2 bg-gradient-to-t from-purple-500/[0.07] via-transparent to-transparent"></div>
@@ -19,7 +17,6 @@
             </div>
         </div>
 
-        <!-- Components -->
         <LandingNav />
         <LandingHero 
             :animatedWaitlist="animatedWaitlist"
@@ -27,11 +24,11 @@
             :animatedModules="animatedModules"
             :animatedSources="animatedSources"
         />
+        <LandingUsp /> 
         <LandingModulesDemo />
         <LandingFeatures />
         <LandingPricing />
         <LandingFAQ />
-        <!-- Wrap LandingStickyCTA in a Transition -->
         <Transition name="sticky-slide">
             <LandingStickyCTA v-if="showStickyBar" />
         </Transition>
@@ -43,6 +40,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import { useDarkMode } from '@/composables/useDarkMode';
 import LandingNav from '@/components/landing/LandingNav.vue';
 import LandingHero from '@/components/landing/LandingHero.vue';
+import LandingUsp from '@/components/landing/LandingUsp.vue'; // New Import
 import LandingModulesDemo from '@/components/landing/LandingModulesDemo.vue';
 import LandingFeatures from '@/components/landing/LandingFeatures.vue';
 import LandingPricing from '@/components/landing/LandingPricing.vue';

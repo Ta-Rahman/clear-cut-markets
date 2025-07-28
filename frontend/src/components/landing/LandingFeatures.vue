@@ -1,7 +1,6 @@
 <template>
-    <!-- Features Section with Icons -->
-    <div id="features" class="px-4 py-8 md:px-6 lg:px-8 bg-gray-50">
-        <h2 class="text-center text-gray-900 text-3xl font-bold mb-6 fade-up">Why Choose Clear Cut Markets?</h2>
+    <div id="features" class="px-4 py-8 md:px-6 lg:px-8">
+        <h2 class="text-center text-gray-900 text-3xl font-bold mb-6 fade-up">Everything You Need, Nothing You Don't</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
             <div v-for="(feature, index) in features" :key="index" 
                  :class="[
@@ -30,34 +29,34 @@ const hoveredFeature = ref(null);
 // Features data
 const features = ref([
     {
-        icon: 'pi-chart-line',
-        title: 'Module-Based Tracking',
-        description: 'Focus on 3-9 investments that matter most to your portfolio'
+        icon: 'pi-filter',
+        title: 'Focused Module Tracking',
+        description: 'Eliminate noise by monitoring only the 3-9 investments that matter most to you.'
     },
     {
-        icon: 'pi-bolt',
+        icon: 'pi-sparkles',
         title: 'AI-Powered Insights',
-        description: 'Get sentiment analysis and smart alerts on your investments'
+        description: 'Get automated sentiment analysis and digestible summaries from 15+ news and data sources.'
+    },
+    {
+        icon: 'pi-sitemap',
+        title: 'Cross-Investment Alerts',
+        description: 'Our AI connects the dots between market news and your specific holdings to give you an early warning.'
     },
     {
         icon: 'pi-shield',
         title: 'Bank-Level Security',
-        description: 'Your data is encrypted and secure with enterprise-grade protection'
+        description: 'Your data is encrypted and secure with enterprise-grade protection.'
     },
     {
         icon: 'pi-mobile',
         title: 'Access Anywhere',
-        description: 'Monitor your investments from any device, anytime'
-    },
-    {
-        icon: 'pi-sync',
-        title: 'Real-Time Updates',
-        description: 'Live market data and instant notifications'
+        description: 'Monitor your investments from any device, anytime, with a clean and modern interface.'
     },
     {
         icon: 'pi-dollar',
-        title: '95% Cost Savings',
-        description: 'Professional tools without the enterprise price tag'
+        title: 'Affordable Power',
+        description: 'Get institutional-grade tools and insights without the enterprise price tag.'
     }
 ]);
 </script>

@@ -6,18 +6,26 @@
             </h2>
             
             <div class="space-y-4">
-                <div v-for="(faq, index) in faqs" :key="index" class="border rounded-lg overflow-hidden border-gray-200 dark:border-gray-700">
+                <div v-for="(faq, index) in faqs" :key="index"
+                     :class="[
+                         'border rounded-lg border-gray-200 dark:border-gray-700',
+                         'fade-up',
+                         `stagger-${index + 1}`
+                     ]">
                     <button
                         @click="toggleFaq(index)"
                         class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                         :aria-expanded="activeFaq === index"
                     >
                         <span class="font-semibold text-gray-900 dark:text-gray-100">{{ faq.question }}</span>
-                        <i :class="['pi', activeFaq === index ? 'pi-chevron-up' : 'pi-chevron-down', 'text-gray-500 dark:text-gray-400']"></i>
+                        <i :class="['pi', activeFaq === index ? 'pi-chevron-up' : 'pi-chevron-down', 'text-gray-500 dark:text-gray-400 transition-transform duration-300']"></i>
                     </button>
-                    <Transition name="accordion">
-                        <div v-if="activeFaq === index" class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
-                            <p class="text-gray-700 dark:text-gray-300">{{ faq.answer }}</p>
+                    
+                    <Transition name="accordion-fade">
+                        <div v-if="activeFaq === index" class="bg-gray-50 dark:bg-gray-800/50 border-t border-gray-200 dark:border-gray-700">
+                            <div class="px-6 pb-4 pt-2 text-gray-700 dark:text-gray-300">
+                                {{ faq.answer }}
+                            </div>
                         </div>
                     </Transition>
                 </div>
@@ -31,7 +39,6 @@ import { ref } from 'vue';
 
 const activeFaq = ref(null);
 
-// FAQ data
 const faqs = ref([
     {
         question: "How is this different from Bloomberg Terminal?",
@@ -59,24 +66,22 @@ const faqs = ref([
     }
 ]);
 
-// Toggle FAQ item
 const toggleFaq = (index) => {
     activeFaq.value = activeFaq.value === index ? null : index;
 };
 </script>
 
 <style scoped>
-/* Accordion transition for FAQ */
-.accordion-enter-active,
-.accordion-leave-active {
-    transition: all 0.3s ease;
-    max-height: 200px;
-    overflow: hidden;
+/*
+  This simplified transition only animates opacity for a rock-solid, shake-free experience.
+*/
+.accordion-fade-enter-active,
+.accordion-fade-leave-active {
+  transition: opacity 0.2s ease-out;
 }
 
-.accordion-enter-from,
-.accordion-leave-to {
-    max-height: 0;
-    opacity: 0;
+.accordion-fade-enter-from,
+.accordion-fade-leave-to {
+  opacity: 0;
 }
 </style>
