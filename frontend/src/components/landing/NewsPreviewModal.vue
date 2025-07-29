@@ -39,6 +39,8 @@
 <script setup>
 import { ref, watch } from 'vue';
 import Dialog from 'primevue/dialog';
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n(); // This line ensures the component is i18n-aware
 
 const props = defineProps({
     visible: {

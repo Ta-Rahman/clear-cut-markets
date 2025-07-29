@@ -10,7 +10,7 @@
             </h1>
             
             <p class="text-xl text-gray-600 dark:text-gray-400 mb-6 max-w-3xl mx-auto animate-fade-in-down animation-delay-200">
-                Our AI co-pilot analyzes market news and sentiment, so you can focus on your key investments with confidence.
+                {{ t('hero.subtitle') }}
             </p>
             
             <div class="flex items-center justify-center gap-3 max-w-lg mx-auto animate-fade-in-down animation-delay-300">
@@ -69,12 +69,15 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n'; 
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
 import Message from 'primevue/message';
 import Chip from 'primevue/chip';
 import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
+
+const { t } = useI18n(); 
 
 // Props for animated values
 const props = defineProps({
@@ -136,6 +139,7 @@ const joinWaitlist = async () => {
 </script>
 
 <style scoped>
+
 /* Component-specific animations */
 .text-gradient {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);

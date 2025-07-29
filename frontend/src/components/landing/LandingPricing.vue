@@ -209,6 +209,8 @@
 import { useRouter } from 'vue-router';
 import Button from 'primevue/button';
 import Chip from 'primevue/chip';
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n(); // This line ensures the component is i18n-aware
 
 const router = useRouter();
 

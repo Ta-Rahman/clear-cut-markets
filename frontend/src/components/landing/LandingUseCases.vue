@@ -53,5 +53,6 @@
 </template>
 
 <script setup>
-// This component is currently visual only, no script logic needed yet.
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n(); // This line ensures the component is i18n-aware
 </script>

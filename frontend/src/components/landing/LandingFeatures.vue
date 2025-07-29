@@ -23,6 +23,8 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n(); // This line ensures the component is i18n-aware
 
 const hoveredFeature = ref(null);
 

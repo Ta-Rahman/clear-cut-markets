@@ -24,15 +24,14 @@
             :animatedModules="animatedModules"
             :animatedSources="animatedSources"
         />
-        
         <LandingModulesDemo />
         <LandingUsp />
-
         <LandingFeatures />
         <LandingUseCases />
         <LandingPricing />
         <LandingFAQ />
-        
+        <LandingFooter />
+
         <Transition name="sticky-slide">
             <LandingStickyCTA v-if="showStickyBar" />
         </Transition>
@@ -41,6 +40,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
+import { useScrollAnimation } from '@/composables/useScrollAnimation';
 import LandingNav from '@/components/landing/LandingNav.vue';
 import LandingHero from '@/components/landing/LandingHero.vue';
 import LandingUsp from '@/components/landing/LandingUsp.vue';
@@ -49,7 +49,11 @@ import LandingFeatures from '@/components/landing/LandingFeatures.vue';
 import LandingUseCases from '@/components/landing/LandingUseCases.vue';
 import LandingPricing from '@/components/landing/LandingPricing.vue';
 import LandingFAQ from '@/components/landing/LandingFAQ.vue';
+import LandingFooter from '@/components/landing/LandingFooter.vue';
 import LandingStickyCTA from '@/components/landing/LandingStickyCTA.vue';
+
+// Initialize scroll animations here to ensure all components are mounted first
+useScrollAnimation();
 
 // State for animated counters
 const animatedWaitlist = ref(0);
@@ -65,7 +69,6 @@ const animateValue = (ref, start, end, duration) => {
     const range = end - start;
     const increment = range / (duration / 16);
     let current = start;
-
     const timer = setInterval(() => {
         current += increment;
         if (current >= end) {
@@ -82,12 +85,9 @@ const checkStickyBar = () => {
     const scrollY = window.scrollY;
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
-
     const hasScrolledEnough = scrollY > windowHeight * 2;
     const nearBottom = scrollY > documentHeight - windowHeight * 1.5;
-    const pastPricing = document.getElementById('pricing') &&
-                        scrollY > document.getElementById('pricing').offsetTop;
-
+    const pastPricing = document.getElementById('pricing') && scrollY > document.getElementById('pricing').offsetTop;
     showStickyBar.value = (hasScrolledEnough && pastPricing) || nearBottom;
 };
 
