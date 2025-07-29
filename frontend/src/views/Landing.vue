@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <div class="absolute inset-0" 
+            <div class="absolute inset-0"
                  style="background-image: radial-gradient(circle, #667eea 1px, transparent 1px);
                         background-size: 50px 50px;
                         opacity: 0.3;">
@@ -18,15 +18,16 @@
         </div>
 
         <LandingNav />
-        <LandingHero 
+        <LandingHero
             :animatedWaitlist="animatedWaitlist"
             :animatedSaved="animatedSaved"
             :animatedModules="animatedModules"
             :animatedSources="animatedSources"
         />
-        <LandingUsp /> 
+        <LandingUsp />
         <LandingModulesDemo />
         <LandingFeatures />
+        <LandingUseCases />
         <LandingPricing />
         <LandingFAQ />
         <Transition name="sticky-slide">
@@ -37,18 +38,15 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-import { useDarkMode } from '@/composables/useDarkMode';
 import LandingNav from '@/components/landing/LandingNav.vue';
 import LandingHero from '@/components/landing/LandingHero.vue';
-import LandingUsp from '@/components/landing/LandingUsp.vue'; // New Import
+import LandingUsp from '@/components/landing/LandingUsp.vue';
 import LandingModulesDemo from '@/components/landing/LandingModulesDemo.vue';
 import LandingFeatures from '@/components/landing/LandingFeatures.vue';
+import LandingUseCases from '@/components/landing/LandingUseCases.vue';
 import LandingPricing from '@/components/landing/LandingPricing.vue';
 import LandingFAQ from '@/components/landing/LandingFAQ.vue';
 import LandingStickyCTA from '@/components/landing/LandingStickyCTA.vue';
-
-// Initialize dark mode
-const { initDarkMode } = useDarkMode();
 
 // State for animated counters
 const animatedWaitlist = ref(0);
@@ -64,7 +62,7 @@ const animateValue = (ref, start, end, duration) => {
     const range = end - start;
     const increment = range / (duration / 16);
     let current = start;
-    
+
     const timer = setInterval(() => {
         current += increment;
         if (current >= end) {
@@ -81,30 +79,27 @@ const checkStickyBar = () => {
     const scrollY = window.scrollY;
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
-    
-    // Multiple conditions for showing sticky bar
-    const hasScrolledEnough = scrollY > windowHeight * 2; // Scrolled 2 viewports
-    const nearBottom = scrollY > documentHeight - windowHeight * 1.5; // Near bottom
-    const pastPricing = document.getElementById('pricing') && 
+
+    const hasScrolledEnough = scrollY > windowHeight * 2;
+    const nearBottom = scrollY > documentHeight - windowHeight * 1.5;
+    const pastPricing = document.getElementById('pricing') &&
                         scrollY > document.getElementById('pricing').offsetTop;
-    
+
     showStickyBar.value = (hasScrolledEnough && pastPricing) || nearBottom;
 };
 
 onMounted(() => {
-    // Initialize dark mode on component mount
-    initDarkMode();
     // Animate counters
     animateValue(animatedWaitlist, 0, 234, 2000);
     animateValue(animatedSaved, 0, 23, 2000);
     animateValue(animatedModules, 0, 9, 1500);
     animateValue(animatedSources, 0, 15, 1800);
-    
+
     // Add scroll listener
     window.addEventListener('scroll', checkStickyBar);
-    
+
     // Set page title
-    document.title = 'Clear Cut Markets - Professional Investment Tracking for 95% Less';
+    document.title = 'Clear Cut Markets - Smarter Insights on What Matters Most';
 });
 
 onUnmounted(() => {
