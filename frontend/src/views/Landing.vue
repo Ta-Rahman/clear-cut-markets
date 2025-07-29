@@ -24,12 +24,15 @@
             :animatedModules="animatedModules"
             :animatedSources="animatedSources"
         />
-        <LandingUsp />
+        
         <LandingModulesDemo />
+        <LandingUsp />
+
         <LandingFeatures />
         <LandingUseCases />
         <LandingPricing />
         <LandingFAQ />
+        
         <Transition name="sticky-slide">
             <LandingStickyCTA v-if="showStickyBar" />
         </Transition>

@@ -263,11 +263,11 @@
 
 /* Module demo specific fixes */
 .app-dark #features {
-    background-color: #1a1a1a;
+    background-color: transparent;
 }
 
 .app-dark #pricing {
-    background-color: #1a1a1a;
+    background-color: transparent;
 }
 
 /* Fix feature cards */
@@ -361,7 +361,7 @@
 
 /* Ensure FAQ section text is readable */
 .app-dark #pricing + section {
-    background-color: #1a1a1a !important;
+    background-color: transparent;
 }
 
 .app-dark .text-center.text-gray-900 {

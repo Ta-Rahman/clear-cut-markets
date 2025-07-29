@@ -1,7 +1,7 @@
 <template>
-    <div id="features" class="px-4 py-8 md:px-6 lg:px-8">
+    <div id="features" class="px-4 py-8 md:px-6 lg:px-8 bg-transparent">
         <h2 class="text-center text-gray-900 text-3xl font-bold mb-6 fade-up">Everything You Need, Nothing You Don't</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-6xl mx-auto bg-transparent">
             <div v-for="(feature, index) in features" :key="index" 
                  :class="[
                      'text-center p-6 bg-white rounded-xl transition-all duration-300 hover:shadow-xl hover:scale-105',

@@ -41,28 +41,28 @@ const activeFaq = ref(null);
 
 const faqs = ref([
     {
-        question: "How is this different from Bloomberg Terminal?",
-        answer: "Clear Cut Markets focuses on tracking 3-9 key investments with AI-powered insights, while Bloomberg Terminal is designed for institutional traders needing access to everything. We provide 80% of the value at 5% of the cost."
+        question: "Is this a replacement for my brokerage account?",
+        answer: "Not at all. Clear Cut Markets is not a broker; it's an AI-powered companion that works alongside your existing accounts. You manage your trades on your preferred platform, and we provide the high-signal insights to inform those decisions."
     },
     {
-        question: "Can I change my plan anytime?",
-        answer: "Yes! You can upgrade, downgrade, or cancel your plan at any time. Changes take effect at the next billing cycle, and we'll prorate any differences."
+        question: "How does the AI analysis actually work?",
+        answer: "Our system continuously scans over 15 verified data sources, including global news outlets, financial filings, and social sentiment platforms. We use a Large Language Model (LLM) to analyze the content, identify key topics, and determine the potential impact on specific assets and the connections between them."
     },
     {
-        question: "What data sources do you use?",
-        answer: "We aggregate data from 15+ reliable sources including major exchanges, financial APIs, news outlets, and social sentiment platforms to give you comprehensive insights."
+        question: "What kind of assets can I track in a module?",
+        answer: "You can track a wide range of assets, including individual stocks (e.g., TSLA), major ETFs (e.g., SPY), and leading cryptocurrencies (e.g., Bitcoin, Ethereum). We are constantly expanding our coverage based on user demand."
     },
     {
-        question: "Is there a free trial?",
-        answer: "Yes, all plans come with a 14-day free trial. No credit card required to start, and you can cancel anytime during the trial period."
+        question: "How does the free trial work?",
+        answer: "All our plans come with a full-featured 14-day free trial, no credit card required upfront. You get to explore the entire platform, including the premium features, to make sure it's the right fit for you before committing."
     },
     {
-        question: "How does the module system work?",
-        answer: "Each module represents one investment you want to track (stock, crypto, ETF, etc.). You get a complete dashboard with real-time data, AI insights, and alerts for each module."
+        question: "Can I change my plan or cancel later?",
+        answer: "Of course. You can upgrade, downgrade, or cancel your plan at any time directly from your account dashboard. Any changes will be pro-rated, and cancellations take effect at the end of your current billing period."
     },
     {
-        question: "What happens if I exceed my module limit?",
-        answer: "You'll need to upgrade to a higher plan or remove existing modules to add new ones. We'll notify you when you're approaching your limit."
+        question: "What makes this different from a standard news aggregator?",
+        answer: "News aggregators give you a firehose of information that you still have to sift through. Clear Cut is the opposite. We do the sifting for you, using AI to connect the dots and only alerting you to the news that has a potential, tangible impact on your specific holdings."
     }
 ]);
 
