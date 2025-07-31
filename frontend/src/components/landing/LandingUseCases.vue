@@ -1,9 +1,9 @@
 <template>
     <div class="px-4 py-16 md:px-6 lg:px-8">
         <div class="text-center mb-12">
-            <h2 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-3 fade-up">Is Clear Cut Markets the right fit for you?</h2>
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-3 fade-up">{{ t('useCases.title') }}</h2>
             <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto fade-up stagger-1">
-                See if our approach matches your investment style.
+                {{ t('useCases.subtitle') }}
             </p>
         </div>
 
@@ -16,9 +16,9 @@
                             <i class="pi pi-filter-fill text-2xl text-violet-600 dark:text-violet-400"></i>
                         </div>
                         <div>
-                             <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 leading-tight">You are a Focused Investor</h3>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 leading-tight">{{ t('useCases.focused_title') }}</h3>
                             <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
-                                You believe in a "less is more" philosophy. You have high-conviction picks and want to deeply understand them without the distraction of the broader market's noise.
+                                {{ t('useCases.focused_text') }}
                             </p>
                         </div>
                     </li>
@@ -28,9 +28,9 @@
                             <i class="pi pi-sitemap text-2xl text-violet-600 dark:text-violet-400"></i>
                         </div>
                         <div>
-                             <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 leading-tight">You are a Cross-Asset Analyst</h3>
+                             <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 leading-tight">{{ t('useCases.cross_asset_title') }}</h3>
                             <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
-                                You understand that a policy change in Asia can impact both your tech stocks and your crypto portfolio. You need a tool that connects the dots across different asset classes.
+                                {{ t('useCases.cross_asset_text') }}
                             </p>
                         </div>
                     </li>
@@ -40,9 +40,9 @@
                             <i class="pi pi-clock text-2xl text-violet-600 dark:text-violet-400"></i>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 leading-tight">You are a Time-Strapped Professional</h3>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 leading-tight">{{ t('useCases.time_strapped_title') }}</h3>
                             <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
-                               Your time is your most valuable asset. You need an AI co-pilot to do the heavy lifting, delivering critical insights so you can make informed decisions, faster.
+                               {{ t('useCases.time_strapped_text') }}
                             </p>
                         </div>
                     </li>
@@ -54,5 +54,5 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n';
-const { t } = useI18n(); // This line ensures the component is i18n-aware
+const { t } = useI18n();
 </script>

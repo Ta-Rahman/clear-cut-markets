@@ -19,7 +19,7 @@
                         <InputIcon class="pi pi-envelope text-gray-500" />
                         <InputText 
                             v-model="email" 
-                            placeholder="Enter your email" 
+                            :placeholder="t('hero.form.placeholder')" 
                             @keyup.enter="joinWaitlist"
                             class="w-full"
                             :class="{'shake-animation': emailError}"
@@ -27,7 +27,7 @@
                     </IconField>
                 </div>
                 <Button 
-                    label="Join Waitlist" 
+                    :label="t('hero.form.button')" 
                     class="p-button-primary p-button-raised"
                     @click="joinWaitlist"
                     :loading="loading"
@@ -44,22 +44,22 @@
                 <div class="flex justify-center items-center gap-4 flex-wrap">
                     <div class="text-center px-6">
                         <h3 class="text-4xl font-bold text-primary mb-1">{{ animatedWaitlist }}+</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm m-0">On Waitlist</p>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm m-0">{{ t('hero.stats.waitlist') }}</p>
                     </div>
                     <div class="w-px h-10 bg-gray-300 dark:bg-gray-700 self-center hidden sm:block"></div>
                     <div class="text-center px-6">
                         <h3 class="text-4xl font-bold text-primary mb-1">${{ animatedSaved }}k</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm m-0">Saved vs competitors</p>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm m-0">{{ t('hero.stats.saved') }}</p>
                     </div>
                     <div class="w-px h-10 bg-gray-300 dark:bg-gray-700 self-center hidden sm:block"></div>
                     <div class="text-center px-6">
                         <h3 class="text-4xl font-bold text-primary mb-1">{{ animatedModules }}</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm m-0">Possible Modules</p>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm m-0">{{ t('hero.stats.modules') }}</p>
                     </div>
                     <div class="w-px h-10 bg-gray-300 dark:bg-gray-700 self-center hidden sm:block"></div>
                     <div class="text-center px-6">
                         <h3 class="text-4xl font-bold text-primary mb-1">{{ animatedSources }}+</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm m-0">Data Sources</p>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm m-0">{{ t('hero.stats.sources') }}</p>
                     </div>
                 </div>
             </div>
@@ -69,7 +69,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useI18n } from 'vue-i18n'; 
+import { useI18n } from 'vue-i18n';
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
 import Message from 'primevue/message';
@@ -77,93 +77,53 @@ import Chip from 'primevue/chip';
 import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
 
-const { t } = useI18n(); 
+const { t } = useI18n();
 
-// Props for animated values
 const props = defineProps({
-    animatedWaitlist: {
-        type: Number,
-        default: 0
-    },
-    animatedSaved: {
-        type: Number,
-        default: 0
-    },
-    animatedModules: {
-        type: Number,
-        default: 0
-    },
-    animatedSources: {
-        type: Number,
-        default: 0
-    }
+    animatedWaitlist: { type: Number, default: 0 },
+    animatedSaved: { type: Number, default: 0 },
+    animatedModules: { type: Number, default: 0 },
+    animatedSources: { type: Number, default: 0 }
 });
 
-// Local state
 const email = ref('');
 const loading = ref(false);
 const message = ref('');
 const messageType = ref('success');
 const emailError = ref(false);
 
-// Methods
 const joinWaitlist = async () => {
     if (!email.value || !email.value.includes('@')) {
         emailError.value = true;
         message.value = 'Please enter a valid email address';
         messageType.value = 'error';
-        
-        setTimeout(() => {
-            emailError.value = false;
-        }, 500);
+        setTimeout(() => { emailError.value = false; }, 500);
         return;
     }
-
     loading.value = true;
-    
     setTimeout(() => {
-        console.log('Email submitted:', email.value);
         message.value = 'Thanks for joining! We\'ll be in touch soon.';
         messageType.value = 'success';
         email.value = '';
         loading.value = false;
-        
-        // You could emit an event here to update the parent's waitlist count
-        // emit('email-submitted');
-        
-        setTimeout(() => {
-            message.value = '';
-        }, 5000);
+        setTimeout(() => { message.value = ''; }, 5000);
     }, 1000);
 };
 </script>
 
 <style scoped>
-
-/* Component-specific animations */
 .text-gradient {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
-
-.shake-animation {
-    animation: shake 0.5s;
-}
-
+.shake-animation { animation: shake 0.5s; }
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-10px); }
     75% { transform: translateX(10px); }
 }
-
-/* Vue transitions */
-.fade-enter-active, .fade-leave-active {
-    transition: opacity 0.5s ease;
-}
-
-.fade-enter-from, .fade-leave-to {
-    opacity: 0;
-}
+.fade-enter-active, .fade-leave-active { transition: opacity 0.5s ease; }
+.fade-enter-from, .fade-leave-to { opacity: 0; }
 </style>

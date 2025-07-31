@@ -5,7 +5,7 @@
                 <i class="pi pi-chart-line text-2xl text-primary"></i>
                 <div>
                     <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 m-0">{{ stockData.name }} ({{ stockData.symbol }})</h2>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 m-0">Placeholder Data - Live data available in the full version.</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 m-0">{{ t('stockModal.subtitle') }}</p>
                 </div>
             </div>
         </template>
@@ -17,20 +17,20 @@
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center">
-                    <p class="text-sm text-gray-600 dark:text-gray-400">Market Price</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ t('stockModal.price') }}</p>
                     <p class="text-xl font-bold text-gray-900 dark:text-gray-100">${{ stockData.price }}</p>
                 </div>
                  <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center">
-                    <p class="text-sm text-gray-600 dark:text-gray-400">Market Cap</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ t('stockModal.market_cap') }}</p>
                     <p class="text-xl font-bold text-gray-900 dark:text-gray-100">${{ stockData.marketCap }}</p>
                 </div>
                  <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center">
-                    <p class="text-sm text-gray-600 dark:text-gray-400">P/E Ratio</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ t('stockModal.pe_ratio') }}</p>
                     <p class="text-xl font-bold text-gray-900 dark:text-gray-100">{{ stockData.peRatio }}</p>
                 </div>
                  <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center">
-                    <p class="text-sm text-gray-600 dark:text-gray-400">Sentiment</p>
-                    <p class="text-xl font-bold text-green-500">{{ stockData.sentiment }}% Bullish</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ t('stockModal.sentiment') }}</p>
+                    <p class="text-xl font-bold text-green-500">{{ stockData.sentiment }}% {{ t('stockModal.bullish') }}</p>
                 </div>
             </div>
         </div>
@@ -39,10 +39,11 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import Dialog from 'primevue/dialog';
 import Chart from 'primevue/chart';
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n(); // This line ensures the component is i18n-aware
+
+const { t } = useI18n();
 
 const props = defineProps({
     visible: {
@@ -56,7 +57,6 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['close']);
-
 const isVisible = ref(props.visible);
 
 watch(() => props.visible, (newValue) => {

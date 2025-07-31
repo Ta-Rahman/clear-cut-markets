@@ -1,10 +1,169 @@
 {
-  "hero": {
-    "subtitle": "Unser KI-Copilot analysiert Marktnachrichten und Stimmungen, damit Sie sich vertrauensvoll auf Ihre wichtigsten Investitionen konzentrieren können."
-  },
   "nav": {
     "features": "Funktionen",
     "pricing": "Preise",
     "login": "Anmelden"
+  },
+  "hero": {
+    "subtitle": "Unser KI-Copilot analysiert Marktnachrichten und Stimmungen, damit du dich vertrauensvoll auf deine wichtigsten Investitionen konzentrieren kannst.",
+    "form": {
+      "placeholder": "Deine E-Mail-Adresse",
+      "button": "Warteliste beitreten"
+    },
+    "stats": {
+      "waitlist": "Auf der Warteliste",
+      "saved": "Gegenüber Konkurrenten gespart",
+      "modules": "Mögliche Module",
+      "sources": "Datenquellen"
+    }
+  },
+  "modulesDemo": {
+    "title": "Deine Investment-Module",
+    "subtitle": "Jedes Modul ist ein komplettes System zur Anlageverfolgung. Wähle, was dir wichtig ist.",
+    "placeholder_text": "(Demodaten unten gezeigt)",
+    "dashboard_button": "Das könnte dein Dashboard sein",
+    "waitlist_prompt": "Tritt der Warteliste bei, um mit der Verfolgung deiner Anlagen zu beginnen.",
+    "cards": {
+      "today": "Heute",
+      "volume": "Volumen",
+      "market_cap": "Marktkap.",
+      "pe_ratio": "KGV",
+      "ai_analysis": "KI-Analyse",
+      "sentiment": "Stimmung",
+      "bullish": "Bullish",
+      "aapl_insight": "Starkes Momentum durch institutionelle Käufe. Q4-Ergebnisse übertreffen die Erwartungen.",
+      "btc_insight": "Wichtige Unterstützung bei $42.000. Ausbruch über den Widerstand bei $45.000 beobachten.",
+      "tsla_insight": "Q4-Auslieferungszahlen übertreffen Erwartungen und treiben bullische Stimmung. Nachfrage in China bleibt stark."
+    }
+  },
+  "usp": {
+    "title": "Erkenne Zusammenhänge, die andere übersehen",
+    "subtitle": "Unsere KI funktioniert als dein Frühwarnsystem und verbindet indirekt zusammenhängende Nachrichten mit deinen spezifischen Beständen.",
+    "market_event": "Marktereignis",
+    "impact_title": "Mögliche Auswirkungen auf dein Portfolio",
+    "news_title": "Globaler Chipmangel verschärft sich",
+    "news_source": "Quelle: Global Tech Times",
+    "potential_decline": "Möglicher Rückgang",
+    "alert_title": "Clear Cut Alarm:",
+    "alert_text": "Eine Verschärfung des Chipmangels könnte sich negativ auf deine **TSLA**- und **NVDA**-Bestände auswirken.",
+    "alert_link": "KI-Analyse ansehen"
+  },
+  "features": {
+    "title": "Alles was du brauchst an einem Ort",
+    "cards": {
+      "tracking": {
+        "title": "Fokussiertes Modul-Tracking",
+        "description": "Vermeide Ablenkungen, indem du nur die 3-9 Investments überwachst, die für dich am wichtigsten sind."
+      },
+      "insights": {
+        "title": "KI-gestützte Einblicke",
+        "description": "Erhalte automatisierte Stimmungsanalysen und verständliche Zusammenfassungen aus über 15 Nachrichten- und Datenquellen."
+      },
+      "alerts": {
+        "title": "Cross-Investment-Warnungen",
+        "description": "Unsere KI verbindet die Punkte zwischen Marktnachrichten und deinen spezifischen Anlagen, um dich frühzeitig zu warnen."
+      },
+      "security": {
+        "title": "Sicherheit auf Bankenniveau",
+        "description": "Deine Daten sind mit unternehmenstauglichem Schutz verschlüsselt und sicher."
+      },
+      "access": {
+        "title": "Zugriff von überall",
+        "description": "Überwache deine Anlagen von jedem Gerät, jederzeit, mit einer sauberen und modernen Oberfläche."
+      },
+      "power": {
+        "title": "Bezahlbare Leistung",
+        "description": "Erhalte professionelle Werkzeuge und Einblicke ohne den Preis eines Unternehmensprodukts."
+      }
+    }
+  },
+  "stockModal": {
+    "subtitle": "Platzhalterdaten - Live-Daten in der Vollversion verfügbar.",
+    "price": "Marktpreis",
+    "market_cap": "Marktkap.",
+    "pe_ratio": "KGV",
+    "sentiment": "Stimmung",
+    "bullish": "Bullish"
+  },
+  "newsModal": {
+    "title": "KI-Nachrichtenanalyse",
+    "subtitle": "Platzhalterdaten - Live-Analyse in der Vollversion verfügbar.",
+    "source_article": "Quellartikel",
+    "source_name": "Global Tech Times",
+    "summary": "KI-generierte Zusammenfassung:",
+    "summary_text": "Der Artikel beleuchtet eine sich verschärfende globale Halbleiterknappheit, die vor allem die Automobil- und Unterhaltungselektronikbranche betrifft. Es wird erwartet, dass die Störungen in der Lieferkette anhalten, was zu potenziellen Produktionsverzögerungen und erhöhten Kosten für große Hersteller wie Tesla und NVIDIA führen wird.",
+    "sentiment_analysis": "Stimmungsanalyse:",
+    "sentiment_title": "Sehr Negativ (85% Konfidenz)",
+    "sentiment_text": "Die allgemeine Stimmung ist aufgrund der breiten Diskussion über Produktionskürzungen und finanzielle Verluste stark bärisch."
+  },
+  "useCases": {
+    "title": "Ist Clear Cut Markets das Richtige für dich?",
+    "subtitle": "Finde heraus, ob unser Ansatz zu deinem Anlagestil passt.",
+    "focused_title": "Du bist ein fokussierter Investor",
+    "focused_text": "Du glaubst an die Philosophie \"weniger ist mehr\". Du hast Anlagen, von denen du überzeugt bist, und möchtest sie tiefgreifend verstehen, ohne vom Lärm des breiteren Marktes abgelenkt zu werden.",
+    "cross_asset_title": "Du bist ein Cross-Asset-Analyst",
+    "cross_asset_text": "Du verstehst, dass eine politische Änderung in Asien sowohl deine Tech-Aktien als auch dein Krypto-Portfolio beeinflussen kann. Du brauchst ein Tool, das die Verbindungen zwischen verschiedenen Anlageklassen herstellt.",
+    "time_strapped_title": "Du bist ein Profi mit wenig Zeit",
+    "time_strapped_text": "Deine Zeit ist dein wertvollstes Gut. Du brauchst einen KI-Copiloten, der die schwere Arbeit übernimmt und dir wichtige Einblicke liefert, damit du schneller fundierte Entscheidungen treffen kannst."
+  },
+  "pricing": {
+    "title": "Einfache, transparente Preise",
+    "subtitle": "Wähle den Plan, der zu deinem Portfolio passt. 14 Tage kostenlose Testversion für alle Pläne.",
+    "essential_name": "Essential",
+    "essential_desc": "Für neue Investoren",
+    "advanced_name": "Advanced",
+    "advanced_desc": "Für aktive Investoren",
+    "professional_name": "Professional",
+    "professional_desc": "Für Power-User",
+    "trial_button": "Kostenlos testen",
+    "modules_label": "Module",
+    "popular_badge": "Am beliebtesten",
+    "features": {
+      "real_time": "Echtzeit-Kursdaten",
+      "sentiment": "KI-Stimmungsanalyse",
+      "standard_support": "Standard-Support",
+      "works_on_all": "Funktioniert auf Desktop, Tablet & Mobilgeräten",
+      "cross_investment": "Cross-Investment-Korrelations-Warnungen",
+      "custom_alerts": "Anpassbare Warnschwellen",
+      "priority_support": "Vorrangiger Support",
+      "export": "Daten & Berichte exportieren (CSV)",
+      "dedicated_support": "Dedizierter Support"
+    },
+    "enterprise_title": "Brauchst du mehr als 9 Module?",
+    "enterprise_text": "Wir bieten individuelle Enterprise-Pläne an. Kontaktiere uns für ein persönliches Angebot.",
+    "contact_button": "Vertrieb kontaktieren"
+  },
+  "faq": {
+    "title": "Häufig gestellte Fragen",
+    "q1": "Ersetzt das mein Broker-Konto?",
+    "a1": "Überhaupt nicht. Clear Cut Markets ist kein Broker; es ist ein KI-gestützter Begleiter, der neben deinen bestehenden Konten funktioniert. Du verwaltest deine Trades auf deiner bevorzugten Plattform, und wir liefern die aussagekräftigen Einblicke, um diese Entscheidungen zu untermauern.",
+    "q2": "Wie funktioniert die KI-Analyse genau?",
+    "a2": "Unser System scannt kontinuierlich über 15 verifizierte Datenquellen, darunter globale Nachrichtenagenturen, Finanzberichte und Social-Sentiment-Plattformen. Wir verwenden ein Large Language Model (LLM), um den Inhalt zu analysieren, Schlüsselthemen zu identifizieren und die potenziellen Auswirkungen auf bestimmte Vermögenswerte sowie die Verbindungen zwischen ihnen zu bestimmen.",
+    "q3": "Welche Arten von Vermögenswerten kann ich in einem Modul verfolgen?",
+    "a3": "Du kannst eine breite Palette von Vermögenswerten verfolgen, einschließlich einzelner Aktien (z.B. TSLA), wichtiger ETFs (z.B. SPY) und führender Kryptowährungen (z.B. Bitcoin, Ethereum). Wir erweitern ständig unsere Abdeckung basierend auf der Nachfrage der Nutzer.",
+    "q4": "Wie funktioniert die kostenlose Testversion?",
+    "a4": "Alle unsere Pläne beinhalten eine voll funktionsfähige 14-tägige kostenlose Testversion, für die vorab keine Kreditkarte erforderlich ist. Du kannst die gesamte Plattform, einschließlich der Premium-Funktionen, erkunden, um sicherzustellen, dass sie für dich geeignet ist, bevor du dich verpflichtest.",
+    "q5": "Kann ich meinen Plan später ändern oder kündigen?",
+    "a5": "Selbstverständlich. Du kannst deinen Plan jederzeit direkt in deinem Konto-Dashboard upgraden, downgraden oder kündigen. Alle Änderungen werden anteilig berechnet, und Kündigungen treten am Ende deines aktuellen Abrechnungszeitraums in Kraft.",
+    "q6": "Was unterscheidet dies von einem Standard-Nachrichtenaggregator?",
+    "a6": "Nachrichtenaggregatoren liefern dir eine Flut von Informationen, die du noch selbst durchsuchen musst. Clear Cut ist das Gegenteil. Wir übernehmen das Sichten für dich, indem wir KI einsetzen, um die Zusammenhänge zu erkennen und dich nur über die Nachrichten zu informieren, die einen potenziellen, greifbaren Einfluss auf deine spezifischen Anlagen haben."
+  },
+  "tooltips": {
+    "alerts": "Benutzerdefinierte Preis- und Stimmungswarnungen festlegen",
+    "details": "Details anzeigen",
+    "settings": "Moduleinstellungen anpassen"
+  },
+  "stickyCTA": {
+    "title": "Bereit, intelligenter zu tracken?",
+    "subtitle": "Schließe dich 234+ Investoren an • 14 Tage kostenlos testen",
+    "button": "Kostenlos testen"
+  },
+  "footer": {
+    "legal": "Impressum",
+    "privacy": "Datenschutzerklärung",
+    "terms": "AGB",
+    "cancellation": "Widerrufsbelehrung",
+    "copyright": "© {year} Clear Cut Markets. Alle Rechte vorbehalten.",
+    "disclaimer": "Diese Webseite dient nur zu Informationszwecken und stellt keine Finanzberatung dar."
   }
 }
