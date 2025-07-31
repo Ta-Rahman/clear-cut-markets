@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-[60vh] flex items-center justify-center px-4 py-12 md:py-16 lg:py-20">
+    <div id="hero-section" class="min-h-[60vh] flex items-center justify-center px-4 py-12 md:py-16 lg:py-20">
         <div class="text-center">
             <div class="mb-4 animate-fade-in-down animation-delay-0">
                 <Chip label="🚀 Launching Soon" class="px-3 py-2" />

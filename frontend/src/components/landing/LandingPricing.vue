@@ -26,9 +26,10 @@
                             <span class="text-gray-600 dark:text-gray-400 ml-2">/ month</span>
                         </div>
                         <Button 
-                            :label="t('pricing.trial_button')"
+                            :label="t('pricing.trial_button')" 
                             outlined
                             class="w-full"
+                            @click="scrollToWaitlist"
                         />
                     </div>
                     
@@ -65,6 +66,7 @@
                             :label="t('pricing.trial_button')"
                             severity="success"
                             class="w-full"
+                            @click="scrollToWaitlist"
                         />
                     </div>
                     <div class="w-full h-px bg-gray-200 dark:bg-gray-700 my-4"></div>
@@ -97,6 +99,7 @@
                             :label="t('pricing.trial_button')"
                             outlined
                             class="w-full"
+                            @click="scrollToWaitlist"
                         />
                     </div>
                     <div class="w-full h-px bg-gray-200 dark:bg-gray-700 my-4"></div>
@@ -123,23 +126,23 @@
                 class="p-button-outlined p-button-lg"
                 icon="pi pi-arrow-right"
                 iconPos="right"
-                @click="contactSales"
+                @click="isContactModalVisible = true"
             />
         </div>
 
     </div>
+    <ContactSalesModal :visible="isContactModalVisible" @close="isContactModalVisible = false" />
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import Button from 'primevue/button';
 import Chip from 'primevue/chip';
+import ContactSalesModal from './ContactSalesModal.vue'; // <-- New Import
 
 const { t } = useI18n();
 const router = useRouter();
-
-const contactSales = () => {
-    window.location.href = 'mailto:sales@clearcutmarkets.com?subject=Enterprise Plan Inquiry';
-};
+const isContactModalVisible = ref(false); // <-- New state for the modal
 </script>

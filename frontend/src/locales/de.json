@@ -8,7 +8,8 @@
     "subtitle": "Unser KI-Copilot analysiert Marktnachrichten und Stimmungen, damit du dich vertrauensvoll auf deine wichtigsten Investitionen konzentrieren kannst.",
     "form": {
       "placeholder": "Deine E-Mail-Adresse",
-      "button": "Warteliste beitreten"
+      "button": "Warteliste beitreten",
+      "button_beta": "Beta beitreten"
     },
     "stats": {
       "waitlist": "Auf der Warteliste",
@@ -107,32 +108,32 @@
     "time_strapped_text": "Deine Zeit ist dein wertvollstes Gut. Du brauchst einen KI-Copiloten, der die schwere Arbeit übernimmt und dir wichtige Einblicke liefert, damit du schneller fundierte Entscheidungen treffen kannst."
   },
   "pricing": {
-    "title": "Einfache, transparente Preise",
-    "subtitle": "Wähle den Plan, der zu deinem Portfolio passt. 14 Tage kostenlose Testversion für alle Pläne.",
-    "essential_name": "Essential",
-    "essential_desc": "Für neue Investoren",
-    "advanced_name": "Advanced",
-    "advanced_desc": "Für aktive Investoren",
-    "professional_name": "Professional",
-    "professional_desc": "Für Power-User",
-    "trial_button": "Kostenlos testen",
-    "modules_label": "Module",
-    "popular_badge": "Am beliebtesten",
-    "features": {
-      "real_time": "Echtzeit-Kursdaten",
-      "sentiment": "KI-Stimmungsanalyse",
-      "standard_support": "Standard-Support",
-      "works_on_all": "Funktioniert auf Desktop, Tablet & Mobilgeräten",
-      "cross_investment": "Cross-Investment-Korrelations-Warnungen",
-      "custom_alerts": "Anpassbare Warnschwellen",
-      "priority_support": "Vorrangiger Support",
-      "export": "Daten & Berichte exportieren (CSV)",
-      "dedicated_support": "Dedizierter Support"
-    },
-    "enterprise_title": "Brauchst du mehr als 9 Module?",
-    "enterprise_text": "Wir bieten individuelle Enterprise-Pläne an. Kontaktiere uns für ein persönliches Angebot.",
-    "contact_button": "Vertrieb kontaktieren"
+  "title": "Einfache, transparente Preise",
+  "subtitle": "Wähle den Plan, der zu deinem Portfolio passt. Erhalte frühzeitigen Zugang, indem du dich in die Warteliste einträgst.",
+  "essential_name": "Essential",
+  "essential_desc": "Für neue Investoren",
+  "advanced_name": "Advanced",
+  "advanced_desc": "Für aktive Investoren",
+  "professional_name": "Professional",
+  "professional_desc": "Für Power-User",
+  "trial_button": "Warteliste beitreten",
+  "modules_label": "Module",
+  "popular_badge": "Am beliebtesten",
+  "features": {
+    "real_time": "Echtzeit-Kursdaten",
+    "sentiment": "KI-Stimmungsanalyse",
+    "standard_support": "Standard-Support",
+    "works_on_all": "Funktioniert auf Desktop, Tablet & Mobilgeräten",
+    "cross_investment": "Cross-Investment-Korrelations-Warnungen",
+    "custom_alerts": "Anpassbare Warnschwellen",
+    "priority_support": "Vorrangiger Support",
+    "export": "Daten & Berichte exportieren (CSV)",
+    "dedicated_support": "Dedizierter Support"
   },
+  "enterprise_title": "Brauchst du mehr als 9 Module?",
+  "enterprise_text": "Wir bieten individuelle Enterprise-Pläne an. Kontaktiere uns für ein persönliches Angebot.",
+  "contact_button": "Vertrieb kontaktieren"
+},
   "faq": {
     "title": "Häufig gestellte Fragen",
     "q1": "Ersetzt das mein Broker-Konto?",
@@ -156,7 +157,9 @@
   "stickyCTA": {
     "title": "Bereit, intelligenter zu tracken?",
     "subtitle": "Schließe dich 234+ Investoren an • 14 Tage kostenlos testen",
-    "button": "Kostenlos testen"
+    "subtitle_beta": "Erhalte frühzeitigen Zugang und gestalte die Zukunft des Investment-Trackings mit.",
+    "button": "Kostenlos testen",
+    "button_beta": "Beta beitreten"
   },
   "footer": {
     "legal": "Impressum",
@@ -165,5 +168,17 @@
     "cancellation": "Widerrufsbelehrung",
     "copyright": "© {year} Clear Cut Markets. Alle Rechte vorbehalten.",
     "disclaimer": "Diese Webseite dient nur zu Informationszwecken und stellt keine Finanzberatung dar."
+  },
+  "contactModal": {
+    "title": "Vertrieb kontaktieren",
+    "subtitle": "Lassen Sie uns einen Plan besprechen, der Ihren Bedürfnissen entspricht.",
+    "name_label": "Dein Name",
+    "name_placeholder": "z.B. Alex Mustermann",
+    "email_label": "Deine E-Mail",
+    "email_placeholder": "z.B. alex.mustermann@email.de",
+    "message_label": "Deine Nachricht",
+    "message_placeholder": "Erzähl uns von deinen Anforderungen...",
+    "cancel_button": "Abbrechen",
+    "send_button": "Nachricht senden"
   }
 }

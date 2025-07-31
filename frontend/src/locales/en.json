@@ -8,7 +8,8 @@
     "subtitle": "Our AI co-pilot analyzes market news and sentiment, so you can focus on your key investments with confidence.",
     "form": {
       "placeholder": "Enter your email",
-      "button": "Join Waitlist"
+      "button": "Join Waitlist",
+      "button_beta": "Join The Beta"
     },
     "stats": {
       "waitlist": "On Waitlist",
@@ -107,32 +108,32 @@
     "time_strapped_text": "Your time is your most valuable asset. You need an AI co-pilot to do the heavy lifting, delivering critical insights so you can make informed decisions, faster."
   },
   "pricing": {
-    "title": "Simple, Transparent Pricing",
-    "subtitle": "Choose the plan that fits your portfolio. 14-day free trial on all plans.",
-    "essential_name": "Essential",
-    "essential_desc": "For new investors",
-    "advanced_name": "Advanced",
-    "advanced_desc": "For active investors",
-    "professional_name": "Professional",
-    "professional_desc": "For power users",
-    "trial_button": "Start Free Trial",
-    "modules_label": "Modules",
-    "popular_badge": "Most Popular",
-    "features": {
-      "real_time": "Real-time Price Data",
-      "sentiment": "AI Sentiment Analysis",
-      "standard_support": "Standard Support",
-      "works_on_all": "Works on Desktop, Tablet & Mobile",
-      "cross_investment": "Cross-Investment Correlation Alerts",
-      "custom_alerts": "Customizable Alert Thresholds",
-      "priority_support": "Priority Support",
-      "export": "Export Data & Reports (CSV)",
-      "dedicated_support": "Dedicated Support"
-    },
-    "enterprise_title": "Need More Than 9 Modules?",
-    "enterprise_text": "We offer custom enterprise plans. Contact us for a personalized quote.",
-    "contact_button": "Contact Sales"
+  "title": "Simple, Transparent Pricing",
+  "subtitle": "Choose the plan that fits your portfolio. Get early access by joining the waitlist.",
+  "essential_name": "Essential",
+  "essential_desc": "For new investors",
+  "advanced_name": "Advanced",
+  "advanced_desc": "For active investors",
+  "professional_name": "Professional",
+  "professional_desc": "For power users",
+  "trial_button": "Join Waitlist",
+  "modules_label": "Modules",
+  "popular_badge": "Most Popular",
+  "features": {
+    "real_time": "Real-time Price Data",
+    "sentiment": "AI Sentiment Analysis",
+    "standard_support": "Standard Support",
+    "works_on_all": "Works on Desktop, Tablet & Mobile",
+    "cross_investment": "Cross-Investment Correlation Alerts",
+    "custom_alerts": "Customizable Alert Thresholds",
+    "priority_support": "Priority Support",
+    "export": "Export Data & Reports (CSV)",
+    "dedicated_support": "Dedicated Support"
   },
+  "enterprise_title": "Need More Than 9 Modules?",
+  "enterprise_text": "We offer custom enterprise plans. Contact us for a personalized quote.",
+  "contact_button": "Contact Sales"
+},
   "faq": {
     "title": "Frequently Asked Questions",
     "q1": "Is this a replacement for my brokerage account?",
@@ -156,7 +157,9 @@
   "stickyCTA": {
     "title": "Ready to start tracking smarter?",
     "subtitle": "Join 234+ investors • 14-day free trial",
-    "button": "Start Free Trial"
+    "subtitle_beta": "Get early access and help shape the future of investment tracking.",
+    "button": "Start Free Trial",
+    "button_beta": "Join The Beta"
   },
   "footer": {
     "legal": "Legal Notice",
@@ -165,5 +168,17 @@
     "cancellation": "Cancellation Policy",
     "copyright": "© {year} Clear Cut Markets. All Rights Reserved.",
     "disclaimer": "This website is for informational purposes only and does not constitute financial advice."
+  },
+  "contactModal": {
+    "title": "Contact Sales",
+    "subtitle": "Let's discuss a plan that fits your needs.",
+    "name_label": "Your Name",
+    "name_placeholder": "e.g. Alex Doe",
+    "email_label": "Your Email",
+    "email_placeholder": "e.g. alex.doe@email.com",
+    "message_label": "Your Message",
+    "message_placeholder": "Tell us about your requirements...",
+    "cancel_button": "Cancel",
+    "send_button": "Send Message"
   }
 }

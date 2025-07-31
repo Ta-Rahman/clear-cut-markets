@@ -99,6 +99,11 @@
     color-scheme: dark;
 }
 
+/*
+  FIX: The following overly broad rules have been removed as they
+  were causing the background override issue on the component sections.
+*/
+/*
 .app-dark .bg-white {
     background-color: #1f2937;
 }
@@ -106,6 +111,7 @@
 .app-dark .bg-gray-50 {
     background-color: #374151;
 }
+*/
 
 .app-dark .text-gray-900 {
     color: #f3f4f6;
@@ -282,7 +288,7 @@
     background-color: #2a2a2a;
 }
 
-.app-dark .text-xl.mb-3.font-semibold {
+.app-dork .text-xl.mb-3.font-semibold {
     color: #f3f4f6;
 }
 

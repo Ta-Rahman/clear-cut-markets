@@ -6,21 +6,21 @@
                 <p class="text-sm opacity-90">{{ t('stickyCTA.subtitle') }}</p>
             </div>
             <Button 
-                :label="t('stickyCTA.button')"
+                :label="t('stickyCTA.button_beta')"
                 class="bg-white text-violet-600 hover:bg-gray-100 border-0 font-semibold"
-                @click="$router.push('/auth/register')"
+                @click="scrollToWaitlist"
             />
         </div>
     </div>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import Button from 'primevue/button';
+import { useWaitlist } from '@/composables/useWaitlist'; // <-- FIX: Import our new composable
 
 const { t } = useI18n();
-const router = useRouter();
+const { scrollToWaitlist } = useWaitlist(); // <-- FIX: Initialize the function
 </script>
 
 <style scoped>

@@ -8,13 +8,13 @@
             <div class="space-y-4">
                 <div v-for="(faq, index) in translatedFaqs" :key="index"
                      :class="[
-                         'border rounded-lg border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/50',
+                         'border rounded-lg border-gray-200 dark:border-gray-700 overflow-hidden',
                          'fade-up',
                          `stagger-${index + 1}`
                      ]">
                     <button
                         @click="toggleFaq(index)"
-                        class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                        class="w-full px-6 py-4 text-left flex items-center justify-between bg-white dark:bg-gray-800/50 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                         :aria-expanded="activeFaq === index"
                     >
                         <span class="font-semibold text-gray-900 dark:text-gray-100">{{ faq.question }}</span>
@@ -22,7 +22,7 @@
                     </button>
                     
                     <Transition name="accordion-fade">
-                        <div v-if="activeFaq === index" class="border-t border-gray-200 dark:border-gray-700">
+                        <div v-if="activeFaq === index" class="bg-gray-50 dark:bg-gray-800/50 border-t border-gray-200 dark:border-gray-700">
                             <div class="px-6 pb-4 pt-2 text-gray-700 dark:text-gray-300">
                                 {{ faq.answer }}
                             </div>
@@ -41,7 +41,6 @@ import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
 const activeFaq = ref(null);
 
-// This creates a translated version of the FAQs that reacts to language changes
 const translatedFaqs = computed(() => [
     { question: t('faq.q1'), answer: t('faq.a1') },
     { question: t('faq.q2'), answer: t('faq.a2') },
