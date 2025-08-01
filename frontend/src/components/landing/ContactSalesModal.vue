@@ -18,7 +18,7 @@
                 </div>
                 <div>
                     <label for="email" class="font-semibold text-gray-700 dark:text-gray-300">{{ t('contactModal.email_label') }}</label>
-                    <InputText id="email" class="w-full mt-1" :placeholder="t('contactModal.email_placeholder')" />
+                    <InputText id="email" class="w-full mt-1" :placeholder="t('contactModal.email_placeholder', { address: t('contactModal.email_example') })" />
                 </div>
                 <div>
                     <label for="message" class="font-semibold text-gray-700 dark:text-gray-300">{{ t('contactModal.message_label') }}</label>

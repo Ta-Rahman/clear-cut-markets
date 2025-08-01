@@ -140,9 +140,11 @@ import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import Button from 'primevue/button';
 import Chip from 'primevue/chip';
-import ContactSalesModal from './ContactSalesModal.vue'; // <-- New Import
+import ContactSalesModal from './ContactSalesModal.vue';
+import { useWaitlist } from '@/composables/useWaitlist';
 
 const { t } = useI18n();
 const router = useRouter();
-const isContactModalVisible = ref(false); // <-- New state for the modal
+const isContactModalVisible = ref(false);
+const { scrollToWaitlist } = useWaitlist();
 </script>
