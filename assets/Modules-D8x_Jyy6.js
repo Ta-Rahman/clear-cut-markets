@@ -1,1 +1,0 @@
-import{f as t,i as e,g as a}from"./index-Dyu7bxGR.js";const n={class:"grid"},c={__name:"Modules",setup(o){return(l,s)=>(a(),t("div",n,s[0]||(s[0]=[e("div",{class:"col-12"},[e("div",{class:"card"},[e("h5",null,"My Investment Modules"),e("p",null,"Manage your investment tracking modules here.")])],-1)])))}};export{c as default};

@@ -1,0 +1,1 @@
+import{y as t,J as e,u as a}from"./index-DduI9QZx.js";const n={class:"grid"},l={__name:"Settings",setup(r){return(c,s)=>(a(),t("div",n,s[0]||(s[0]=[e("div",{class:"col-12"},[e("div",{class:"card"},[e("h5",null,"Settings"),e("p",null,"Manage your account settings and preferences.")])],-1)])))}};export{l as default};
