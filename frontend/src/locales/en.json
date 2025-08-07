@@ -175,7 +175,7 @@
     "name_label": "Your Name",
     "name_placeholder": "e.g. Alex Doe",
     "email_label": "Your Email",
-    "email_placeholder": "e.g. alex.doe@email.com",
+    "email_placeholder": "Your email address",
     "message_label": "Your Message",
     "message_placeholder": "Tell us about your requirements...",
     "cancel_button": "Cancel",

@@ -175,7 +175,7 @@
     "name_label": "Dein Name",
     "name_placeholder": "z.B. Alex Mustermann",
     "email_label": "Deine E-Mail",
-    "email_placeholder": "z.B. alex.mustermann@email.de",
+    "email_placeholder": "Ihre E-Mail-Adresse",
     "message_label": "Deine Nachricht",
     "message_placeholder": "Erzähl uns von deinen Anforderungen...",
     "cancel_button": "Abbrechen",

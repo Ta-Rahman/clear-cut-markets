@@ -41,6 +41,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useScrollAnimation } from '@/composables/useScrollAnimation';
+import { supabase } from '@/supabase'; // <-- 1. Import Supabase
 import LandingNav from '@/components/landing/LandingNav.vue';
 import LandingHero from '@/components/landing/LandingHero.vue';
 import LandingUsp from '@/components/landing/LandingUsp.vue';
@@ -52,20 +53,17 @@ import LandingFAQ from '@/components/landing/LandingFAQ.vue';
 import LandingFooter from '@/components/landing/LandingFooter.vue';
 import LandingStickyCTA from '@/components/landing/LandingStickyCTA.vue';
 
-// Initialize scroll animations here to ensure all components are mounted first
 useScrollAnimation();
 
 // State for animated counters
-const animatedWaitlist = ref(0);
+const animatedWaitlist = ref(0); // This will now be our live counter
 const animatedSaved = ref(0);
 const animatedModules = ref(0);
 const animatedSources = ref(0);
-
-// State for sticky bar
 const showStickyBar = ref(false);
 
-// Animation function
 const animateValue = (ref, start, end, duration) => {
+    if (end === 0) return; // Don't animate if the end value is 0
     const range = end - start;
     const increment = range / (duration / 16);
     let current = start;
@@ -80,7 +78,6 @@ const animateValue = (ref, start, end, duration) => {
     }, 16);
 };
 
-// Check if sticky bar should be shown
 const checkStickyBar = () => {
     const scrollY = window.scrollY;
     const windowHeight = window.innerHeight;
@@ -91,17 +88,30 @@ const checkStickyBar = () => {
     showStickyBar.value = (hasScrolledEnough && pastPricing) || nearBottom;
 };
 
+// 2. New function to fetch the live count
+const fetchWaitlistCount = async () => {
+    try {
+        const { data, error } = await supabase.rpc('get_waitlist_count');
+        if (error) throw error;
+        
+        // Animate from 0 to the live count
+        animateValue(animatedWaitlist, 0, data, 2000);
+
+    } catch (error) {
+        console.error('Error fetching waitlist count:', error);
+        // Fallback to a static number if the fetch fails
+        animateValue(animatedWaitlist, 0, 234, 2000);
+    }
+};
+
 onMounted(() => {
-    // Animate counters
-    animateValue(animatedWaitlist, 0, 234, 2000);
+    // 3. Call our new function and animate the other static counters
+    fetchWaitlistCount();
     animateValue(animatedSaved, 0, 23, 2000);
     animateValue(animatedModules, 0, 9, 1500);
     animateValue(animatedSources, 0, 15, 1800);
 
-    // Add scroll listener
     window.addEventListener('scroll', checkStickyBar);
-
-    // Set page title
     document.title = 'Clear Cut Markets - Smarter Insights on What Matters Most';
 });
 

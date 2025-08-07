@@ -76,6 +76,7 @@ import Message from 'primevue/message';
 import Chip from 'primevue/chip';
 import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
+import { supabase } from '@/supabase';
 
 const { t } = useI18n();
 
@@ -92,22 +93,42 @@ const message = ref('');
 const messageType = ref('success');
 const emailError = ref(false);
 
+// FIX: A more robust regex for email validation
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 const joinWaitlist = async () => {
-    if (!email.value || !email.value.includes('@')) {
+    // FIX: Using the regex to test the email format
+    if (!email.value || !emailRegex.test(email.value)) {
         emailError.value = true;
         message.value = 'Please enter a valid email address';
         messageType.value = 'error';
         setTimeout(() => { emailError.value = false; }, 500);
         return;
     }
+
     loading.value = true;
-    setTimeout(() => {
-        message.value = 'Thanks for joining! We\'ll be in touch soon.';
+    message.value = '';
+
+    try {
+        const { error } = await supabase
+            .from('waitlist')
+            .insert({ email: email.value });
+
+        if (error) {
+            throw error;
+        }
+
+        message.value = "Thanks for joining! We'll be in touch soon.";
         messageType.value = 'success';
         email.value = '';
+
+    } catch (error) {
+        message.value = 'This email is already on the list or an error occurred.';
+        messageType.value = 'error';
+    } finally {
         loading.value = false;
         setTimeout(() => { message.value = ''; }, 5000);
-    }, 1000);
+    }
 };
 </script>
 
