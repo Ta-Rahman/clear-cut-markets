@@ -29,7 +29,6 @@ jobs:
         with:
           node-version: 20
       
-      # FIX: All commands now run inside the 'frontend' directory
       - name: Install dependencies
         working-directory: ./frontend
         run: npm install
@@ -47,7 +46,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # FIX: The path is now relative to the repository root
           path: './frontend/dist'
 
       - name: Deploy to GitHub Pages
