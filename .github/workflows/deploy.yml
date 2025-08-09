@@ -1,4 +1,4 @@
-name: Deploy static content to Pages
+name: Deploy Frontend to GitHub Pages
 
 on:
   push:
@@ -28,12 +28,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-
-      # FIX: Added a step to navigate into the 'frontend' directory
-      - name: Navigate to frontend directory
-        run: cd frontend
-
-      # FIX: All subsequent commands run inside the 'frontend' directory
+      
+      # FIX: All commands now run inside the 'frontend' directory
       - name: Install dependencies
         working-directory: ./frontend
         run: npm install
@@ -51,7 +47,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # FIX: Upload the 'dist' folder from within the 'frontend' directory
+          # FIX: The path is now relative to the repository root
           path: './frontend/dist'
 
       - name: Deploy to GitHub Pages
