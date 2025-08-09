@@ -48,8 +48,8 @@
                     </div>
                     <div class="w-px h-10 bg-gray-300 dark:bg-gray-700 self-center hidden sm:block"></div>
                     <div class="text-center px-6">
-                        <h3 class="text-4xl font-bold text-primary mb-1">${{ animatedSaved }}k</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm m-0">{{ t('hero.stats.saved') }}</p>
+                        <h3 class="text-4xl font-bold text-primary mb-1">{{ t('hero.stats.saved_currency') }}{{ animatedSaved }}k</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm m-0">{{ t('hero.stats.saved_text') }}</p>
                     </div>
                     <div class="w-px h-10 bg-gray-300 dark:bg-gray-700 self-center hidden sm:block"></div>
                     <div class="text-center px-6">

@@ -88,19 +88,20 @@ const checkStickyBar = () => {
     showStickyBar.value = (hasScrolledEnough && pastPricing) || nearBottom;
 };
 
-// 2. New function to fetch the live count
 const fetchWaitlistCount = async () => {
     try {
         const { data, error } = await supabase.rpc('get_waitlist_count');
         if (error) throw error;
         
-        // Animate from 0 to the live count
-        animateValue(animatedWaitlist, 0, data, 2000);
+        // FIX: Round the live count down to the nearest 10
+        const roundedCount = Math.floor(data / 10) * 10;
+        
+        animateValue(animatedWaitlist, 0, roundedCount, 2000);
 
     } catch (error) {
         console.error('Error fetching waitlist count:', error);
-        // Fallback to a static number if the fetch fails
-        animateValue(animatedWaitlist, 0, 234, 2000);
+        // Also round the fallback number
+        animateValue(animatedWaitlist, 0, 230, 2000);
     }
 };
 

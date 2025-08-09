@@ -13,7 +13,9 @@
     },
     "stats": {
       "waitlist": "Auf der Warteliste",
-      "saved": "Gegenüber Konkurrenten gespart",
+      "saved_currency": "€",
+      "saved_amount": "21",
+      "saved_text": "Gegenüber Konkurrenten gespart",
       "modules": "Mögliche Module",
       "sources": "Datenquellen"
     }
@@ -108,32 +110,37 @@
     "time_strapped_text": "Deine Zeit ist dein wertvollstes Gut. Du brauchst einen KI-Copiloten, der die schwere Arbeit übernimmt und dir wichtige Einblicke liefert, damit du schneller fundierte Entscheidungen treffen kannst."
   },
   "pricing": {
-  "title": "Einfache, transparente Preise",
-  "subtitle": "Wähle den Plan, der zu deinem Portfolio passt. Erhalte frühzeitigen Zugang, indem du dich in die Warteliste einträgst.",
-  "essential_name": "Essential",
-  "essential_desc": "Für neue Investoren",
-  "advanced_name": "Advanced",
-  "advanced_desc": "Für aktive Investoren",
-  "professional_name": "Professional",
-  "professional_desc": "Für Power-User",
-  "trial_button": "Warteliste beitreten",
-  "modules_label": "Module",
-  "popular_badge": "Am beliebtesten",
-  "features": {
-    "real_time": "Echtzeit-Kursdaten",
-    "sentiment": "KI-Stimmungsanalyse",
-    "standard_support": "Standard-Support",
-    "works_on_all": "Funktioniert auf Desktop, Tablet & Mobilgeräten",
-    "cross_investment": "Cross-Investment-Korrelations-Warnungen",
-    "custom_alerts": "Anpassbare Warnschwellen",
-    "priority_support": "Vorrangiger Support",
-    "export": "Daten & Berichte exportieren (CSV)",
-    "dedicated_support": "Dedizierter Support"
+    "title": "Einfache, transparente Preise",
+    "subtitle": "Wähle den Plan, der zu deinem Portfolio passt. Erhalte frühzeitigen Zugang, indem du dich in die Warteliste einträgst.",
+    "essential_name": "Essential",
+    "essential_desc": "Für neue Investoren",
+    "essential_price": "19",
+    "advanced_name": "Advanced",
+    "advanced_desc": "Für aktive Investoren",
+    "advanced_price": "29",
+    "professional_name": "Professional",
+    "professional_desc": "Für Power-User",
+    "professional_price": "34",
+    "currency_symbol": "€",
+    "per_month": "/ Monat",
+    "trial_button": "Warteliste beitreten",
+    "modules_label": "Module",
+    "popular_badge": "Am beliebtesten",
+    "features": {
+      "real_time": "Echtzeit-Kursdaten",
+      "sentiment": "KI-Stimmungsanalyse",
+      "standard_support": "Standard-Support",
+      "works_on_all": "Funktioniert auf Desktop, Tablet & Mobilgeräten",
+      "cross_investment": "Cross-Investment-Korrelations-Warnungen",
+      "custom_alerts": "Anpassbare Warnschwellen",
+      "priority_support": "Vorrangiger Support",
+      "export": "Daten & Berichte exportieren (CSV)",
+      "dedicated_support": "Dedizierter Support"
+    },
+    "enterprise_title": "Brauchst du mehr als 9 Module?",
+    "enterprise_text": "Wir bieten individuelle Enterprise-Pläne an. Kontaktiere uns für ein persönliches Angebot.",
+    "contact_button": "Vertrieb kontaktieren"
   },
-  "enterprise_title": "Brauchst du mehr als 9 Module?",
-  "enterprise_text": "Wir bieten individuelle Enterprise-Pläne an. Kontaktiere uns für ein persönliches Angebot.",
-  "contact_button": "Vertrieb kontaktieren"
-},
   "faq": {
     "title": "Häufig gestellte Fragen",
     "q1": "Ersetzt das mein Broker-Konto?",
