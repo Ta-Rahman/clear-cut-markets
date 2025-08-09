@@ -10,7 +10,7 @@
                      :class="[
                          'border rounded-lg border-gray-200 dark:border-gray-700 overflow-hidden',
                          'fade-up',
-                         `stagger-${index + 1}`
+                         `stagger-${index}`
                      ]">
                     <button
                         @click="toggleFaq(index)"

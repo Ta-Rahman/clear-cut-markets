@@ -6,7 +6,7 @@
                  :class="[
                      'text-center p-6 bg-white dark:bg-gray-800/50 rounded-xl transition-all duration-300 hover:shadow-xl hover:scale-105 border border-gray-200 dark:border-gray-700',
                      'fade-up',
-                     `stagger-${(index % 3) + 1}`
+                     `stagger-${(index)}`
                  ]"
                  @mouseenter="hoveredFeature = index"
                  @mouseleave="hoveredFeature = null">
