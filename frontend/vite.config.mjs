@@ -4,8 +4,8 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  // This explicitly tells Vite to prefix all asset paths with your repository name.
-  // This will fix the 404 errors on GitHub Pages.
+  // This line is the definitive fix.
+  // It tells Vite to build all asset links with the correct repository subfolder.
   base: '/clear-cut-markets/', 
   
   plugins: [vue()],
