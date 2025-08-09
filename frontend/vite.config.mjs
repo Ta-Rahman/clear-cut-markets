@@ -1,25 +1,16 @@
-import { fileURLToPath, URL } from 'node:url';
-
-import { PrimeVueResolver } from '@primevue/auto-import-resolver';
-import vue from '@vitejs/plugin-vue';
-import Components from 'unplugin-vue-components/vite';
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    base: process.env.NODE_ENV === 'production' ? '/clear-cut-markets/' : '/',
-    optimizeDeps: {
-        noDiscovery: true
+  // FIX: Set the base path to your repository name
+  base: '/clear-cut-markets/', 
+  
+  plugins: [vue()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
     },
-    plugins: [
-        vue(),
-        Components({
-            resolvers: [PrimeVueResolver()]
-        })
-    ],
-    resolve: {
-        alias: {
-            '@': fileURLToPath(new URL('./src', import.meta.url))
-        }
-    }
-});
+  }
+})
