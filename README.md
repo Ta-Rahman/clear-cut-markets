@@ -2,11 +2,6 @@
 
 ### Focus on what matters. AI-powered investment monitoring with a modular slot-based approach.
 
-![Clear Cut Markets Hero Image](https://user-images.githubusercontent.com/your-username/your-repo/assets/hero-image.png) 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/your-username/clear-cut-markets/blob/main/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/your-username/clear-cut-markets.svg)](https://GitHub.com/your-username/clear-cut-markets/issues/)
-[![PRs Welcome](httpsse.com/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
-
 **Clear Cut Markets** is a SaaS investment monitoring platform designed to eliminate information overload. It acts as an AI-powered co-pilot for your portfolio, allowing you to focus on the 3-9 investments that matter most to you. The platform provides automated sentiment analysis and crucial cross-investment correlation insights, helping you understand the "why" behind market moves.
 
 ## Core Value Proposition
