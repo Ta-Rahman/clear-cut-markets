@@ -11,6 +11,15 @@
 
             <div class="p-0 md:p-4 fade-up stagger-1">
                 <div class="relative p-8 flex flex-col bg-white dark:bg-gray-800 rounded-2xl border-2 border-gray-200 dark:border-gray-700 hover:border-violet-500 duration-300 transition-all cursor-pointer h-full">
+                    <div class="text-gray-900 dark:text-gray-100 text-center mb-4">
+                        <h3 class="text-3xl font-bold">{{ t('pricing.essential_name') }}</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mt-2">{{ t('pricing.essential_desc') }}</p>
+                    </div>
+                    
+                    <div class="text-center bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg border dark:border-gray-600 mb-8">
+                        <span class="text-2xl font-bold text-violet-600 dark:text-violet-400">3 {{ t('pricing.modules_label') }}</span>
+                    </div>
+                    
                     <div class="mb-8 flex flex-col items-center gap-4">
                         <div class="flex items-baseline">
                             <span class="text-5xl font-bold text-gray-900 dark:text-gray-100">{{ t('pricing.currency_symbol') }}{{ t('pricing.essential_price') }}</span>
@@ -40,6 +49,14 @@
 
             <div class="p-0 md:p-4 fade-up stagger-2">
                 <div class="relative p-8 flex flex-col bg-white dark:bg-gray-800 rounded-2xl border-2 border-violet-500 duration-300 transition-all cursor-pointer h-full">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2"><Chip :label="t('pricing.popular_badge')" class="bg-violet-600 text-white px-4 py-2" /></div>
+                    <div class="text-gray-900 dark:text-gray-100 text-center mb-4">
+                        <h3 class="text-3xl font-bold">{{ t('pricing.advanced_name') }}</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mt-2">{{ t('pricing.advanced_desc') }}</p>
+                    </div>
+                    <div class="text-center bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg border dark:border-gray-600 mb-8">
+                        <span class="text-2xl font-bold text-violet-600 dark:text-violet-400">6 {{ t('pricing.modules_label') }}</span>
+                    </div>
                     <div class="mb-8 flex flex-col items-center gap-4">
                         <div class="flex items-baseline">
                             <span class="text-5xl font-bold text-gray-900 dark:text-gray-100">{{ t('pricing.currency_symbol') }}{{ t('pricing.advanced_price') }}</span>
@@ -47,7 +64,7 @@
                         </div>
                         <Button
                             :label="t('pricing.trial_button')"
-                            severity="success"
+                            severity="primary"
                             class="w-full"
                             @click="scrollToWaitlist"
                         />
@@ -66,6 +83,13 @@
             </div>
             <div class="p-0 md:p-4 fade-up stagger-3">
                 <div class="relative p-8 flex flex-col bg-white dark:bg-gray-800 rounded-2xl border-2 border-gray-200 dark:border-gray-700 hover:border-violet-500 duration-300 transition-all cursor-pointer h-full">
+                    <div class="text-gray-900 dark:text-gray-100 text-center mb-4">
+                        <h3 class="text-3xl font-bold">{{ t('pricing.professional_name') }}</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mt-2">{{ t('pricing.professional_desc') }}</p>
+                    </div>
+                    <div class="text-center bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg border dark:border-gray-600 mb-8">
+                        <span class="text-2xl font-bold text-violet-600 dark:text-violet-400">9 {{ t('pricing.modules_label') }}</span>
+                    </div>
                     <div class="mb-8 flex flex-col items-center gap-4">
                         <div class="flex items-baseline">
                              <span class="text-5xl font-bold text-gray-900 dark:text-gray-100">{{ t('pricing.currency_symbol') }}{{ t('pricing.professional_price') }}</span>
@@ -106,8 +130,8 @@
             />
         </div>
 
+        <ContactSalesModal :visible="isContactModalVisible" @close="isContactModalVisible = false" />
     </div>
-    <ContactSalesModal :visible="isContactModalVisible" @close="isContactModalVisible = false" />
 </template>
 
 <script setup>
