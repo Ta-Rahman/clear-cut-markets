@@ -9,11 +9,10 @@ import Sidebar from 'primevue/sidebar';
 const router = useRouter();
 const { t, locale } = useI18n();
 
-// --- State for Mobile Sidebar ---
 const sidebarVisible = ref(false);
-
-// --- Dark Mode Logic ---
 const isDark = ref(false);
+
+// This function remains the same. It toggles the state and saves the user's preference.
 const toggleDarkMode = () => {
     const newValue = !isDark.value;
     isDark.value = newValue;
@@ -26,51 +25,29 @@ const toggleDarkMode = () => {
     }
 };
 
-// --- Language Switcher Logic ---
 const languages = ref([
     { name: 'English', code: 'en' },
     { name: 'Deutsch', code: 'de' }
 ]);
 const selectedLanguage = ref();
 
-// --- General Functions ---
 const scrollToSection = (sectionId) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
     sidebarVisible.value = false;
 };
 
-// --- Lifecycle Hook ---
 onMounted(() => {
-    // Initialize Dark Mode
-    const savedTheme = localStorage.getItem('app-dark-mode');
-    if (savedTheme !== null) {
-        isDark.value = savedTheme === 'true';
-    } else {
-        isDark.value = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    }
-    if(isDark.value) {
-        document.documentElement.classList.add('app-dark');
-    }
+    // FIX: The logic is now much simpler. It just checks the current state
+    // that was set by App.vue to correctly display the button icon.
+    isDark.value = document.documentElement.classList.contains('app-dark');
 
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (localStorage.getItem('app-dark-mode') === null) {
-            isDark.value = e.matches;
-            if (e.matches) {
-                document.documentElement.classList.add('app-dark');
-            } else {
-                document.documentElement.classList.remove('app-dark');
-            }
-        }
-    });
-
-    // Initialize Language
+    // Language initialization remains the same
     const browserLang = navigator.language.split('-')[0];
     const defaultLang = languages.value.find(lang => lang.code === browserLang) || languages.value[0];
     selectedLanguage.value = defaultLang;
     locale.value = defaultLang.code;
 });
 
-// Watch for language changes
 watch(selectedLanguage, (newLang) => {
     if (newLang) {
         locale.value = newLang.code;

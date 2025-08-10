@@ -28,7 +28,7 @@
                         <Button 
                             :label="t('pricing.trial_button')" 
                             outlined
-                            class="w-full"
+                            class="w-full !border-emerald-400 !text-emerald-400 hover:!bg-emerald-400 hover:!border-emerald-400 hover:!text-white"
                             @click="scrollToWaitlist"
                         />
                     </div>
@@ -36,13 +36,13 @@
                     <div class="w-full h-px bg-gray-200 dark:bg-gray-700 my-4"></div>
                     
                     <ul class="my-8 list-none p-0 flex flex-col gap-4 flex-grow">
-                        <li class="flex items-start"><i class="pi pi-check-circle text-green-500 text-xl mr-3 mt-1"></i><span class="text-gray-700 dark:text-gray-300">{{ t('pricing.features.real_time') }}</span></li>
-                        <li class="flex items-start"><i class="pi pi-sparkles text-violet-500 text-xl mr-3 mt-1"></i><span class="text-gray-700 dark:text-gray-300">{{ t('pricing.features.sentiment') }}</span></li>
-                        <li class="flex items-start"><i class="pi pi-check-circle text-green-500 text-xl mr-3 mt-1"></i><span class="text-gray-700 dark:text-gray-300">{{ t('pricing.features.standard_support') }}</span></li>
-                        <li class="flex items-start"><i class="pi pi-check-circle text-green-500 text-xl mr-3 mt-1"></i><span class="text-gray-700 dark:text-gray-300">{{ t('pricing.features.works_on_all') }}</span></li>
-                        <li class="flex items-start"><i class="pi pi-times-circle text-gray-400 dark:text-gray-600 text-xl mr-3 mt-1"></i><span class="text-gray-400 dark:text-gray-500">{{ t('pricing.features.cross_investment') }}</span></li>
-                        <li class="flex items-start"><i class="pi pi-times-circle text-gray-400 dark:text-gray-600 text-xl mr-3 mt-1"></i><span class="text-gray-400 dark:text-gray-500">{{ t('pricing.features.custom_alerts') }}</span></li>
-                        <li class="flex items-start"><i class="pi pi-times-circle text-gray-400 dark:text-gray-600 text-xl mr-3 mt-1"></i><span class="text-gray-400 dark:text-gray-500">{{ t('pricing.features.export') }}</span></li>
+                        <li class="flex items-start"><i class="pi pi-check-circle text-green-500 text-xl mr-3"></i><span class="text-gray-700 dark:text-gray-300">{{ t('pricing.features.real_time') }}</span></li>
+                        <li class="flex items-start"><i class="pi pi-sparkles text-violet-500 text-xl mr-3"></i><span class="text-gray-700 dark:text-gray-300">{{ t('pricing.features.sentiment') }}</span></li>
+                        <li class="flex items-start"><i class="pi pi-check-circle text-green-500 text-xl mr-3"></i><span class="text-gray-700 dark:text-gray-300">{{ t('pricing.features.standard_support') }}</span></li>
+                        <li class="flex items-start"><i class="pi pi-check-circle text-green-500 text-xl mr-3"></i><span class="text-gray-700 dark:text-gray-300">{{ t('pricing.features.works_on_all') }}</span></li>
+                        <li class="flex items-start"><i class="pi pi-times-circle text-gray-400 dark:text-gray-600 text-xl mr-3"></i><span class="text-gray-400 dark:text-gray-500">{{ t('pricing.features.cross_investment') }}</span></li>
+                        <li class="flex items-start"><i class="pi pi-times-circle text-gray-400 dark:text-gray-600 text-xl mr-3"></i><span class="text-gray-400 dark:text-gray-500">{{ t('pricing.features.custom_alerts') }}</span></li>
+                        <li class="flex items-start"><i class="pi pi-times-circle text-gray-400 dark:text-gray-600 text-xl mr-3"></i><span class="text-gray-400 dark:text-gray-500">{{ t('pricing.features.export') }}</span></li>
                     </ul>
                 </div>
             </div>
@@ -64,23 +64,23 @@
                         </div>
                         <Button
                             :label="t('pricing.trial_button')"
-                            severity="primary"
-                            class="w-full"
+                            class="w-full bg-emerald-500 border-emerald-500 text-white hover:bg-emerald-600 hover:border-emerald-600"
                             @click="scrollToWaitlist"
                         />
                     </div>
                     <div class="w-full h-px bg-gray-200 dark:bg-gray-700 my-4"></div>
                     <ul class="my-8 list-none p-0 flex flex-col gap-4 flex-grow">
-                        <li class="flex items-start"><i class="pi pi-check-circle text-green-500 text-xl mr-3 mt-1"></i><span class="text-gray-700 dark:text-gray-300">{{ t('pricing.features.real_time') }}</span></li>
-                        <li class="flex items-start"><i class="pi pi-sparkles text-violet-500 text-xl mr-3 mt-1"></i><span class="text-gray-700 dark:text-gray-300">{{ t('pricing.features.sentiment') }}</span></li>
-                        <li class="flex items-start"><i class="pi pi-check-circle text-green-500 text-xl mr-3 mt-1"></i><span class="text-gray-700 dark:text-gray-300"><strong>{{ t('pricing.features.priority_support') }}</strong></span></li>
-                        <li class="flex items-start"><i class="pi pi-check-circle text-green-500 text-xl mr-3 mt-1"></i><span class="text-gray-700 dark:text-gray-300">{{ t('pricing.features.works_on_all') }}</span></li>
-                        <li class="flex items-start"><i class="pi pi-sparkles text-violet-500 text-xl mr-3 mt-1"></i><span class="text-gray-700 dark:text-gray-300"><strong>{{ t('pricing.features.cross_investment') }}</strong></span></li>
-                        <li class="flex items-start"><i class="pi pi-check-circle text-green-500 text-xl mr-3 mt-1"></i><span class="text-gray-700 dark:text-gray-300">{{ t('pricing.features.custom_alerts') }}</span></li>
-                        <li class="flex items-start"><i class="pi pi-times-circle text-gray-400 dark:text-gray-600 text-xl mr-3 mt-1"></i><span class="text-gray-400 dark:text-gray-500">{{ t('pricing.features.export') }}</span></li>
+                        <li class="flex items-start"><i class="pi pi-check-circle text-green-500 text-xl mr-3"></i><span class="text-gray-700 dark:text-gray-300">{{ t('pricing.features.real_time') }}</span></li>
+                        <li class="flex items-start"><i class="pi pi-sparkles text-violet-500 text-xl mr-3"></i><span class="text-gray-700 dark:text-gray-300">{{ t('pricing.features.sentiment') }}</span></li>
+                        <li class="flex items-start"><i class="pi pi-check-circle text-green-500 text-xl mr-3"></i><span class="text-gray-700 dark:text-gray-300"><strong>{{ t('pricing.features.priority_support') }}</strong></span></li>
+                        <li class="flex items-start"><i class="pi pi-check-circle text-green-500 text-xl mr-3"></i><span class="text-gray-700 dark:text-gray-300">{{ t('pricing.features.works_on_all') }}</span></li>
+                        <li class="flex items-start"><i class="pi pi-sparkles text-violet-500 text-xl mr-3"></i><span class="text-gray-700 dark:text-gray-300"><strong>{{ t('pricing.features.cross_investment') }}</strong></span></li>
+                        <li class="flex items-start"><i class="pi pi-check-circle text-green-500 text-xl mr-3"></i><span class="text-gray-700 dark:text-gray-300">{{ t('pricing.features.custom_alerts') }}</span></li>
+                        <li class="flex items-start"><i class="pi pi-times-circle text-gray-400 dark:text-gray-600 text-xl mr-3"></i><span class="text-gray-400 dark:text-gray-500">{{ t('pricing.features.export') }}</span></li>
                     </ul>
                 </div>
             </div>
+            
             <div class="p-0 md:p-4 fade-up stagger-3">
                 <div class="relative p-8 flex flex-col bg-white dark:bg-gray-800 rounded-2xl border-2 border-gray-200 dark:border-gray-700 hover:border-violet-500 duration-300 transition-all cursor-pointer h-full">
                     <div class="text-gray-900 dark:text-gray-100 text-center mb-4">
@@ -98,19 +98,19 @@
                          <Button
                             :label="t('pricing.trial_button')"
                             outlined
-                            class="w-full"
+                            class="w-full !border-emerald-400 !text-emerald-400 hover:!bg-emerald-400 hover:!border-emerald-400 hover:!text-white"
                             @click="scrollToWaitlist"
                         />
                     </div>
                     <div class="w-full h-px bg-gray-200 dark:bg-gray-700 my-4"></div>
                     <ul class="my-8 list-none p-0 flex flex-col gap-4 flex-grow">
-                        <li class="flex items-start"><i class="pi pi-check-circle text-green-500 text-xl mr-3 mt-1"></i><span class="text-gray-700 dark:text-gray-300">{{ t('pricing.features.real_time') }}</span></li>
-                        <li class="flex items-start"><i class="pi pi-sparkles text-violet-500 text-xl mr-3 mt-1"></i><span class="text-gray-700 dark:text-gray-300">{{ t('pricing.features.sentiment') }}</span></li>
-                        <li class="flex items-start"><i class="pi pi-check-circle text-green-500 text-xl mr-3 mt-1"></i><span class="text-gray-700 dark:text-gray-300"><strong>{{ t('pricing.features.dedicated_support') }}</strong></span></li>
-                        <li class="flex items-start"><i class="pi pi-check-circle text-green-500 text-xl mr-3 mt-1"></i><span class="text-gray-700 dark:text-gray-300">{{ t('pricing.features.works_on_all') }}</span></li>
-                        <li class="flex items-start"><i class="pi pi-sparkles text-violet-500 text-xl mr-3 mt-1"></i><span class="text-gray-700 dark:text-gray-300"><strong>{{ t('pricing.features.cross_investment') }}</strong></span></li>
-                        <li class="flex items-start"><i class="pi pi-check-circle text-green-500 text-xl mr-3 mt-1"></i><span class="text-gray-700 dark:text-gray-300">{{ t('pricing.features.custom_alerts') }}</span></li>
-                        <li class="flex items-start"><i class="pi pi-check-circle text-green-500 text-xl mr-3 mt-1"></i><span class="text-gray-700 dark:text-gray-300"><strong>{{ t('pricing.features.export') }}</strong></span></li>
+                        <li class="flex items-start"><i class="pi pi-check-circle text-green-500 text-xl mr-3"></i><span class="text-gray-700 dark:text-gray-300">{{ t('pricing.features.real_time') }}</span></li>
+                        <li class="flex items-start"><i class="pi pi-sparkles text-violet-500 text-xl mr-3"></i><span class="text-gray-700 dark:text-gray-300">{{ t('pricing.features.sentiment') }}</span></li>
+                        <li class="flex items-start"><i class="pi pi-check-circle text-green-500 text-xl mr-3"></i><span class="text-gray-700 dark:text-gray-300"><strong>{{ t('pricing.features.dedicated_support') }}</strong></span></li>
+                        <li class="flex items-start"><i class="pi pi-check-circle text-green-500 text-xl mr-3"></i><span class="text-gray-700 dark:text-gray-300">{{ t('pricing.features.works_on_all') }}</span></li>
+                        <li class="flex items-start"><i class="pi pi-sparkles text-violet-500 text-xl mr-3"></i><span class="text-gray-700 dark:text-gray-300"><strong>{{ t('pricing.features.cross_investment') }}</strong></span></li>
+                        <li class="flex items-start"><i class="pi pi-check-circle text-green-500 text-xl mr-3"></i><span class="text-gray-700 dark:text-gray-300">{{ t('pricing.features.custom_alerts') }}</span></li>
+                        <li class="flex items-start"><i class="pi pi-check-circle text-green-500 text-xl mr-3"></i><span class="text-gray-700 dark:text-gray-300"><strong>{{ t('pricing.features.export') }}</strong></span></li>
                     </ul>
                 </div>
             </div>
@@ -123,7 +123,7 @@
             </p>
             <Button 
                 :label="t('pricing.contact_button')"
-                class="p-button-outlined p-button-lg"
+                class="p-button-outlined p-button-lg !border-emerald-400 !text-emerald-400 hover:!bg-emerald-400 hover:!border-emerald-400 hover:!text-white"
                 icon="pi pi-arrow-right"
                 iconPos="right"
                 @click="isContactModalVisible = true"

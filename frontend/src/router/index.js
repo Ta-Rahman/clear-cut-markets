@@ -1,5 +1,6 @@
-import AppLayout from '@/layout/AppLayout.vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
+import { useAuth } from '@/composables/useAuth'; // 1. Import useAuth
+import AppLayout from '@/layout/AppLayout.vue';
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -20,24 +21,14 @@ const router = createRouter({
         {
             path: '/app',
             component: AppLayout,
-            // FIX: Removed redirect and children since these pages don't exist yet.
-            // We will add them back as we build them.
+            meta: { requiresAuth: true }, // 2. Add meta field to protect this route and its children
             children: [
-                // {
-                //     path: 'dashboard',
-                //     name: 'dashboard',
-                //     component: () => import('@/views/Dashboard.vue') // This file was deleted
-                // },
-                // {
-                //     path: 'modules',
-                //     name: 'modules',
-                //     component: () => import('@/views/Modules.vue') // This file was deleted
-                // },
-                // {
-                //     path: 'settings',
-                //     name: 'settings',
-                //     component: () => import('@/views/Settings.vue') // This file was deleted
-                // }
+                {
+                    path: 'dashboard',
+                    name: 'dashboard',
+                    component: () => import('@/views/Dashboard.vue') // We need at least one route to land on
+                },
+                // You can add back modules and settings here as you build them
             ]
         },
         
@@ -57,6 +48,26 @@ const router = createRouter({
             redirect: '/pages/notfound'
         }
     ]
+});
+
+// 3. Add the navigation guard
+router.beforeEach(async (to, from, next) => {
+    const { getCurrentUser } = useAuth();
+    const user = await getCurrentUser();
+
+    // Check if the route requires authentication
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        // If the user is not logged in, redirect to the login page
+        if (!user) {
+            next({ name: 'login' });
+        } else {
+            // If the user is logged in, allow them to proceed
+            next();
+        }
+    } else {
+        // If the route does not require authentication, let them proceed
+        next();
+    }
 });
 
 export default router;
