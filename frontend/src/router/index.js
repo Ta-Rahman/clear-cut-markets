@@ -1,14 +1,14 @@
 import AppLayout from '@/layout/AppLayout.vue';
-import { createRouter, createWebHashHistory } from 'vue-router'; // Changed import
+import { createRouter, createWebHashHistory } from 'vue-router';
 
 const router = createRouter({
-    history: createWebHashHistory(), // Changed from createWebHistory()
+    history: createWebHashHistory(),
     routes: [
         // PUBLIC ROUTES
         {
             path: '/',
             name: 'landing',
-            component: () => import('@/views/Landing.vue')
+            component: () => import('@/views/pages/Landing.vue')
         },
         {
             path: '/auth/login',
@@ -20,23 +20,24 @@ const router = createRouter({
         {
             path: '/app',
             component: AppLayout,
-            redirect: '/app/dashboard',
+            // FIX: Removed redirect and children since these pages don't exist yet.
+            // We will add them back as we build them.
             children: [
-                {
-                    path: 'dashboard',
-                    name: 'dashboard',
-                    component: () => import('@/views/Dashboard.vue')
-                },
-                {
-                    path: 'modules',
-                    name: 'modules',
-                    component: () => import('@/views/Modules.vue')
-                },
-                {
-                    path: 'settings',
-                    name: 'settings',
-                    component: () => import('@/views/Settings.vue')
-                }
+                // {
+                //     path: 'dashboard',
+                //     name: 'dashboard',
+                //     component: () => import('@/views/Dashboard.vue') // This file was deleted
+                // },
+                // {
+                //     path: 'modules',
+                //     name: 'modules',
+                //     component: () => import('@/views/Modules.vue') // This file was deleted
+                // },
+                // {
+                //     path: 'settings',
+                //     name: 'settings',
+                //     component: () => import('@/views/Settings.vue') // This file was deleted
+                // }
             ]
         },
         
@@ -56,16 +57,6 @@ const router = createRouter({
             redirect: '/pages/notfound'
         }
     ]
-});
-
-// Debug logging - MUST BE AFTER router is created
-router.beforeEach((to, from, next) => {
-    console.log('Navigating to:', to.path);
-    next();
-});
-
-router.onError((error) => {
-    console.error('Router error:', error);
 });
 
 export default router;
