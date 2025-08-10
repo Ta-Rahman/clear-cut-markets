@@ -9,10 +9,11 @@ import Sidebar from 'primevue/sidebar';
 const router = useRouter();
 const { t, locale } = useI18n();
 
+// --- State for Mobile Sidebar ---
 const sidebarVisible = ref(false);
-const isDark = ref(false);
 
-// This function remains the same. It toggles the state and saves the user's preference.
+// --- Dark Mode Logic ---
+const isDark = ref(false);
 const toggleDarkMode = () => {
     const newValue = !isDark.value;
     isDark.value = newValue;
@@ -25,32 +26,35 @@ const toggleDarkMode = () => {
     }
 };
 
+// --- Language Switcher Logic ---
 const languages = ref([
     { name: 'English', code: 'en' },
     { name: 'Deutsch', code: 'de' }
 ]);
 const selectedLanguage = ref();
 
+// --- General Functions ---
 const scrollToSection = (sectionId) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
     sidebarVisible.value = false;
 };
 
+// --- Lifecycle Hook ---
 onMounted(() => {
-    // FIX: The logic is now much simpler. It just checks the current state
-    // that was set by App.vue to correctly display the button icon.
+    // Initialize Dark Mode
     isDark.value = document.documentElement.classList.contains('app-dark');
 
-    // Language initialization remains the same
-    const browserLang = navigator.language.split('-')[0];
-    const defaultLang = languages.value.find(lang => lang.code === browserLang) || languages.value[0];
-    selectedLanguage.value = defaultLang;
-    locale.value = defaultLang.code;
+    // FIX: Initialize the dropdown to reflect the current locale (which was loaded from localStorage)
+    const currentLangCode = locale.value;
+    selectedLanguage.value = languages.value.find(lang => lang.code === currentLangCode) || languages.value[0];
 });
 
+// Watch for language changes
 watch(selectedLanguage, (newLang) => {
     if (newLang) {
         locale.value = newLang.code;
+        // FIX: Save the user's choice to localStorage
+        localStorage.setItem('user-locale', newLang.code);
     }
 });
 </script>

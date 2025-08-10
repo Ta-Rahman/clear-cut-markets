@@ -1,6 +1,6 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
-import { useAuth } from '@/composables/useAuth'; // 1. Import useAuth
 import AppLayout from '@/layout/AppLayout.vue';
+import { createRouter, createWebHashHistory } from 'vue-router';
+import { supabase } from '@/supabase';
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -16,28 +16,29 @@ const router = createRouter({
             name: 'login',
             component: () => import('@/views/pages/auth/Login.vue')
         },
+        {
+            path: '/auth/signup',
+            name: 'signup',
+            component: () => import('@/views/pages/auth/SignUp.vue')
+        },
         
         // PROTECTED APP ROUTES
         {
             path: '/app',
             component: AppLayout,
-            meta: { requiresAuth: true }, // 2. Add meta field to protect this route and its children
+            redirect: '/app/dashboard', // Redirect /app to /app/dashboard
+            meta: { requiresAuth: true }, // This whole section requires login
             children: [
                 {
                     path: 'dashboard',
                     name: 'dashboard',
-                    component: () => import('@/views/Dashboard.vue') // We need at least one route to land on
-                },
-                // You can add back modules and settings here as you build them
+                    component: () => import('@/views/Dashboard.vue')
+                }
+                // We will add '/app/modules' and '/app/settings' here later
             ]
         },
         
         // ERROR PAGES
-        {
-            path: '/auth/access',
-            name: 'accessDenied',
-            component: () => import('@/views/pages/auth/Access.vue')
-        },
         {
             path: '/pages/notfound',
             name: 'notfound',
@@ -50,22 +51,20 @@ const router = createRouter({
     ]
 });
 
-// 3. Add the navigation guard
+// Route Guard to protect routes
 router.beforeEach(async (to, from, next) => {
-    const { getCurrentUser } = useAuth();
-    const user = await getCurrentUser();
+    const { data } = await supabase.auth.getSession();
+    const isLoggedIn = !!data.session;
 
-    // Check if the route requires authentication
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-        // If the user is not logged in, redirect to the login page
-        if (!user) {
-            next({ name: 'login' });
-        } else {
-            // If the user is logged in, allow them to proceed
-            next();
-        }
-    } else {
-        // If the route does not require authentication, let them proceed
+    if (to.meta.requiresAuth && !isLoggedIn) {
+        // If the route requires login and the user is not logged in, redirect to login
+        next({ name: 'login' });
+    } else if ((to.name === 'login' || to.name === 'signup') && isLoggedIn) {
+        // If the user is already logged in and tries to visit login/signup, redirect to dashboard
+        next({ name: 'dashboard' });
+    }
+    else {
+        // Otherwise, allow navigation
         next();
     }
 });

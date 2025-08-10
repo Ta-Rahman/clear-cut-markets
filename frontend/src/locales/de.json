@@ -204,6 +204,20 @@
     "forgot_password": "Passwort vergessen?",
     "submit_button": "Anmelden",
     "error_enter_credentials": "Bitte gib sowohl E-Mail als auch Passwort ein.",
-    "error_unknown": "Ein unbekannter Fehler ist aufgetreten."
+    "error_unknown": "Ein unbekannter Fehler ist aufgetreten.",
+    "back_to_home": "Zurück zur Startseite"
+  },
+  "signup": {
+    "title": "Tritt der Beta-Warteliste bei",
+    "subtitle": "Erhalte frühzeitigen Zugang zu Clear Cut Markets.",
+    "email_label": "E-Mail",
+    "email_placeholder": "Deine E-Mail-Adresse",
+    "submit_button": "Warteliste beitreten",
+    "success_message": "Du stehst auf der Liste! Wir werden uns bald mit deiner Beta-Einladung bei dir melden.",
+    "error_email_exists": "Diese E-Mail ist bereits auf der Warteliste.",
+    "error_generic": "Ein Fehler ist aufgetreten. Bitte versuche es erneut.",
+    "error_invalid_email": "Bitte gib eine gültige E-Mail-Adresse ein.",
+    "already_on_list": "Bereits auf der Liste?",
+    "sign_in_link": "Anmelden"
   }
 }

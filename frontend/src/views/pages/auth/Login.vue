@@ -110,6 +110,12 @@ const handleLogin = async () => {
                         <Button type="submit" :label="t('login.submit_button')" class="w-full" :loading="loading"></Button>
                     </form>
                 </div>
+
+                <div class="text-center mt-4">
+                    <router-link to="/" class="text-sm font-medium text-gray-500 hover:text-primary transition-colors duration-200">
+                        <i class="pi pi-arrow-left mr-2"></i>{{ t('login.back_to_home') }}
+                    </router-link>
+                </div>
             </div>
         </div>
     </div>

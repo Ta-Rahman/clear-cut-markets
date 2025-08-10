@@ -204,6 +204,20 @@
     "forgot_password": "Forgot your password?",
     "submit_button": "Sign In",
     "error_enter_credentials": "Please enter both email and password.",
-    "error_unknown": "An unknown error occurred."
+    "error_unknown": "An unknown error occurred.",
+    "back_to_home": "Back to landing page"
+  },
+  "signup": {
+    "title": "Join the Beta Waitlist",
+    "subtitle": "Get early access to Clear Cut Markets.",
+    "email_label": "Email",
+    "email_placeholder": "Your email address",
+    "submit_button": "Join Waitlist",
+    "success_message": "You're on the list! We'll be in touch soon with your beta invitation.",
+    "error_email_exists": "This email is already on the waitlist.",
+    "error_generic": "An error occurred. Please try again.",
+    "error_invalid_email": "Please enter a valid email address.",
+    "already_on_list": "Already on the list?",
+    "sign_in_link": "Sign In"
   }
 }
