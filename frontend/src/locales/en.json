@@ -187,5 +187,37 @@
     "message_placeholder": "Tell us about your requirements...",
     "cancel_button": "Cancel",
     "send_button": "Send Message"
+  },
+  "login": {
+    "branding_title": "Welcome to Clear Cut Markets",
+    "branding_subtitle": "Focus on what matters. Your AI co-pilot for smarter investing.",
+    "testimonial_text": "\"This is the first tool that actually helps me see the connections between my different assets. It's a game-changer.\"",
+    "testimonial_author": "- Early Beta Tester",
+    "form_title": "Sign In to Your Account",
+    "form_subtitle": "Don't have an account?",
+    "create_link": "Create today",
+    "email_label": "Email",
+    "email_placeholder": "Your email address",
+    "password_label": "Password",
+    "password_placeholder": "Your password",
+    "remember_me": "Remember me",
+    "forgot_password": "Forgot your password?",
+    "submit_button": "Sign In",
+    "error_enter_credentials": "Please enter both email and password.",
+    "error_unknown": "An unknown error occurred.",
+    "back_to_home": "Back to landing page"
+  },
+  "signup": {
+    "title": "Join the Beta Waitlist",
+    "subtitle": "Get early access to Clear Cut Markets.",
+    "email_label": "Email",
+    "email_placeholder": "Your email address",
+    "submit_button": "Join Waitlist",
+    "success_message": "You're on the list! We'll be in touch soon with your beta invitation.",
+    "error_email_exists": "This email is already on the waitlist.",
+    "error_generic": "An error occurred. Please try again.",
+    "error_invalid_email": "Please enter a valid email address.",
+    "already_on_list": "Already on the list?",
+    "sign_in_link": "Sign In"
   }
 }

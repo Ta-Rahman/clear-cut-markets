@@ -1,4 +1,23 @@
-<script setup></script>
+<script setup>
+import { onMounted } from 'vue';
+
+// This logic will now run on every single page load for your entire app.
+onMounted(() => {
+    const savedTheme = localStorage.getItem('app-dark-mode');
+    if (savedTheme !== null) {
+        if (savedTheme === 'true') {
+            document.documentElement.classList.add('app-dark');
+        } else {
+            document.documentElement.classList.remove('app-dark');
+        }
+    } else {
+        // If no theme is saved, check the user's system preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('app-dark');
+        }
+    }
+});
+</script>
 
 <template>
   <Suspense>

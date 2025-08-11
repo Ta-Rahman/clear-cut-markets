@@ -42,38 +42,19 @@ const scrollToSection = (sectionId) => {
 // --- Lifecycle Hook ---
 onMounted(() => {
     // Initialize Dark Mode
-    const savedTheme = localStorage.getItem('app-dark-mode');
-    if (savedTheme !== null) {
-        isDark.value = savedTheme === 'true';
-    } else {
-        isDark.value = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    }
-    if(isDark.value) {
-        document.documentElement.classList.add('app-dark');
-    }
+    isDark.value = document.documentElement.classList.contains('app-dark');
 
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (localStorage.getItem('app-dark-mode') === null) {
-            isDark.value = e.matches;
-            if (e.matches) {
-                document.documentElement.classList.add('app-dark');
-            } else {
-                document.documentElement.classList.remove('app-dark');
-            }
-        }
-    });
-
-    // Initialize Language
-    const browserLang = navigator.language.split('-')[0];
-    const defaultLang = languages.value.find(lang => lang.code === browserLang) || languages.value[0];
-    selectedLanguage.value = defaultLang;
-    locale.value = defaultLang.code;
+    // FIX: Initialize the dropdown to reflect the current locale (which was loaded from localStorage)
+    const currentLangCode = locale.value;
+    selectedLanguage.value = languages.value.find(lang => lang.code === currentLangCode) || languages.value[0];
 });
 
 // Watch for language changes
 watch(selectedLanguage, (newLang) => {
     if (newLang) {
         locale.value = newLang.code;
+        // FIX: Save the user's choice to localStorage
+        localStorage.setItem('user-locale', newLang.code);
     }
 });
 </script>

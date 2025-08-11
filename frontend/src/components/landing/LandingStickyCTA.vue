@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-violet-600 to-purple-600 text-white p-4 shadow-lg z-40">
+    <div class="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-slate-800 to-slate-900 text-white p-4 shadow-lg z-40">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="text-center md:text-left">
                 <p class="font-semibold">{{ t('stickyCTA.title') }}</p>
@@ -7,7 +7,7 @@
             </div>
             <Button 
                 :label="t('stickyCTA.button_beta')"
-                class="bg-white text-violet-600 hover:bg-gray-100 border-0 font-semibold"
+                class="!bg-white !text-emerald-600 hover:!bg-gray-100 !border-0 font-semibold"
                 @click="scrollToWaitlist"
             />
         </div>
@@ -17,10 +17,10 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
 import Button from 'primevue/button';
-import { useWaitlist } from '@/composables/useWaitlist'; // <-- FIX: Import our new composable
+import { useWaitlist } from '@/composables/useWaitlist';
 
 const { t } = useI18n();
-const { scrollToWaitlist } = useWaitlist(); // <-- FIX: Initialize the function
+const { scrollToWaitlist } = useWaitlist();
 </script>
 
 <style scoped>

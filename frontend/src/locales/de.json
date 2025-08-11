@@ -187,5 +187,37 @@
     "message_placeholder": "Erzähl uns von deinen Anforderungen...",
     "cancel_button": "Abbrechen",
     "send_button": "Nachricht senden"
+  },
+  "login": {
+    "branding_title": "Willkommen bei Clear Cut Markets",
+    "branding_subtitle": "Konzentriere dich auf das Wesentliche. Dein KI-Copilot für klügere Investitionen.",
+    "testimonial_text": "\"Das ist das erste Tool, das mir wirklich hilft, die Zusammenhänge zwischen meinen verschiedenen Anlagen zu erkennen. Es ist ein Game-Changer.\"",
+    "testimonial_author": "- Früher Beta-Tester",
+    "form_title": "Melde dich bei deinem Konto an",
+    "form_subtitle": "Du hast noch kein Konto?",
+    "create_link": "Heute erstellen",
+    "email_label": "E-Mail",
+    "email_placeholder": "Deine E-Mail-Adresse",
+    "password_label": "Passwort",
+    "password_placeholder": "Dein Passwort",
+    "remember_me": "Angemeldet bleiben",
+    "forgot_password": "Passwort vergessen?",
+    "submit_button": "Anmelden",
+    "error_enter_credentials": "Bitte gib sowohl E-Mail als auch Passwort ein.",
+    "error_unknown": "Ein unbekannter Fehler ist aufgetreten.",
+    "back_to_home": "Zurück zur Startseite"
+  },
+  "signup": {
+    "title": "Tritt der Beta-Warteliste bei",
+    "subtitle": "Erhalte frühzeitigen Zugang zu Clear Cut Markets.",
+    "email_label": "E-Mail",
+    "email_placeholder": "Deine E-Mail-Adresse",
+    "submit_button": "Warteliste beitreten",
+    "success_message": "Du stehst auf der Liste! Wir werden uns bald mit deiner Beta-Einladung bei dir melden.",
+    "error_email_exists": "Diese E-Mail ist bereits auf der Warteliste.",
+    "error_generic": "Ein Fehler ist aufgetreten. Bitte versuche es erneut.",
+    "error_invalid_email": "Bitte gib eine gültige E-Mail-Adresse ein.",
+    "already_on_list": "Bereits auf der Liste?",
+    "sign_in_link": "Anmelden"
   }
 }

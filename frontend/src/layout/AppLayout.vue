@@ -1,71 +1,23 @@
 <script setup>
-import { useLayout } from '@/layout/composables/layout';
-import { computed, ref, watch } from 'vue';
-import AppFooter from './AppFooter.vue';
-import AppSidebar from './AppSidebar.vue';
 import AppTopbar from './AppTopbar.vue';
-
-const { layoutConfig, layoutState, isSidebarActive } = useLayout();
-
-const outsideClickListener = ref(null);
-
-watch(isSidebarActive, (newVal) => {
-    if (newVal) {
-        bindOutsideClickListener();
-    } else {
-        unbindOutsideClickListener();
-    }
-});
-
-const containerClass = computed(() => {
-    return {
-        'layout-overlay': layoutConfig.menuMode === 'overlay',
-        'layout-static': layoutConfig.menuMode === 'static',
-        'layout-static-inactive': layoutState.staticMenuDesktopInactive && layoutConfig.menuMode === 'static',
-        'layout-overlay-active': layoutState.overlayMenuActive,
-        'layout-mobile-active': layoutState.staticMenuMobileActive
-    };
-});
-
-function bindOutsideClickListener() {
-    if (!outsideClickListener.value) {
-        outsideClickListener.value = (event) => {
-            if (isOutsideClicked(event)) {
-                layoutState.overlayMenuActive = false;
-                layoutState.staticMenuMobileActive = false;
-                layoutState.menuHoverActive = false;
-            }
-        };
-        document.addEventListener('click', outsideClickListener.value);
-    }
-}
-
-function unbindOutsideClickListener() {
-    if (outsideClickListener.value) {
-        document.removeEventListener('click', outsideClickListener);
-        outsideClickListener.value = null;
-    }
-}
-
-function isOutsideClicked(event) {
-    const sidebarEl = document.querySelector('.layout-sidebar');
-    const topbarEl = document.querySelector('.layout-menu-button');
-
-    return !(sidebarEl.isSameNode(event.target) || sidebarEl.contains(event.target) || topbarEl.isSameNode(event.target) || topbarEl.contains(event.target));
-}
 </script>
 
 <template>
-    <div class="layout-wrapper" :class="containerClass">
-        <app-topbar></app-topbar>
-        <app-sidebar></app-sidebar>
-        <div class="layout-main-container">
-            <div class="layout-main">
-                <router-view></router-view>
+    <div class="min-h-screen relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-violet-500 to-purple-600 opacity-5 -z-10"></div>
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute inset-0">
+                <div class="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-violet-500/[0.07] via-transparent to-transparent"></div>
+                <div class="absolute bottom-0 right-0 w-full h-1/2 bg-gradient-to-t from-purple-500/[0.07] via-transparent to-transparent"></div>
             </div>
-            <app-footer></app-footer>
         </div>
-        <div class="layout-mask animate-fadein"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(#e0e0e0_1px,transparent_1px)] dark:bg-[radial-gradient(#404040_1px,transparent_1px)] [background-size:20px_20px] opacity-20 -z-10"></div>
+
+        <div class="relative z-10">
+            <AppTopbar />
+            <main class="p-4 sm:p-6 lg:p-8">
+                <router-view />
+            </main>
+        </div>
     </div>
-    <Toast />
 </template>

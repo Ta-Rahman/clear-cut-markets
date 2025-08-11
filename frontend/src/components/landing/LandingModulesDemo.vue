@@ -109,7 +109,7 @@
                 </div>
                 
                 <div class="text-center mt-8">
-                    <Button :label="t('modulesDemo.dashboard_button')" class="p-button-outlined p-button-lg" disabled />
+                    <Button :label="t('modulesDemo.dashboard_button')" class="p-button-outlined p-button-lg !border-emerald-400 !text-emerald-400" disabled />
                     <p class="text-gray-600 dark:text-gray-400 mt-3">{{ t('modulesDemo.waitlist_prompt') }}</p>
                 </div>
             </div>
