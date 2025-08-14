@@ -41,7 +41,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useScrollAnimation } from '@/composables/useScrollAnimation';
-import { supabase } from '@/supabase'; // <-- 1. Import Supabase
+import { supabase } from '@/supabase';
 import LandingNav from '@/components/landing/LandingNav.vue';
 import LandingHero from '@/components/landing/LandingHero.vue';
 import LandingUsp from '@/components/landing/LandingUsp.vue';
@@ -56,20 +56,21 @@ import LandingStickyCTA from '@/components/landing/LandingStickyCTA.vue';
 useScrollAnimation();
 
 // State for animated counters
-const animatedWaitlist = ref(0); // This will now be our live counter
+const animatedWaitlist = ref(0);
 const animatedSaved = ref(0);
 const animatedModules = ref(0);
 const animatedSources = ref(0);
 const showStickyBar = ref(false);
 
 const animateValue = (ref, start, end, duration) => {
-    if (end === 0) return; // Don't animate if the end value is 0
+    if (end === 0) return;
     const range = end - start;
-    const increment = range / (duration / 16);
+    const increment = end > start ? range / (duration / 16) : -range / (duration / 16);
     let current = start;
+
     const timer = setInterval(() => {
         current += increment;
-        if (current >= end) {
+        if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
             ref.value = end;
             clearInterval(timer);
         } else {
@@ -92,15 +93,23 @@ const fetchWaitlistCount = async () => {
     try {
         const { data, error } = await supabase.rpc('get_waitlist_count');
         if (error) throw error;
-        
-        // FIX: Round the live count down to the nearest 10
-        const roundedCount = Math.floor(data / 10) * 10;
-        
-        animateValue(animatedWaitlist, 0, roundedCount, 2000);
+
+        // --- CORRECTED LOGIC ---
+        let displayCount = 0;
+        if (data > 10) {
+            // If the count is over 10, round it down to the nearest 10.
+            displayCount = Math.floor(data / 10) * 10;
+        } else if (data > 0) {
+            // If the count is between 1 and 10, just show a solid 10 for better social proof.
+            displayCount = 10;
+        }
+        // If data is 0, displayCount will remain 0.
+
+        animateValue(animatedWaitlist, 0, displayCount, 2000);
 
     } catch (error) {
         console.error('Error fetching waitlist count:', error);
-        // Also round the fallback number
+        // Fallback to a static number if the fetch fails
         animateValue(animatedWaitlist, 0, 230, 2000);
     }
 };
