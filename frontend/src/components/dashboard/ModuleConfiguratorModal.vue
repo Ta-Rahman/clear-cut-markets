@@ -65,7 +65,7 @@ const canAddMore = () => {
 </script>
 
 <template>
-    <Dialog v-model:visible="isVisible" modal header="Module Configurator" :style="{ width: '40rem' }" :dismissableMask="true" @hide="$emit('close')">
+    <Dialog v-model:visible="isVisible" modal header="Module Configurator" class="w-[90vw] md:w-[40rem]" :dismissableMask="true" @hide="$emit('close')">
         <template #header>
             <div class="flex items-center gap-3">
                 <i class="pi pi-cog text-2xl text-primary"></i>
@@ -89,7 +89,7 @@ const canAddMore = () => {
             </div>
 
             <div>
-                <h3 class="font-semibold mb-2 text-gray-700 dark:text-gray-300">Current Modules</h3>
+                <h3 class="font-semibold mb-2 text-base sm:text-xl text-gray-700 dark:text-gray-300">Current Modules</h3>
                 <div v-if="currentModules.length > 0" class="space-y-2">
                     <div v-for="module in currentModules" :key="module.id"
                          class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
@@ -103,7 +103,7 @@ const canAddMore = () => {
             </div>
             
             <div class="border-t border-gray-200 dark:border-gray-700 pt-6">
-                <h3 class="font-semibold mb-2 text-gray-700 dark:text-gray-300">Add New Module</h3>
+                <h3 class="font-semibold mb-2 text-base sm:text-xl text-gray-700 dark:text-gray-300">Add New Module</h3>
                 <div v-if="canAddMore()" class="flex gap-2">
                     <Dropdown v-model="newAssetType" :options="assetTypes" optionLabel="name" placeholder="Type" class="w-[120px]" />
                     
@@ -125,8 +125,11 @@ const canAddMore = () => {
                             </div>
                         </template>
                     </AutoComplete>
-
-                    <Button label="Add" icon="pi pi-plus" @click="handleAddModule" :disabled="!selectedAsset || typeof selectedAsset !== 'object'" />
+                    
+                    <Button @click="handleAddModule" :disabled="!selectedAsset || typeof selectedAsset !== 'object'">
+                        <i class="pi pi-plus"></i>
+                        <span class="hidden sm:inline ml-2">Add</span>
+                    </Button>
                 </div>
                 <div v-else class="text-center p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
                     <p class="text-yellow-700 dark:text-yellow-300">You've reached your module limit. Upgrade your plan to add more.</p>

@@ -1,5 +1,5 @@
 <template>
-    <Dialog v-model:visible="isVisible" modal :header="t('newsModal.title')" :style="{ width: '40rem' }" :dismissableMask="true" @hide="$emit('close')">
+    <Dialog v-model:visible="isVisible" modal :header="t('newsModal.title')" class="w-[90vw] md:w-[40rem]" :dismissableMask="true" @hide="$emit('close')">
         <template #header>
             <div class="flex items-center gap-3">
                 <i class="pi pi-globe text-2xl text-primary"></i>

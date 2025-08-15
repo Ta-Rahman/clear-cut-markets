@@ -9,7 +9,6 @@ import ModuleConfiguratorModal from '@/components/dashboard/ModuleConfiguratorMo
 
 const { profile } = useUser();
 
-// This will now hold the modules fetched from your database
 const userModules = ref([]);
 const isModalVisible = ref(false);
 
@@ -21,7 +20,6 @@ const moduleLimit = computed(() => {
 
 const canAddModule = computed(() => userModules.value.length < moduleLimit.value);
 
-// Function to fetch modules from Supabase
 const fetchModules = async () => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
@@ -38,7 +36,6 @@ const fetchModules = async () => {
     }
 };
 
-// Function to add a new module
 const addModule = async (moduleData) => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
@@ -59,7 +56,6 @@ const addModule = async (moduleData) => {
     }
 };
 
-// Function to remove a module
 const removeModule = async (moduleId) => {
     const { error } = await supabase
         .from('user_modules')
@@ -73,13 +69,12 @@ const removeModule = async (moduleId) => {
     }
 };
 
-// Fetch modules when the component is first loaded
 onMounted(fetchModules);
 
 </script>
 
 <template>
-    <div class="space-y-8">
+    <div class="max-w-7xl mx-auto space-y-8">
         <div>
             <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100">
                 Welcome, {{ profile?.first_name || 'User' }}
@@ -98,10 +93,10 @@ onMounted(fetchModules);
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <DashboardModuleCard v-for="module in userModules" :key="module.id" :module="module" />
                 <DashboardAddModuleCard v-if="canAddModule" @click="isModalVisible = true" />
-            </div>
-            
-            <div v-if="userModules.length === 0" class="text-center p-8 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-2xl">
-                <p class="text-gray-500">You haven't added any modules yet.</p>
+                
+                <div v-if="userModules.length === 0" class="md:col-span-2 lg:col-span-3 text-center p-8">
+                    <p class="text-gray-500">You haven't added any modules yet. Click the card above to get started!</p>
+                </div>
             </div>
         </div>
 
