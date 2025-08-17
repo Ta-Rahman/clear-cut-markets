@@ -23,10 +23,11 @@ const getSentimentColor = (sentiment) => {
         <div class="mb-4">
             <div class="flex justify-between items-start">
                 <div>
-                    <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 m-0">{{ module.symbol }}</h3>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 m-0">{{ module.name }}</p>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 m-0">{{ module.asset_symbol }}</h3>
+                    <p class="text-lg text-gray-800 dark:text-gray-200 m-0 truncate">{{ module.name }}</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 m-0">{{ module.region }}</p>
                 </div>
-                <Tag :severity="module.change > 0 ? 'success' : 'danger'" class="font-semibold">
+                <Tag :severity="module.change > 0 ? 'success' : 'danger'" class="font-semibold flex-shrink-0">
                     {{ module.change > 0 ? '+' : '' }}{{ module.change }}%
                 </Tag>
             </div>

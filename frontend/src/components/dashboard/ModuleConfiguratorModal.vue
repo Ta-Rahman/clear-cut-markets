@@ -1,5 +1,6 @@
 <script setup>
-import { ref, defineProps, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
+import { supabase } from '@/supabase'; // Your Supabase client
 import Dialog from 'primevue/dialog';
 import Button from 'primevue/button';
 import AutoComplete from 'primevue/autocomplete';
@@ -25,18 +26,18 @@ const assetTypes = ref([
 
 watch(() => props.visible, (newValue) => {
     isVisible.value = newValue;
+    if (!newValue) {
+        selectedAsset.value = null; // Clear selection when modal closes
+    }
 });
 
 const searchAssets = async (event) => {
-    if (!isVisible.value) {
-        searchResults.value = [];
-        return;
-    }
-    if (!event.query.trim().length) {
+    if (!isVisible.value || !event.query.trim().length) {
         searchResults.value = [];
         return;
     }
     try {
+        // This function for searching remains the same
         const response = await fetch(`/api/search-assets?query=${event.query}&type=${newAssetType.value.code}`);
         const data = await response.json();
         searchResults.value = data;
@@ -46,21 +47,45 @@ const searchAssets = async (event) => {
     }
 };
 
-const handleAddModule = () => {
+// --- MODIFIED FUNCTION ---
+// This function now securely calls the database RPC function
+const handleAddModule = async () => {
     if (!selectedAsset.value || typeof selectedAsset.value !== 'object') {
-        return; 
+        return;
     }
-    
-    emit('addModule', {
-        asset_type: newAssetType.value.code,
-        asset_symbol: selectedAsset.value.symbol,
-    });
 
-    selectedAsset.value = null;
+    try {
+        // Call the database function 'add_user_module' with the correct parameter names
+        const { data, error } = await supabase.rpc('add_user_module', {
+            p_asset_symbol: selectedAsset.value.symbol,
+            p_asset_name: selectedAsset.value.name,
+            p_asset_exchange: selectedAsset.value.region,
+            p_asset_type: newAssetType.value.code
+        });
+
+        if (error) throw error;
+
+        // The RPC returns an array with the new module data. We take the first element.
+        const newModule = data[0];
+        
+        // Emit the new module data to the parent dashboard to update the UI
+        emit('addModule', newModule);
+
+    } catch (error) {
+        console.error('Error adding module via RPC:', error);
+        // Here you could add a Toast or Message to show the error to the user
+    } finally {
+        selectedAsset.value = null; // Clear the input after adding
+    }
 };
 
-const canAddMore = () => {
+const canAddMore = computed(() => {
     return props.currentModules.length < props.moduleLimit;
+});
+
+// This function correctly emits the entire module object to be removed
+const handleRemoveModule = (module) => {
+    emit('removeModule', module);
 };
 </script>
 
@@ -90,11 +115,11 @@ const canAddMore = () => {
 
             <div>
                 <h3 class="font-semibold mb-2 text-base sm:text-xl text-gray-700 dark:text-gray-300">Current Modules</h3>
-                <div v-if="currentModules.length > 0" class="space-y-2">
+                <div v-if="currentModules.length > 0" class="space-y-2 max-h-48 overflow-y-auto">
                     <div v-for="module in currentModules" :key="module.id"
                          class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
                         <span class="font-semibold">{{ module.asset_symbol }}</span>
-                        <Button icon="pi pi-trash" severity="danger" text rounded @click="$emit('removeModule', module.id)" />
+                        <Button icon="pi pi-trash" severity="danger" text rounded @click="$emit('removeModule', module)" />
                     </div>
                 </div>
                 <div v-else class="text-center text-gray-500 p-4">
@@ -104,7 +129,7 @@ const canAddMore = () => {
             
             <div class="border-t border-gray-200 dark:border-gray-700 pt-6">
                 <h3 class="font-semibold mb-2 text-base sm:text-xl text-gray-700 dark:text-gray-300">Add New Module</h3>
-                <div v-if="canAddMore()" class="flex gap-2">
+                <div v-if="canAddMore" class="flex gap-2">
                     <Dropdown v-model="newAssetType" :options="assetTypes" optionLabel="name" placeholder="Type" class="w-[120px]" />
                     
                     <AutoComplete 
