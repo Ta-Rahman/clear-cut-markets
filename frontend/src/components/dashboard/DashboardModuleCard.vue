@@ -2,6 +2,8 @@
 import { defineProps } from 'vue';
 import Button from 'primevue/button';
 import Tag from 'primevue/tag';
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const props = defineProps({
     module: {
@@ -60,14 +62,14 @@ const getSentimentColor = (sentiment) => {
         <div class="mb-4 flex flex-col flex-grow">
             <div class="flex items-center gap-2 mb-3">
                 <i class="pi pi-sparkles text-primary"></i>
-                <span class="font-semibold text-gray-900 dark:text-gray-100">AI Analysis</span>
+                <span class="font-semibold text-gray-900 dark:text-gray-100">{{ t('dashboard.card.ai_analysis') }}</span>
             </div>
             <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{{ module.insight }}</p>
             
             <div class="mt-auto bg-white/50 dark:bg-gray-900/50 p-3 rounded-lg">
                 <div class="flex justify-between items-center mb-2">
-                    <span class="text-xs text-gray-500 dark:text-gray-400">Sentiment</span>
-                    <span class="text-xs font-bold text-gray-900 dark:text-gray-100">{{ module.sentiment }}% Bullish</span>
+                    <span class="text-xs text-gray-500 dark:text-gray-400">{{ t('dashboard.card.sentiment') }}</span>
+                    <span class="text-xs font-bold text-gray-900 dark:text-gray-100">{{ module.sentiment }}% {{ t('dashboard.card.bullish') }}</span>
                 </div>
                 <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                     <div class="h-full rounded-full transition-all duration-500" 

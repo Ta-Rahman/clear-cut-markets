@@ -219,5 +219,45 @@
     "error_invalid_email": "Bitte gib eine gültige E-Mail-Adresse ein.",
     "already_on_list": "Bereits auf der Liste?",
     "sign_in_link": "Anmelden"
+  },
+  "dashboard": {
+    "welcome": "Willkommen, {name}",
+    "subtitle": "Hier ist dein Investment-Dashboard im Überblick.",
+    "your_modules": "Deine Module",
+    "module_configurator": "Modul-Konfigurator",
+    "no_modules": "Du hast noch keine Module hinzugefügt. Klicke oben, um zu starten!",
+    "correlation_insights": "Cross-Investment Korrelationseinblicke",
+    "correlation_placeholder": "Deine KI-gestützten Korrelationseinblicke werden hier erscheinen.",
+    "unlock_title": "Erschließe einen mächtigen Vorteil",
+    "unlock_subtitle": "Steige auf den Advanced-Plan um, um Cross-Investment-Korrelationswarnungen zu erhalten.",
+    "upgrade_button": "Jetzt upgraden",
+    "card": {
+      "ai_analysis": "KI-Analyse",
+      "sentiment": "Stimmung",
+      "bullish": "Bullish",
+      "add_module_title": "Neues Modul hinzufügen",
+      "add_module_subtitle": "Klicke, um deine Module zu konfigurieren."
+    },
+    "configurator": {
+      "title": "Modul-Konfigurator",
+      "modules_used": "Genutzte Module",
+      "current_modules": "Aktuelle Module",
+      "no_modules_added": "Du hast noch keine Module hinzugefügt.",
+      "add_new_module": "Neues Modul hinzufügen",
+      "search_placeholder": "Suche nach einem Asset...",
+      "add_button": "Hinzufügen",
+      "limit_reached": "Du hast dein Modul-Limit erreicht. Erweitere deinen Plan, um mehr hinzuzufügen."
+    }
+  },
+  "topbar": {
+    "settings": "Einstellungen",
+    "logout": "Abmelden",
+    "menu": "Menü",
+    "display_options": "Anzeigeoptionen",
+    "account": "Konto",
+    "theme": "Thema",
+    "light_mode": "Wechsel zum Hellen Modus",
+    "dark_mode": "Wechsel zum Dunklen Modus",
+    "language": "Sprache"
   }
 }

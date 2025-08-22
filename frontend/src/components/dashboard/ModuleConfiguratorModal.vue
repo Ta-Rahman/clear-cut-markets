@@ -5,6 +5,9 @@ import Dialog from 'primevue/dialog';
 import Button from 'primevue/button';
 import AutoComplete from 'primevue/autocomplete';
 import Dropdown from 'primevue/dropdown';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const props = defineProps({
     visible: { type: Boolean, default: false },
@@ -90,12 +93,12 @@ const handleRemoveModule = (module) => {
 </script>
 
 <template>
-    <Dialog v-model:visible="isVisible" modal header="Module Configurator" class="w-[90vw] md:w-[40rem]" :dismissableMask="true" @hide="$emit('close')">
+    <Dialog v-model:visible="isVisible" modal :header="t('dashboard.configurator.title')" class="w-[90vw] md:w-[40rem]" :dismissableMask="true" @hide="$emit('close')">
         <template #header>
             <div class="flex items-center gap-3">
                 <i class="pi pi-cog text-2xl text-primary"></i>
                 <div>
-                    <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 m-0">Module Configurator</h2>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 m-0">{{ t('dashboard.configurator.title') }}</h2>
                 </div>
             </div>
         </template>
@@ -103,7 +106,7 @@ const handleRemoveModule = (module) => {
         <div class="p-4 space-y-6">
             <div>
                 <div class="flex justify-between items-center mb-2">
-                    <span class="font-semibold text-gray-700 dark:text-gray-300">Modules Used</span>
+                    <span class="font-semibold text-gray-700 dark:text-gray-300">{{ t('dashboard.configurator.modules_used') }}</span>
                     <span class="font-bold text-primary">{{ currentModules.length }} / {{ moduleLimit }}</span>
                 </div>
                 <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
@@ -114,7 +117,7 @@ const handleRemoveModule = (module) => {
             </div>
 
             <div>
-                <h3 class="font-semibold mb-2 text-base sm:text-xl text-gray-700 dark:text-gray-300">Current Modules</h3>
+                <h3 class="font-semibold mb-2 text-base sm:text-xl text-gray-700 dark:text-gray-300">{{ t('dashboard.configurator.current_modules') }}</h3>
                 <div v-if="currentModules.length > 0" class="space-y-2 max-h-48 overflow-y-auto">
                     <div v-for="module in currentModules" :key="module.id"
                          class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
@@ -123,12 +126,12 @@ const handleRemoveModule = (module) => {
                     </div>
                 </div>
                 <div v-else class="text-center text-gray-500 p-4">
-                    You haven't added any modules yet.
+                    {{ t('dashboard.configurator.no_modules_added') }}
                 </div>
             </div>
             
             <div class="border-t border-gray-200 dark:border-gray-700 pt-6">
-                <h3 class="font-semibold mb-2 text-base sm:text-xl text-gray-700 dark:text-gray-300">Add New Module</h3>
+                <h3 class="font-semibold mb-2 text-base sm:text-xl text-gray-700 dark:text-gray-300">{{ t('dashboard.configurator.add_new_module') }}</h3>
                 <div v-if="canAddMore" class="flex gap-2">
                     <Dropdown v-model="newAssetType" :options="assetTypes" optionLabel="name" placeholder="Type" class="w-[120px]" />
                     
@@ -137,7 +140,7 @@ const handleRemoveModule = (module) => {
                         :suggestions="searchResults" 
                         @complete="searchAssets" 
                         optionLabel="name" 
-                        placeholder="Search for a stock..." 
+                        :placeholder="t('dashboard.configurator.search_placeholder')" 
                         class="flex-grow"
                     >
                         <template #option="slotProps">
@@ -153,11 +156,11 @@ const handleRemoveModule = (module) => {
                     
                     <Button @click="handleAddModule" :disabled="!selectedAsset || typeof selectedAsset !== 'object'">
                         <i class="pi pi-plus"></i>
-                        <span class="hidden sm:inline ml-2">Add</span>
+                        <span class="hidden sm:inline ml-2">{{ t('dashboard.configurator.add_button') }}</span>
                     </Button>
                 </div>
                 <div v-else class="text-center p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
-                    <p class="text-yellow-700 dark:text-yellow-300">You've reached your module limit. Upgrade your plan to add more.</p>
+                    <p class="text-yellow-700 dark:text-yellow-300">{{ t('dashboard.configurator.limit_reached') }}</p>
                 </div>
             </div>
         </div>
