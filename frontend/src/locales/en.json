@@ -219,5 +219,45 @@
     "error_invalid_email": "Please enter a valid email address.",
     "already_on_list": "Already on the list?",
     "sign_in_link": "Sign In"
+  },
+  "dashboard": {
+    "welcome": "Welcome, {name}",
+    "subtitle": "Here is your investment dashboard overview.",
+    "your_modules": "Your Modules",
+    "module_configurator": "Module Configurator",
+    "no_modules": "You haven't added any modules yet. Click the card above to get started!",
+    "correlation_insights": "Cross-Investment Correlation Insights",
+    "correlation_placeholder": "Your AI-powered correlation insights will appear here.",
+    "unlock_title": "Unlock a Powerful Edge",
+    "unlock_subtitle": "Upgrade to the Advanced plan to get Cross-Investment Correlation Alerts.",
+    "upgrade_button": "Upgrade Now",
+    "card": {
+      "ai_analysis": "AI Analysis",
+      "sentiment": "Sentiment",
+      "bullish": "Bullish",
+      "add_module_title": "Add New Module",
+      "add_module_subtitle": "Click to configure your modules."
+    },
+    "configurator": {
+      "title": "Module Configurator",
+      "modules_used": "Modules Used",
+      "current_modules": "Current Modules",
+      "no_modules_added": "You haven't added any modules yet.",
+      "add_new_module": "Add New Module",
+      "search_placeholder": "Search for an asset...",
+      "add_button": "Add",
+      "limit_reached": "You've reached your module limit. Upgrade your plan to add more."
+    }
+  },
+  "topbar": {
+    "settings": "Settings",
+    "logout": "Logout",
+    "menu": "Menu",
+    "display_options": "Display Options",
+    "account": "Account",
+    "theme": "Theme",
+    "light_mode": "Switch to Light Mode",
+    "dark_mode": "Switch to Dark Mode",
+    "language": "Language"
   }
 }

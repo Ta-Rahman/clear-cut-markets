@@ -1,5 +1,5 @@
 <template>
-    <Dialog v-model:visible="isVisible" modal :header="stockData.symbol" :style="{ width: '45rem' }" :dismissableMask="true" @hide="$emit('close')">
+    <Dialog v-model:visible="isVisible" modal :header="stockData.symbol" class="w-[90vw] md:w-[45rem]" :dismissableMask="true" @hide="$emit('close')">
         <template #header>
             <div class="flex items-center gap-3">
                 <i class="pi pi-chart-line text-2xl text-primary"></i>
@@ -63,7 +63,6 @@ watch(() => props.visible, (newValue) => {
     isVisible.value = newValue;
 });
 
-// Placeholder Chart Data & Options
 const chartData = computed(() => ({
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
     datasets: [
@@ -80,7 +79,7 @@ const chartData = computed(() => ({
 
 const chartOptions = ref({
     maintainAspectRatio: false,
-    aspectRatio: 2, // Adjusted for a wider chart
+    aspectRatio: 2,
     plugins: {
         legend: {
             display: false
