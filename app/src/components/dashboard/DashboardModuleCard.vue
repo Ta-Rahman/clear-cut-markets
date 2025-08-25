@@ -1,8 +1,11 @@
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, onMounted, onUnmounted, computed } from 'vue';
 import Button from 'primevue/button';
 import Tag from 'primevue/tag';
+import Chart from 'primevue/chart';
 import { useI18n } from 'vue-i18n';
+import { useStockData } from '@/composables/useStockData';
+
 const { t } = useI18n();
 
 const props = defineProps({
@@ -12,10 +15,69 @@ const props = defineProps({
     }
 });
 
+const { 
+    stockPrice, 
+    marketCap,
+    peRatio,
+    chartData,
+    isLoading, 
+    fetchStockPrice,
+    fetchAssetDetails
+} = useStockData();
+
+let priceUpdateInterval = null;
+
+onMounted(() => {
+    const ticker = props.module.asset_symbol;
+    fetchStockPrice(ticker);
+    fetchAssetDetails(ticker);
+
+    priceUpdateInterval = setInterval(() => {
+        fetchStockPrice(ticker);
+    }, 60000); // Poll for new price every minute
+});
+
+onUnmounted(() => {
+    clearInterval(priceUpdateInterval);
+});
+
+const lineChartData = computed(() => {
+    const labels = chartData.value.map((_, index) => index);
+    return {
+        labels: labels,
+        datasets: [{
+            data: chartData.value,
+            fill: true,
+            borderColor: props.module.change > 0 ? '#22c55e' : '#ef4444',
+            tension: 0.4,
+            backgroundColor: props.module.change > 0 ? 'rgba(34, 197, 94, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+            pointRadius: 0
+        }]
+    };
+});
+
+const lineChartOptions = {
+    maintainAspectRatio: false,
+    aspectRatio: 2.5,
+    plugins: { legend: { display: false } },
+    scales: {
+        x: { display: false },
+        y: { display: false }
+    }
+};
+
 const getSentimentColor = (sentiment) => {
     if (sentiment >= 70) return '#22c55e';
     if (sentiment >= 30) return '#f59e0b';
     return '#ef4444';
+};
+
+const formatNumber = (num) => {
+    if (!num) return '...';
+    if (num >= 1e12) return `${(num / 1e12).toFixed(2)}T`;
+    if (num >= 1e9) return `${(num / 1e9).toFixed(2)}B`;
+    if (num >= 1e6) return `${(num / 1e6).toFixed(2)}M`;
+    return num.toLocaleString();
 };
 </script>
 
@@ -38,25 +100,28 @@ const getSentimentColor = (sentiment) => {
         <div class="mb-4">
             <div class="flex items-baseline mb-1">
                 <span class="text-xl text-gray-600 dark:text-gray-500 mr-1">$</span>
-                <span class="text-4xl font-bold text-gray-900 dark:text-gray-100">{{ module.price }}</span>
+                <span v-if="isLoading" class="text-4xl font-bold text-gray-900 dark:text-gray-100">...</span>
+                <span v-else class="text-4xl font-bold text-gray-900 dark:text-gray-100">{{ stockPrice || '0.00' }}</span>
             </div>
         </div>
         
         <div class="h-16 my-4 bg-white/50 dark:bg-gray-900/50 rounded-md p-2 flex-shrink-0">
-            <svg viewBox="0 0 100 40" preserveAspectRatio="none" class="w-full h-full">
-                <polyline
-                    :points="module.simpleChart"
-                    fill="none"
-                    :stroke="module.change > 0 ? '#22c55e' : '#ef4444'"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                />
-                <path
-                    :d="`M ${module.simpleChart} L 100,40 L 0,40 Z`"
-                    :fill="module.change > 0 ? '#22c55e20' : '#ef444420'"
-                />
-            </svg>
+            <Chart type="line" :data="lineChartData" :options="lineChartOptions" />
+        </div>
+
+        <div class="grid grid-cols-3 gap-4 py-4 border-t border-b border-gray-200 dark:border-gray-700 mb-6 flex-shrink-0">
+            <div class="text-center">
+                <span class="block text-xs text-gray-600 dark:text-gray-400 mb-1">{{ t('modulesDemo.cards.volume') }}</span>
+                <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">{{ module.volume || 'N/A' }}</span>
+            </div>
+            <div class="text-center">
+                <span class="block text-xs text-gray-600 dark:text-gray-400 mb-1">{{ t('modulesDemo.cards.market_cap') }}</span>
+                <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">{{ formatNumber(marketCap) }}</span>
+            </div>
+            <div class="text-center">
+                <span class="block text-xs text-gray-600 dark:text-gray-400 mb-1">{{ t('modulesDemo.cards.pe_ratio') }}</span>
+                <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">{{ peRatio ? peRatio.toFixed(2) : '...' }}</span>
+            </div>
         </div>
         
         <div class="mb-4 flex flex-col flex-grow">

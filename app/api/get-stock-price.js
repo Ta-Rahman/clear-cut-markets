@@ -1,4 +1,5 @@
-import 'dotenv/config'; // This line explicitly loads your .env.local file
+// api/get-stock-price.js
+import 'dotenv/config'; 
 import { Redis } from '@upstash/redis';
 
 const redis = new Redis({
@@ -7,8 +8,6 @@ const redis = new Redis({
 });
 
 export default async function handler(request, response) {
-  // ... the rest of your code is exactly the same
-  
   response.setHeader('Access-Control-Allow-Origin', '*');
   response.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -28,11 +27,9 @@ export default async function handler(request, response) {
     const cachedData = await redis.get(cacheKey);
 
     if (cachedData) {
-      console.log(`CACHE HIT for ${ticker}`);
       return response.status(200).json({ price: cachedData, source: 'cache' });
     }
 
-    console.log(`CACHE MISS for ${ticker}. Fetching from Finnhub.`);
     const finnhubApiKey = process.env.FINNHUB_API_KEY;
     const finnhubUrl = `https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${finnhubApiKey}`;
     
@@ -49,7 +46,8 @@ export default async function handler(request, response) {
         return response.status(404).json({ error: 'Data not found for the given symbol' });
     }
     
-    await redis.set(cacheKey, currentPrice, { ex: 60 });
+    // Set cache to expire in 3600 seconds (1 hour)
+    await redis.set(cacheKey, currentPrice, { ex: 3600 });
 
     return response.status(200).json({ price: currentPrice, source: 'api' });
 
