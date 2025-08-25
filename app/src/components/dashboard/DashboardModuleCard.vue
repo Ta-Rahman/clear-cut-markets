@@ -15,26 +15,28 @@ const props = defineProps({
     }
 });
 
-const { 
-    stockPrice, 
+// --- THIS IS THE CORRECTED PART ---
+const {
+    stockPrice,
+    stockVolume,
     marketCap,
     peRatio,
     chartData,
-    isLoading, 
-    fetchStockPrice,
-    fetchAssetDetails
+    chartLabels,
+    marketStatus, 
+    isLoading,
+    fetchModuleData
 } = useStockData();
 
 let priceUpdateInterval = null;
 
 onMounted(() => {
     const ticker = props.module.asset_symbol;
-    fetchStockPrice(ticker);
-    fetchAssetDetails(ticker);
+    fetchModuleData(props.module.asset_symbol);
 
     priceUpdateInterval = setInterval(() => {
         fetchStockPrice(ticker);
-    }, 60000); // Poll for new price every minute
+    }, 60000);
 });
 
 onUnmounted(() => {
@@ -42,9 +44,8 @@ onUnmounted(() => {
 });
 
 const lineChartData = computed(() => {
-    const labels = chartData.value.map((_, index) => index);
     return {
-        labels: labels,
+        labels: chartLabels.value,
         datasets: [{
             data: chartData.value,
             fill: true,
@@ -56,15 +57,40 @@ const lineChartData = computed(() => {
     };
 });
 
-const lineChartOptions = {
-    maintainAspectRatio: false,
-    aspectRatio: 2.5,
-    plugins: { legend: { display: false } },
-    scales: {
-        x: { display: false },
-        y: { display: false }
-    }
-};
+const lineChartOptions = computed(() => {
+    const documentStyle = getComputedStyle(document.documentElement);
+    const textColorSecondary = documentStyle.getPropertyValue('--p-text-muted-color');
+    const surfaceBorder = documentStyle.getPropertyValue('--p-content-border-color');
+
+    return {
+        maintainAspectRatio: false,
+        aspectRatio: 2.5,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        scales: {
+            x: {
+                ticks: {
+                    color: textColorSecondary,
+                    maxTicksLimit: 6,
+                    font: { size: 9 }
+                },
+                grid: { display: false, drawBorder: false }
+            },
+            y: {
+                ticks: {
+                    color: textColorSecondary,
+                    callback: (value) => Math.round(value),
+                    padding: 5,
+                    font: { size: 9 }
+                },
+                grid: { color: surfaceBorder, drawBorder: false }
+            }
+        }
+    };
+});
 
 const getSentimentColor = (sentiment) => {
     if (sentiment >= 70) return '#22c55e';
@@ -99,20 +125,24 @@ const formatNumber = (num) => {
         
         <div class="mb-4">
             <div class="flex items-baseline mb-1">
-                <span class="text-xl text-gray-600 dark:text-gray-500 mr-1">$</span>
-                <span v-if="isLoading" class="text-4xl font-bold text-gray-900 dark:text-gray-100">...</span>
-                <span v-else class="text-4xl font-bold text-gray-900 dark:text-gray-100">{{ stockPrice || '0.00' }}</span>
+                    <span class="text-xl text-gray-600 dark:text-gray-500 mr-1">$</span>
+                    <span v-if="isLoading" class="text-4xl font-bold text-gray-900 dark:text-gray-100">...</span>
+                    <span v-else class="text-4xl font-bold text-gray-900 dark:text-gray-100">{{ stockPrice ? stockPrice.toFixed(2) : '0.00' }}</span>
             </div>
+                <i v-if="!isLoading && marketStatus === 'closed'" 
+                   class="pi pi-clock text-lg text-gray-500 dark:text-gray-400 opacity-70 ml-2" 
+                   v-tooltip.top="'Market closed. Price from last close.'">
+                </i>
         </div>
         
-        <div class="h-16 my-4 bg-white/50 dark:bg-gray-900/50 rounded-md p-2 flex-shrink-0">
+        <div class="relative h-40 my-4 bg-white/50 dark:bg-gray-900/50 rounded-md p-2 flex-shrink-0">
             <Chart type="line" :data="lineChartData" :options="lineChartOptions" />
         </div>
 
         <div class="grid grid-cols-3 gap-4 py-4 border-t border-b border-gray-200 dark:border-gray-700 mb-6 flex-shrink-0">
             <div class="text-center">
                 <span class="block text-xs text-gray-600 dark:text-gray-400 mb-1">{{ t('modulesDemo.cards.volume') }}</span>
-                <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">{{ module.volume || 'N/A' }}</span>
+                <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">{{ formatNumber(stockVolume) }}</span>
             </div>
             <div class="text-center">
                 <span class="block text-xs text-gray-600 dark:text-gray-400 mb-1">{{ t('modulesDemo.cards.market_cap') }}</span>
@@ -137,7 +167,7 @@ const formatNumber = (num) => {
                     <span class="text-xs font-bold text-gray-900 dark:text-gray-100">{{ module.sentiment }}% {{ t('dashboard.card.bullish') }}</span>
                 </div>
                 <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                    <div class="h-full rounded-full transition-all duration-500" 
+                    <div class="h-full rounded-full transition-all duration-500"
                          :style="{ width: module.sentiment + '%', backgroundColor: getSentimentColor(module.sentiment) }">
                     </div>
                 </div>
@@ -165,5 +195,10 @@ const formatNumber = (num) => {
 }
 .module-card:hover::before {
     transform: scaleX(1);
+}
+
+:deep(.p-chart) {
+    height: 100%;
+    width: 100%;
 }
 </style>

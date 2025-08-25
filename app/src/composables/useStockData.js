@@ -1,58 +1,51 @@
-// src/composables/useStockData.js
 import { ref } from 'vue';
 
 export function useStockData() {
     const stockPrice = ref(null);
+    const stockVolume = ref(null);
     const marketCap = ref(null);
     const peRatio = ref(null);
     const chartData = ref([]);
+    const chartLabels = ref([]);
+    const marketStatus = ref('closed'); // Add a ref for market status
     const isLoading = ref(false);
     const error = ref(null);
 
-    const fetchStockPrice = async (ticker) => {
+    const fetchModuleData = async (ticker) => {
         if (!ticker) return;
         isLoading.value = true;
-        stockPrice.value = null;
         error.value = null;
         try {
-            const response = await fetch(`/api/get-stock-price?ticker=${ticker}`);
-            if (!response.ok) throw new Error('Price fetch failed');
+            const response = await fetch(`/api/get-asset-details?ticker=${ticker}`);
+            if (!response.ok) throw new Error('Failed to fetch module data');
             const data = await response.json();
-            stockPrice.value = data.price;
+
+            stockPrice.value = data.lastPrice;
+            stockVolume.value = data.volume;
+            marketCap.value = data.marketCap;
+            peRatio.value = data.peRatio;
+            chartData.value = data.chart;
+            chartLabels.value = data.labels;
+            marketStatus.value = data.marketStatus; // Store the status
+
         } catch (e) {
-            console.error(`Price fetch error for ${ticker}:`, e);
+            error.value = e.message;
+            console.error(`Failed to fetch data for ${ticker}:`, e);
         } finally {
             isLoading.value = false;
         }
     };
 
-    const fetchAssetDetails = async (ticker) => {
-        if (!ticker) return;
-        marketCap.value = null;
-        peRatio.value = null;
-        chartData.value = [];
-        error.value = null;
-        try {
-            const response = await fetch(`/api/get-asset-details?ticker=${ticker}`);
-            if (!response.ok) throw new Error('Details fetch failed');
-            const data = await response.json();
-            marketCap.value = data.marketCap;
-            peRatio.value = data.peRatio;
-            chartData.value = data.chart;
-        } catch (e) {
-            error.value = e.message;
-            console.error(`Details fetch error for ${ticker}:`, e);
-        }
-    };
-
     return {
         stockPrice,
+        stockVolume,
         marketCap,
         peRatio,
         chartData,
+        chartLabels,
+        marketStatus, // Export the new ref
         isLoading,
         error,
-        fetchStockPrice,
-        fetchAssetDetails
+        fetchModuleData
     };
 }
