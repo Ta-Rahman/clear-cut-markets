@@ -15,7 +15,6 @@ const props = defineProps({
     }
 });
 
-// --- THIS IS THE CORRECTED PART ---
 const {
     stockPrice,
     stockVolume,
@@ -23,24 +22,17 @@ const {
     peRatio,
     chartData,
     chartLabels,
-    marketStatus, 
+    marketStatus,
     isLoading,
     fetchModuleData
 } = useStockData();
 
-let priceUpdateInterval = null;
-
 onMounted(() => {
-    const ticker = props.module.asset_symbol;
     fetchModuleData(props.module.asset_symbol);
-
-    priceUpdateInterval = setInterval(() => {
-        fetchStockPrice(ticker);
-    }, 60000);
 });
 
 onUnmounted(() => {
-    clearInterval(priceUpdateInterval);
+    // This is here for good practice to clean up anything if needed in the future
 });
 
 const lineChartData = computed(() => {
@@ -75,18 +67,28 @@ const lineChartOptions = computed(() => {
                 ticks: {
                     color: textColorSecondary,
                     maxTicksLimit: 6,
-                    font: { size: 9 }
+                    font: {
+                        size: 9
+                    }
                 },
-                grid: { display: false, drawBorder: false }
+                grid: {
+                    display: false,
+                    drawBorder: false
+                }
             },
             y: {
                 ticks: {
                     color: textColorSecondary,
                     callback: (value) => Math.round(value),
                     padding: 5,
-                    font: { size: 9 }
+                    font: {
+                        size: 9
+                    }
                 },
-                grid: { color: surfaceBorder, drawBorder: false }
+                grid: {
+                    color: surfaceBorder,
+                    drawBorder: false
+                }
             }
         }
     };
@@ -98,11 +100,23 @@ const getSentimentColor = (sentiment) => {
     return '#ef4444';
 };
 
-const formatNumber = (num) => {
+// Formatting function specifically for Market Cap (assumes input is in millions)
+const formatMarketCap = (num) => {
     if (!num) return '...';
-    if (num >= 1e12) return `${(num / 1e12).toFixed(2)}T`;
+    const fullValue = num * 1000000;
+
+    if (fullValue >= 1e12) return `$${(fullValue / 1e12).toFixed(2)}T`;
+    if (fullValue >= 1e9) return `$${(fullValue / 1e9).toFixed(2)}B`;
+    if (fullValue >= 1e6) return `$${(fullValue / 1e6).toFixed(2)}M`;
+    return `$${fullValue.toLocaleString()}`;
+};
+
+// Separate, simpler formatting function for Volume
+const formatVolume = (num) => {
+    if (!num) return '...';
     if (num >= 1e9) return `${(num / 1e9).toFixed(2)}B`;
     if (num >= 1e6) return `${(num / 1e6).toFixed(2)}M`;
+    if (num >= 1e3) return `${(num / 1e3).toFixed(2)}K`;
     return num.toLocaleString();
 };
 </script>
@@ -124,15 +138,17 @@ const formatNumber = (num) => {
         </div>
         
         <div class="mb-4">
-            <div class="flex items-baseline mb-1">
+            <div class="flex items-center mb-1">
+                <div class="flex items-baseline">
                     <span class="text-xl text-gray-600 dark:text-gray-500 mr-1">$</span>
                     <span v-if="isLoading" class="text-4xl font-bold text-gray-900 dark:text-gray-100">...</span>
                     <span v-else class="text-4xl font-bold text-gray-900 dark:text-gray-100">{{ stockPrice ? stockPrice.toFixed(2) : '0.00' }}</span>
-            </div>
-                <i v-if="!isLoading && marketStatus === 'closed'" 
-                   class="pi pi-clock text-lg text-gray-500 dark:text-gray-400 opacity-70 ml-2" 
+                </div>
+                <i v-if="!isLoading && marketStatus === 'closed'"
+                   class="pi pi-clock text-lg text-gray-500 dark:text-gray-400 opacity-70 ml-2"
                    v-tooltip.top="'Market closed. Price from last close.'">
                 </i>
+            </div>
         </div>
         
         <div class="relative h-40 my-4 bg-white/50 dark:bg-gray-900/50 rounded-md p-2 flex-shrink-0">
@@ -142,11 +158,11 @@ const formatNumber = (num) => {
         <div class="grid grid-cols-3 gap-4 py-4 border-t border-b border-gray-200 dark:border-gray-700 mb-6 flex-shrink-0">
             <div class="text-center">
                 <span class="block text-xs text-gray-600 dark:text-gray-400 mb-1">{{ t('modulesDemo.cards.volume') }}</span>
-                <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">{{ formatNumber(stockVolume) }}</span>
+                <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">{{ formatVolume(stockVolume) }}</span>
             </div>
             <div class="text-center">
                 <span class="block text-xs text-gray-600 dark:text-gray-400 mb-1">{{ t('modulesDemo.cards.market_cap') }}</span>
-                <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">{{ formatNumber(marketCap) }}</span>
+                <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">{{ formatMarketCap(marketCap) }}</span>
             </div>
             <div class="text-center">
                 <span class="block text-xs text-gray-600 dark:text-gray-400 mb-1">{{ t('modulesDemo.cards.pe_ratio') }}</span>

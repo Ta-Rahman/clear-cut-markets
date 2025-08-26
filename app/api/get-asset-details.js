@@ -39,7 +39,7 @@ export default async function handler(request, response) {
             return response.status(400).json({ error: 'Ticker symbol is required' });
         }
 
-        const cacheKey = `details-v13-resilient:${ticker}`;
+        const cacheKey = `details-v16-metrics-final:${ticker}`;
         const cachedData = await redis.get(cacheKey);
         if (cachedData) {
             return response.status(200).json({ ...cachedData, source: 'cache' });
@@ -49,46 +49,45 @@ export default async function handler(request, response) {
         const ninetyDaysAgo = new Date();
         ninetyDaysAgo.setDate(today.getDate() - 90);
 
+        // --- Define all data sources, including the new metrics endpoint ---
         const dailyUrl = `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/day/${formatDate(ninetyDaysAgo)}/${formatDate(today)}?apiKey=${polygonApiKey}`;
         const profileUrl = `https://finnhub.io/api/v1/stock/profile2?symbol=${ticker}&token=${finnhubApiKey}`;
         const quoteUrl = `https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${finnhubApiKey}`;
+        // **THIS IS THE NEW, MORE RELIABLE SOURCE FOR P/E RATIO**
+        const metricsUrl = `https://finnhub.io/api/v1/stock/metric?symbol=${ticker}&metric=all&token=${finnhubApiKey}`;
 
-        const [dailyData, profileData, quoteData] = await Promise.all([
+
+        const [dailyData, profileData, quoteData, metricsData] = await Promise.all([
             fetchData(dailyUrl),
             fetchData(profileUrl),
-            fetchData(quoteUrl)
+            fetchData(quoteUrl),
+            fetchData(metricsUrl)
         ]);
 
-        let chartPoints = [];
-        let chartLabels = [];
-        let lastPrice = null;
+        let chartPoints = [], chartLabels = [], lastPrice = null, volume = quoteData?.v || 0;
 
-        // **THE FIX: Safely access data and get the last price**
-        if (dailyData && Array.isArray(dailyData.results) && dailyData.results.length > 0) {
+        if (dailyData?.results?.length > 0) {
             const results = dailyData.results;
             chartPoints = results.map(agg => agg.c);
             chartLabels = results.map(agg => new Date(agg.t).toLocaleDateString([], { month: 'short', day: 'numeric' }));
             lastPrice = results[results.length - 1].c;
+            if (volume === 0) volume = results[results.length - 1].v;
         }
 
-        // Determine market status safely
         let marketStatus = 'closed';
-        if (quoteData && quoteData.t) {
+        if (quoteData?.t) {
             const minutesSinceUpdate = (Date.now() - (quoteData.t * 1000)) / 60000;
-            if (minutesSinceUpdate < 20) {
-                marketStatus = 'open';
-            }
+            if (minutesSinceUpdate < 20) marketStatus = 'open';
         }
         
-        // Use the live price only if the market is open and the price is valid
-        const displayPrice = (marketStatus === 'open' && quoteData?.c > 0) ? quoteData.c : lastPrice;
-
+        // --- Finalize Data, using the new metrics endpoint for P/E Ratio ---
         const result = {
-            lastPrice: displayPrice,
-            marketStatus: marketStatus,
-            volume: quoteData?.v || 0, // Fallback to 0 if quoteData is missing
+            lastPrice: (marketStatus === 'open' && quoteData?.c > 0) ? quoteData.c : lastPrice,
+            volume: volume,
             marketCap: profileData?.marketCapitalization,
-            peRatio: profileData?.peRatio,
+            // **THE FIX: Prioritize the more reliable P/E ratio from the metrics endpoint**
+            peRatio: metricsData?.metric?.peNormalizedAnnual,
+            marketStatus: marketStatus,
             chart: chartPoints,
             labels: chartLabels
         };
