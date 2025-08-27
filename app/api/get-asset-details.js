@@ -49,11 +49,9 @@ export default async function handler(request, response) {
         const ninetyDaysAgo = new Date();
         ninetyDaysAgo.setDate(today.getDate() - 90);
 
-        // --- Define all data sources, including the new metrics endpoint ---
         const dailyUrl = `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/day/${formatDate(ninetyDaysAgo)}/${formatDate(today)}?apiKey=${polygonApiKey}`;
         const profileUrl = `https://finnhub.io/api/v1/stock/profile2?symbol=${ticker}&token=${finnhubApiKey}`;
         const quoteUrl = `https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${finnhubApiKey}`;
-        // **THIS IS THE NEW, MORE RELIABLE SOURCE FOR P/E RATIO**
         const metricsUrl = `https://finnhub.io/api/v1/stock/metric?symbol=${ticker}&metric=all&token=${finnhubApiKey}`;
 
 
@@ -81,11 +79,11 @@ export default async function handler(request, response) {
         }
         
         // --- Finalize Data, using the new metrics endpoint for P/E Ratio ---
-        const result = {
+       const result = {
             lastPrice: (marketStatus === 'open' && quoteData?.c > 0) ? quoteData.c : lastPrice,
+            percentChange: quoteData?.dp || 0,
             volume: volume,
             marketCap: profileData?.marketCapitalization,
-            // **THE FIX: Prioritize the more reliable P/E ratio from the metrics endpoint**
             peRatio: metricsData?.metric?.peNormalizedAnnual,
             marketStatus: marketStatus,
             chart: chartPoints,

@@ -247,6 +247,12 @@
       "search_placeholder": "Search for an asset...",
       "add_button": "Add",
       "limit_reached": "You've reached your module limit. Upgrade your plan to add more."
+    },
+    "detailModal": {
+        "price": "Price",
+        "market_cap": "Market Cap",
+        "volume": "Volume",
+        "pe_ratio": "P/E Ratio"
     }
   },
   "topbar": {

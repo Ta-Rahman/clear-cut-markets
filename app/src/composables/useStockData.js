@@ -1,18 +1,23 @@
 import { ref } from 'vue';
 
 export function useStockData() {
-    const stockPrice = ref(null);
-    const stockVolume = ref(null);
-    const marketCap = ref(null);
-    const peRatio = ref(null);
+    // --- THE FIX: Initialize all refs with safe, non-null default values ---
+    const stockPrice = ref(0);
+    const stockVolume = ref(0);
+    const marketCap = ref(0);
+    const peRatio = ref(null); // Can be null, so we handle it in the template
     const chartData = ref([]);
     const chartLabels = ref([]);
-    const marketStatus = ref('closed'); // Add a ref for market status
-    const isLoading = ref(false);
+    const marketStatus = ref('closed');
+    const percentChange = ref(0);
+    const isLoading = ref(true); // Start in a loading state
     const error = ref(null);
 
     const fetchModuleData = async (ticker) => {
-        if (!ticker) return;
+        if (!ticker) {
+            isLoading.value = false;
+            return;
+        }
         isLoading.value = true;
         error.value = null;
         try {
@@ -20,13 +25,15 @@ export function useStockData() {
             if (!response.ok) throw new Error('Failed to fetch module data');
             const data = await response.json();
 
-            stockPrice.value = data.lastPrice;
-            stockVolume.value = data.volume;
-            marketCap.value = data.marketCap;
+            // Assign new values, with fallbacks to prevent errors
+            stockPrice.value = data.lastPrice || 0;
+            stockVolume.value = data.volume || 0;
+            marketCap.value = data.marketCap || 0;
             peRatio.value = data.peRatio;
-            chartData.value = data.chart;
-            chartLabels.value = data.labels;
-            marketStatus.value = data.marketStatus; // Store the status
+            chartData.value = data.chart || [];
+            chartLabels.value = data.labels || [];
+            marketStatus.value = data.marketStatus || 'closed';
+            percentChange.value = data.percentChange || 0;
 
         } catch (e) {
             error.value = e.message;
@@ -43,7 +50,8 @@ export function useStockData() {
         peRatio,
         chartData,
         chartLabels,
-        marketStatus, // Export the new ref
+        marketStatus,
+        percentChange,
         isLoading,
         error,
         fetchModuleData

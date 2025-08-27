@@ -247,6 +247,12 @@
       "search_placeholder": "Suche nach einem Asset...",
       "add_button": "Hinzufügen",
       "limit_reached": "Du hast dein Modul-Limit erreicht. Erweitere deinen Plan, um mehr hinzuzufügen."
+    },
+    "detailModal": {
+        "price": "Preis",
+        "market_cap": "Marktkap.",
+        "volume": "Volumen",
+        "pe_ratio": "KGV"
     }
   },
   "topbar": {

@@ -6,6 +6,7 @@ import Button from 'primevue/button';
 import AutoComplete from 'primevue/autocomplete';
 import Dropdown from 'primevue/dropdown';
 import { useI18n } from 'vue-i18n';
+import Message from 'primevue/message'; // Import the Message component
 
 const { t } = useI18n();
 
@@ -26,11 +27,13 @@ const assetTypes = ref([
     { name: 'Crypto', code: 'crypto' },
     { name: 'ETF', code: 'etf' }
 ]);
+const searchError = ref(''); // Ref to hold search error messages
 
 watch(() => props.visible, (newValue) => {
     isVisible.value = newValue;
     if (!newValue) {
         selectedAsset.value = null; // Clear selection when modal closes
+        searchError.value = ''; // Clear errors when modal closes
     }
 });
 
@@ -39,26 +42,30 @@ const searchAssets = async (event) => {
         searchResults.value = [];
         return;
     }
+    searchError.value = ''; // Clear previous errors
     try {
-        // This function for searching remains the same
-        const response = await fetch(`/api/search-assets?query=${event.query}&type=${newAssetType.value.code}`);
+        const response = await fetch(`/api/search-assets?query=${event.query}`);
+        
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'An unknown error occurred.');
+        }
+
         const data = await response.json();
         searchResults.value = data;
     } catch (error) {
         console.error("Error searching assets:", error);
+        searchError.value = error.message;
         searchResults.value = [];
     }
 };
 
-// --- MODIFIED FUNCTION ---
-// This function now securely calls the database RPC function
 const handleAddModule = async () => {
     if (!selectedAsset.value || typeof selectedAsset.value !== 'object') {
         return;
     }
 
     try {
-        // Call the database function 'add_user_module' with the correct parameter names
         const { data, error } = await supabase.rpc('add_user_module', {
             p_asset_symbol: selectedAsset.value.symbol,
             p_asset_name: selectedAsset.value.name,
@@ -68,17 +75,13 @@ const handleAddModule = async () => {
 
         if (error) throw error;
 
-        // The RPC returns an array with the new module data. We take the first element.
         const newModule = data[0];
-        
-        // Emit the new module data to the parent dashboard to update the UI
         emit('addModule', newModule);
 
     } catch (error) {
         console.error('Error adding module via RPC:', error);
-        // Here you could add a Toast or Message to show the error to the user
     } finally {
-        selectedAsset.value = null; // Clear the input after adding
+        selectedAsset.value = null;
     }
 };
 
@@ -86,7 +89,6 @@ const canAddMore = computed(() => {
     return props.currentModules.length < props.moduleLimit;
 });
 
-// This function correctly emits the entire module object to be removed
 const handleRemoveModule = (module) => {
     emit('removeModule', module);
 };
@@ -122,7 +124,7 @@ const handleRemoveModule = (module) => {
                     <div v-for="module in currentModules" :key="module.id"
                          class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
                         <span class="font-semibold">{{ module.asset_symbol }}</span>
-                        <Button icon="pi pi-trash" severity="danger" text rounded @click="$emit('removeModule', module)" />
+                        <Button icon="pi pi-trash" severity="danger" text rounded @click="handleRemoveModule(module)" />
                     </div>
                 </div>
                 <div v-else class="text-center text-gray-500 p-4">
@@ -132,32 +134,37 @@ const handleRemoveModule = (module) => {
             
             <div class="border-t border-gray-200 dark:border-gray-700 pt-6">
                 <h3 class="font-semibold mb-2 text-base sm:text-xl text-gray-700 dark:text-gray-300">{{ t('dashboard.configurator.add_new_module') }}</h3>
-                <div v-if="canAddMore" class="flex gap-2">
-                    <Dropdown v-model="newAssetType" :options="assetTypes" optionLabel="name" placeholder="Type" class="w-[120px]" />
-                    
-                    <AutoComplete 
-                        v-model="selectedAsset" 
-                        :suggestions="searchResults" 
-                        @complete="searchAssets" 
-                        optionLabel="name" 
-                        :placeholder="t('dashboard.configurator.search_placeholder')" 
-                        class="flex-grow"
-                    >
-                        <template #option="slotProps">
-                            <div class="flex items-center justify-between w-full">
-                                <div class="flex-1 overflow-hidden">
-                                    <div class="font-bold truncate">{{ slotProps.option.symbol }}</div>
-                                    <div class="text-sm truncate">{{ slotProps.option.name }}</div>
+                <div v-if="canAddMore" class="flex flex-col gap-2">
+                    <div class="flex gap-2">
+                        <Dropdown v-model="newAssetType" :options="assetTypes" optionLabel="name" placeholder="Type" class="w-[120px]" />
+                        
+                        <AutoComplete 
+                            v-model="selectedAsset" 
+                            :suggestions="searchResults" 
+                            @complete="searchAssets" 
+                            optionLabel="name" 
+                            :placeholder="t('dashboard.configurator.search_placeholder')" 
+                            class="flex-grow"
+                        >
+                            <template #option="slotProps">
+                                <div class="flex items-center justify-between w-full">
+                                    <div class="flex-1 overflow-hidden">
+                                        <div class="font-bold truncate">{{ slotProps.option.symbol }}</div>
+                                        <div class="text-sm truncate">{{ slotProps.option.name }}</div>
+                                    </div>
+                                    <span class="text-xs text-gray-500 ml-4 flex-shrink-0">{{ slotProps.option.region }}</span>
                                 </div>
-                                <span class="text-xs text-gray-500 ml-4 flex-shrink-0">{{ slotProps.option.region }}</span>
-                            </div>
-                        </template>
-                    </AutoComplete>
-                    
-                    <Button @click="handleAddModule" :disabled="!selectedAsset || typeof selectedAsset !== 'object'">
-                        <i class="pi pi-plus"></i>
-                        <span class="hidden sm:inline ml-2">{{ t('dashboard.configurator.add_button') }}</span>
-                    </Button>
+                            </template>
+                        </AutoComplete>
+                        
+                        <Button @click="handleAddModule" :disabled="!selectedAsset || typeof selectedAsset !== 'object'">
+                            <i class="pi pi-plus"></i>
+                            <span class="hidden sm:inline ml-2">{{ t('dashboard.configurator.add_button') }}</span>
+                        </Button>
+                    </div>
+                    <div v-if="searchError" class="mt-2">
+                        <Message severity="error" :closable="false">{{ searchError }}</Message>
+                    </div>
                 </div>
                 <div v-else class="text-center p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
                     <p class="text-yellow-700 dark:text-yellow-300">{{ t('dashboard.configurator.limit_reached') }}</p>
