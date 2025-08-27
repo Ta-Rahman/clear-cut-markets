@@ -20,11 +20,14 @@ const props = defineProps({
 const emit = defineEmits(['close']);
 
 const lineChartData = computed(() => {
+    if (!props.module || !props.module.chart) {
+        return { labels: [], datasets: [] };
+    }
     const change = typeof props.module.percentChange === 'number' ? props.module.percentChange : 0;
     return {
-        labels: props.module.labels || [],
+        labels: props.module.labels,
         datasets: [{
-            data: props.module.chart || [],
+            data: props.module.chart,
             fill: true,
             borderColor: change > 0 ? '#22c55e' : '#ef4444',
             tension: 0.4,
@@ -42,14 +45,8 @@ const lineChartOptions = computed(() => {
         maintainAspectRatio: false,
         plugins: { legend: { display: false } },
         scales: {
-            x: {
-                ticks: { color: textColorSecondary, maxTicksLimit: 8, font: { size: 10 } },
-                grid: { color: surfaceBorder, drawBorder: false }
-            },
-            y: {
-                ticks: { color: textColorSecondary, callback: (value) => '$' + value.toFixed(2), padding: 5, font: { size: 10 } },
-                grid: { color: surfaceBorder, drawBorder: false }
-            }
+            x: { ticks: { color: textColorSecondary, maxTicksLimit: 8, font: { size: 10 } }, grid: { color: surfaceBorder, drawBorder: false } },
+            y: { ticks: { color: textColorSecondary, callback: (value) => '$' + value.toFixed(2), padding: 5, font: { size: 10 } }, grid: { color: surfaceBorder, drawBorder: false } }
         }
     };
 });
@@ -59,15 +56,13 @@ const formatMarketCap = (num) => {
     const fullValue = num * 1000000;
     if (fullValue >= 1e12) return `$${(fullValue / 1e12).toFixed(2)}T`;
     if (fullValue >= 1e9) return `$${(fullValue / 1e9).toFixed(2)}B`;
-    if (fullValue >= 1e6) return `$${(fullValue / 1e6).toFixed(2)}M`;
-    return `$${fullValue.toLocaleString()}`;
+    return `$${(fullValue / 1e6).toFixed(2)}M`;
 };
 
 const formatVolume = (num) => {
     if (!num) return '...';
     if (num >= 1e9) return `${(num / 1e9).toFixed(2)}B`;
     if (num >= 1e6) return `${(num / 1e6).toFixed(2)}M`;
-    if (num >= 1e3) return `${(num / 1e3).toFixed(2)}K`;
     return num.toLocaleString();
 };
 </script>
@@ -75,16 +70,21 @@ const formatVolume = (num) => {
 <template>
     <Dialog :visible="visible" modal @update:visible="$emit('close')" class="w-[90vw] md:w-[45rem]" :dismissableMask="true">
         <template #header>
-            <div v-if="module" class="flex items-center gap-3">
-                <i class="pi pi-chart-line text-2xl text-primary"></i>
-                <div>
-                    <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 m-0">{{ module.name }} ({{ module.asset_symbol }})</h2>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 m-0">{{ module.region }}</p>
+            <div v-if="module" class="w-full flex justify-between items-center pr-8">
+                <div class="flex items-center gap-3">
+                    <i class="pi pi-chart-line text-2xl text-primary"></i>
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 m-0">{{ module.name }} ({{ module.asset_symbol }})</h2>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 m-0">{{ module.region }}</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <p class="text-2xl font-bold text-gray-900 dark:text-gray-100 m-0">${{ module.lastPrice ? module.lastPrice.toFixed(2) : '0.00' }}</p>
                 </div>
             </div>
         </template>
 
-        <div v-if="!module || Object.keys(module).length === 0" class="p-4 animate-pulse">
+        <div v-if="!module || !module.lastPrice" class="p-4 animate-pulse">
             <div class="h-64 bg-gray-200 dark:bg-gray-700 rounded w-full mb-4"></div>
             <div class="h-24 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
         </div>
@@ -96,22 +96,40 @@ const formatVolume = (num) => {
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center">
-                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ t('dashboard.detailModal.price') }}</p>
-                    <p class="text-xl font-bold text-gray-900 dark:text-gray-100">${{ module.lastPrice ? module.lastPrice.toFixed(2) : '0.00' }}</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ t('dashboard.detailModal.day_change') }}</p>
+                    <p class="text-xl font-bold whitespace-nowrap" :class="module.percentChange > 0 ? 'text-green-500' : 'text-red-500'">
+                        {{ module.dayChange ? module.dayChange.toFixed(2) : '0.00' }} ({{ module.percentChange ? module.percentChange.toFixed(2) : '0.00' }}%)
+                    </p>
                 </div>
-                 <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center">
-                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ t('dashboard.detailModal.market_cap') }}</p>
-                    <p class="text-xl font-bold text-gray-900 dark:text-gray-100">{{ formatMarketCap(module.marketCap) }}</p>
-                </div>
-                 <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center">
+                <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center">
                     <p class="text-sm text-gray-600 dark:text-gray-400">{{ t('dashboard.detailModal.volume') }}</p>
                     <p class="text-xl font-bold text-gray-900 dark:text-gray-100">{{ formatVolume(module.volume) }}</p>
                 </div>
-                 <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center">
+                <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center">
+                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ t('dashboard.detailModal.market_cap') }}</p>
+                    <p class="text-xl font-bold text-gray-900 dark:text-gray-100">{{ formatMarketCap(module.marketCap) }}</p>
+                </div>
+                <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center">
                     <p class="text-sm text-gray-600 dark:text-gray-400">{{ t('dashboard.detailModal.pe_ratio') }}</p>
                     <p class="text-xl font-bold text-gray-900 dark:text-gray-100">{{ module.peRatio ? module.peRatio.toFixed(2) : 'N/A' }}</p>
+                </div>
+                <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center">
+                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ t('dashboard.detailModal.day_high') }}</p>
+                    <p class="text-xl font-bold text-gray-900 dark:text-gray-100">${{ module.dayHigh ? module.dayHigh.toFixed(2) : '0.00' }}</p>
+                </div>
+                 <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center">
+                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ t('dashboard.detailModal.day_low') }}</p>
+                    <p class="text-xl font-bold text-gray-900 dark:text-gray-100">${{ module.dayLow ? module.dayLow.toFixed(2) : '0.00' }}</p>
+                </div>
+                 <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center">
+                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ t('dashboard.detailModal.52_week_high') }}</p>
+                    <p class="text-xl font-bold text-gray-900 dark:text-gray-100">${{ module.fiftyTwoWeekHigh ? module.fiftyTwoWeekHigh.toFixed(2) : '0.00' }}</p>
+                </div>
+                 <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center">
+                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ t('dashboard.detailModal.52_week_low') }}</p>
+                    <p class="text-xl font-bold text-gray-900 dark:text-gray-100">${{ module.fiftyTwoWeekLow ? module.fiftyTwoWeekLow.toFixed(2) : '0.00' }}</p>
                 </div>
             </div>
         </div>
     </Dialog>
-</template> 
+</template>

@@ -12,12 +12,18 @@ import { useModuleManager } from '@/composables/useModuleManager';
 
 const { t } = useI18n();
 const { profile } = useUser();
-
 const { modules, isLoading, fetchAllModuleData } = useModuleManager();
 
 const isConfigModalVisible = ref(false);
 const isDetailModalVisible = ref(false);
 const selectedModuleForDetail = ref(null);
+
+// **NEW: Computed property to format the user's name**
+const formattedUserName = computed(() => {
+    const name = profile.value?.first_name || 'User';
+    // Capitalize the first letter and add the rest of the string
+    return name.charAt(0).toUpperCase() + name.slice(1);
+});
 
 const moduleLimit = computed(() => {
     if (profile.value?.subscription_tier === 'professional') return 9;
@@ -60,8 +66,8 @@ onMounted(() => {
 <template>
     <div class="max-w-7xl mx-auto space-y-8">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100">
-                {{ t('dashboard.welcome', { name: profile?.first_name || 'User' }) }}
+            <h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100">
+                {{ t('dashboard.welcome') }} <span class="text-gradient">{{ formattedUserName }}</span>
             </h1>
             <p class="mt-1 text-gray-600 dark:text-gray-400">
                 {{ t('dashboard.subtitle') }}

@@ -15,11 +15,14 @@ const props = defineProps({
 });
 
 const lineChartData = computed(() => {
+    if (!props.module || !props.module.chart) {
+        return { labels: [], datasets: [] };
+    }
     const change = typeof props.module.percentChange === 'number' ? props.module.percentChange : 0;
     return {
-        labels: props.module.labels || [],
+        labels: props.module.labels,
         datasets: [{
-            data: props.module.chart || [],
+            data: props.module.chart,
             fill: true,
             borderColor: change > 0 ? '#22c55e' : '#ef4444',
             tension: 0.4,
@@ -55,16 +58,25 @@ const formatMarketCap = (num) => {
     const fullValue = num * 1000000;
     if (fullValue >= 1e12) return `$${(fullValue / 1e12).toFixed(2)}T`;
     if (fullValue >= 1e9) return `$${(fullValue / 1e9).toFixed(2)}B`;
-    if (fullValue >= 1e6) return `$${(fullValue / 1e6).toFixed(2)}M`;
-    return `$${fullValue.toLocaleString()}`;
+    return `$${(fullValue / 1e6).toFixed(2)}M`;
 };
 
 const formatVolume = (num) => {
     if (!num) return '...';
     if (num >= 1e9) return `${(num / 1e9).toFixed(2)}B`;
     if (num >= 1e6) return `${(num / 1e6).toFixed(2)}M`;
-    if (num >= 1e3) return `${(num / 1e3).toFixed(2)}K`;
     return num.toLocaleString();
+};
+
+// **NEW: Placeholder functions for the buttons**
+const handleAlertsClick = () => {
+    console.log('Alerts button clicked for:', props.module.asset_symbol);
+    // Future logic for alert modal will go here
+};
+
+const handleSettingsClick = () => {
+    console.log('Settings button clicked for:', props.module.asset_symbol);
+    // Future logic for settings modal will go here
 };
 </script>
 
@@ -84,64 +96,62 @@ const formatVolume = (num) => {
             </div>
         </div>
 
-        <div class="flex flex-col flex-grow">
-            <div class="mb-4">
-                <div class="flex items-center mb-1">
-                    <div class="flex items-baseline">
-                        <span class="text-xl text-gray-600 dark:text-gray-500 mr-1">$</span>
-                        <span class="text-4xl font-bold text-gray-900 dark:text-gray-100">{{ module.lastPrice ? module.lastPrice.toFixed(2) : '0.00' }}</span>
-                    </div>
-                    <i v-if="module.marketStatus === 'closed'"
-                       class="pi pi-clock text-lg text-gray-500 dark:text-gray-400 opacity-70 ml-2"
-                       v-tooltip.top="'Market closed. Price from last close.'">
-                    </i>
+        <div class="mb-4">
+            <div class="flex items-center mb-1">
+                <div class="flex items-baseline">
+                    <span class="text-xl text-gray-600 dark:text-gray-500 mr-1">$</span>
+                    <span class="text-4xl font-bold text-gray-900 dark:text-gray-100">{{ module.lastPrice ? module.lastPrice.toFixed(2) : '...' }}</span>
                 </div>
+                <i v-if="module.marketStatus === 'closed'"
+                   class="pi pi-clock text-lg text-gray-500 dark:text-gray-400 opacity-70 ml-2"
+                   v-tooltip.top="'Market closed. Price from last close.'">
+                </i>
             </div>
-            
-            <div class="relative h-40 my-4 bg-white/50 dark:bg-gray-900/50 rounded-md p-2 flex-shrink-0">
-                <Chart type="line" :data="lineChartData" :options="lineChartOptions" />
-            </div>
+        </div>
+        
+        <div class="relative h-40 my-4 bg-white/50 dark:bg-gray-900/50 rounded-md p-2 flex-shrink-0">
+            <Chart type="line" :data="lineChartData" :options="lineChartOptions" />
+        </div>
 
-            <div class="grid grid-cols-3 gap-4 py-4 border-t border-b border-gray-200 dark:border-gray-700 mb-6 flex-shrink-0">
-                <div class="text-center">
-                    <span class="block text-xs text-gray-600 dark:text-gray-400 mb-1">{{ t('modulesDemo.cards.volume') }}</span>
-                    <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">{{ formatVolume(module.volume) }}</span>
-                </div>
-                <div class="text-center">
-                    <span class="block text-xs text-gray-600 dark:text-gray-400 mb-1">{{ t('modulesDemo.cards.market_cap') }}</span>
-                    <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">{{ formatMarketCap(module.marketCap) }}</span>
-                </div>
-                <div class="text-center">
-                    <span class="block text-xs text-gray-600 dark:text-gray-400 mb-1">{{ t('modulesDemo.cards.pe_ratio') }}</span>
-                    <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">{{ module.peRatio ? module.peRatio.toFixed(2) : '...' }}</span>
-                </div>
+        <div class="grid grid-cols-3 gap-4 py-4 border-t border-b border-gray-200 dark:border-gray-700 mb-6 flex-shrink-0">
+            <div class="text-center">
+                <span class="block text-xs text-gray-600 dark:text-gray-400 mb-1">{{ t('modulesDemo.cards.volume') }}</span>
+                <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">{{ formatVolume(module.volume) }}</span>
             </div>
+            <div class="text-center">
+                <span class="block text-xs text-gray-600 dark:text-gray-400 mb-1">{{ t('modulesDemo.cards.market_cap') }}</span>
+                <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">{{ formatMarketCap(module.marketCap) }}</span>
+            </div>
+            <div class="text-center">
+                <span class="block text-xs text-gray-600 dark:text-gray-400 mb-1">{{ t('modulesDemo.cards.pe_ratio') }}</span>
+                <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">{{ module.peRatio ? module.peRatio.toFixed(2) : '...' }}</span>
+            </div>
+        </div>
+        
+        <div class="mb-4 flex flex-col flex-grow">
+            <div class="flex items-center gap-2 mb-3">
+                <i class="pi pi-sparkles text-primary"></i>
+                <span class="font-semibold text-gray-900 dark:text-gray-100">{{ t('dashboard.card.ai_analysis') }}</span>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{{ module.insight }}</p>
             
-            <div class="mb-4 flex flex-col flex-grow">
-                <div class="flex items-center gap-2 mb-3">
-                    <i class="pi pi-sparkles text-primary"></i>
-                    <span class="font-semibold text-gray-900 dark:text-gray-100">{{ t('dashboard.card.ai_analysis') }}</span>
+            <div class="mt-auto bg-white/50 dark:bg-gray-900/50 p-3 rounded-lg">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-xs text-gray-500 dark:text-gray-400">{{ t('dashboard.card.sentiment') }}</span>
+                    <span class="text-xs font-bold text-gray-900 dark:text-gray-100">{{ module.sentiment }}% {{ t('dashboard.card.bullish') }}</span>
                 </div>
-                <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{{ module.insight }}</p>
-                
-                <div class="mt-auto bg-white/50 dark:bg-gray-900/50 p-3 rounded-lg">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-xs text-gray-500 dark:text-gray-400">{{ t('dashboard.card.sentiment') }}</span>
-                        <span class="text-xs font-bold text-gray-900 dark:text-gray-100">{{ module.sentiment }}% {{ t('dashboard.card.bullish') }}</span>
-                    </div>
-                    <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                        <div class="h-full rounded-full transition-all duration-500"
-                             :style="{ width: module.sentiment + '%', backgroundColor: getSentimentColor(module.sentiment) }">
-                        </div>
+                <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                    <div class="h-full rounded-full transition-all duration-500"
+                         :style="{ width: module.sentiment + '%', backgroundColor: getSentimentColor(module.sentiment) }">
                     </div>
                 </div>
             </div>
-            
-            <div class="flex justify-center gap-4 pt-2 flex-shrink-0">
-                <Button icon="pi pi-bell" class="p-button-text p-button-sm p-button-rounded" v-tooltip="'Set custom price and sentiment alerts'" />
-                <Button icon="pi pi-chart-line" class="p-button-text p-button-sm p-button-rounded" v-tooltip="'View Details'" />
-                <Button icon="pi pi-cog" class="p-button-text p-button-sm p-button-rounded" v-tooltip="'Customize module settings'" />
-            </div>
+        </div>
+        
+        <div class="flex justify-center gap-4 pt-2 flex-shrink-0">
+            <Button @click.stop="handleAlertsClick" icon="pi pi-bell" class="p-button-text p-button-sm p-button-rounded" v-tooltip="'Set custom price and sentiment alerts'" />
+            <Button icon="pi pi-chart-line" class="p-button-text p-button-sm p-button-rounded" v-tooltip="'View Details'" />
+            <Button @click.stop="handleSettingsClick" icon="pi pi-cog" class="p-button-text p-button-sm p-button-rounded" v-tooltip="'Customize module settings'" />
         </div>
     </div>
 </template>

@@ -221,7 +221,7 @@
     "sign_in_link": "Sign In"
   },
   "dashboard": {
-    "welcome": "Welcome, {name}",
+    "welcome": "Welcome,",
     "subtitle": "Here is your investment dashboard overview.",
     "your_modules": "Your Modules",
     "module_configurator": "Module Configurator",
@@ -252,7 +252,12 @@
         "price": "Price",
         "market_cap": "Market Cap",
         "volume": "Volume",
-        "pe_ratio": "P/E Ratio"
+        "pe_ratio": "P/E Ratio",
+        "day_high": "Day's High",
+        "day_low": "Day's Low",
+        "52_week_high": "52-Week High",
+        "52_week_low": "52-Week Low",
+        "day_change": "Day's Change"
     }
   },
   "topbar": {
