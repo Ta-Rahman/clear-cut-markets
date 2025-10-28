@@ -1,28 +1,19 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
-import { apiMiddleware } from './server/api'; // <-- Import our new middleware
 
 export default defineConfig({
-  base: '/clear-cut-markets/',
+  // FIX: Explicitly set the base path to the root '/'.
+  // This forces the build to use correct paths and overrides any
+  // old/cached settings.
+  base: '/',
   plugins: [
     vue(),
-    // Add the middleware plugin
-    {
-      name: 'api-middleware',
-      configureServer(server) {
-        server.middlewares.use(apiMiddleware);
-      }
-    }
+    // The custom local middleware has been removed for production builds
   ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
-  },
-  optimizeDeps: {
-    include: [
-      '@supabase/supabase-js',
-    ],
   },
 });

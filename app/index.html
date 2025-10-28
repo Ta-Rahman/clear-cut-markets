@@ -11,7 +11,11 @@
 
 <body>
       <div id="app"></div>
-      <script type="module" src="/src/main.js"></script>
+      <!-- 
+        FIX: Removed the leading '/' from '/src/main.js'.
+        This makes it a relative path, which Vite's build process handles correctly.
+      -->
+      <script type="module" src="src/main.js"></script>
 </body>
 
 </html>
