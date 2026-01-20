@@ -1,14 +1,8 @@
 <template>
     <div class="relative overflow-x-hidden sticky-bar-padding" :style="{ paddingBottom: showStickyBar ? '96px' : '0' }">
-        <div class="fixed inset-0 bg-gradient-to-br from-violet-500 to-purple-600 opacity-5 -z-10"></div>
-        <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <div class="absolute inset-0">
-                <div class="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-violet-500/[0.07] via-transparent to-transparent"></div>
-                <div class="absolute bottom-0 right-0 w-full h-1/2 bg-gradient-to-t from-purple-500/[0.07] via-transparent to-transparent"></div>
-                <div class="absolute top-1/4 -left-1/4 w-3/4 h-3/4 bg-gradient-to-br from-violet-600/[0.05] to-transparent rounded-full blur-3xl transform rotate-45"></div>
-                <div class="absolute bottom-1/4 -right-1/4 w-3/4 h-3/4 bg-gradient-to-tl from-purple-600/[0.05] to-transparent rounded-full blur-3xl transform -rotate-45"></div>
-            </div>
-        </div>
+        <GradientBackground :showOrbs="true" />
+        
+        <!-- Additional dot pattern specific to landing page -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
             <div class="absolute inset-0"
                  style="background-image: radial-gradient(circle, #667eea 1px, transparent 1px);
@@ -42,6 +36,7 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useScrollAnimation } from '@/composables/useScrollAnimation';
 import { supabase } from '@/supabase';
+import GradientBackground from '@/components/shared/GradientBackground.vue';
 import LandingNav from '@/components/landing/LandingNav.vue';
 import LandingHero from '@/components/landing/LandingHero.vue';
 import LandingUsp from '@/components/landing/LandingUsp.vue';
@@ -94,28 +89,22 @@ const fetchWaitlistCount = async () => {
         const { data, error } = await supabase.rpc('get_waitlist_count');
         if (error) throw error;
 
-        // --- CORRECTED LOGIC ---
         let displayCount = 0;
         if (data > 10) {
-            // If the count is over 10, round it down to the nearest 10.
             displayCount = Math.floor(data / 10) * 10;
         } else if (data > 0) {
-            // If the count is between 1 and 10, just show a solid 10 for better social proof.
             displayCount = 10;
         }
-        // If data is 0, displayCount will remain 0.
 
         animateValue(animatedWaitlist, 0, displayCount, 2000);
 
     } catch (error) {
         console.error('Error fetching waitlist count:', error);
-        // Fallback to a static number if the fetch fails
         animateValue(animatedWaitlist, 0, 230, 2000);
     }
 };
 
 onMounted(() => {
-    // 3. Call our new function and animate the other static counters
     fetchWaitlistCount();
     animateValue(animatedSaved, 0, 23, 2000);
     animateValue(animatedModules, 0, 9, 1500);

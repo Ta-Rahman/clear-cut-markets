@@ -7,6 +7,7 @@ import InputText from 'primevue/inputtext';
 import Checkbox from 'primevue/checkbox';
 import Message from 'primevue/message';
 import { useI18n } from 'vue-i18n';
+import GradientBackground from '@/components/shared/GradientBackground.vue';
 
 const router = useRouter();
 const { t } = useI18n();
@@ -42,15 +43,9 @@ const handleLogin = async () => {
 <template>
     <div class="flex flex-col lg:flex-row min-h-screen">
         
+        <!-- Left side - Branding (desktop only) -->
         <div class="hidden lg:flex flex-col flex-1 text-center p-8 relative overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-violet-500 to-purple-600 opacity-5 -z-10"></div>
-            <div class="absolute inset-0 overflow-hidden pointer-events-none">
-                <div class="absolute inset-0">
-                    <div class="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-violet-500/[0.07] via-transparent to-transparent"></div>
-                    <div class="absolute bottom-0 right-0 w-full h-1/2 bg-gradient-to-t from-purple-500/[0.07] via-transparent to-transparent"></div>
-                </div>
-            </div>
-            <div class="absolute inset-0 bg-[radial-gradient(#e0e0e0_1px,transparent_1px)] dark:bg-[radial-gradient(#404040_1px,transparent_1px)] [background-size:20px_20px] opacity-20 -z-10"></div>
+            <GradientBackground />
 
             <div class="relative z-10 flex flex-col items-center justify-center flex-grow">
                 <img src="/layout/images/logo-dark.svg" alt="Image" height="60" class="mb-6" />
@@ -66,16 +61,14 @@ const handleLogin = async () => {
             </div>
         </div>
 
+        <!-- Right side - Login form -->
         <div class="flex flex-1 items-center justify-center p-6 sm:p-12 relative overflow-hidden lg:bg-white dark:lg:bg-black">
-            <div class="absolute inset-0 lg:hidden bg-gradient-to-br from-violet-500 to-purple-600 opacity-5 -z-10"></div>
-            <div class="absolute inset-0 lg:hidden overflow-hidden pointer-events-none">
-                <div class="absolute inset-0">
-                    <div class="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-violet-500/[0.07] via-transparent to-transparent"></div>
-                    <div class="absolute bottom-0 right-0 w-full h-1/2 bg-gradient-to-t from-purple-500/[0.07] via-transparent to-transparent"></div>
-                </div>
+            <!-- Mobile background -->
+            <div class="lg:hidden">
+                <GradientBackground />
             </div>
-            <div class="absolute inset-0 lg:hidden bg-[radial-gradient(#e0e0e0_1px,transparent_1px)] dark:bg-[radial-gradient(#404040_1px,transparent_1px)] [background-size:20px_20px] opacity-20 -z-10"></div>
             
+            <!-- Desktop grain texture -->
             <div class="absolute inset-0 bg-grain opacity-5 pointer-events-none hidden lg:block"></div>
 
             <div class="w-full max-w-md z-10 p-8 lg:p-0 bg-white/80 dark:bg-gray-900/80 lg:bg-transparent dark:lg:bg-transparent backdrop-blur-md lg:backdrop-blur-none rounded-2xl shadow-lg lg:shadow-none border border-black/5 dark:border-white/10 lg:border-none">

@@ -1,12 +1,13 @@
 <script setup>
 import { ref, watch, computed } from 'vue';
-import { supabase } from '@/supabase'; // Your Supabase client
+import { supabase } from '@/supabase';
 import Dialog from 'primevue/dialog';
 import Button from 'primevue/button';
 import AutoComplete from 'primevue/autocomplete';
 import Dropdown from 'primevue/dropdown';
 import { useI18n } from 'vue-i18n';
-import Message from 'primevue/message'; // Import the Message component
+import Message from 'primevue/message';
+import { getDisplaySymbol } from '@/utils/formatters';
 
 const { t } = useI18n();
 
@@ -27,37 +28,43 @@ const assetTypes = ref([
     { name: 'Crypto', code: 'crypto' },
     { name: 'ETF', code: 'etf' }
 ]);
-const searchError = ref(''); // Ref to hold search error messages
+const searchError = ref('');
+const searchTimer = ref(null);
 
 watch(() => props.visible, (newValue) => {
     isVisible.value = newValue;
     if (!newValue) {
-        selectedAsset.value = null; // Clear selection when modal closes
-        searchError.value = ''; // Clear errors when modal closes
+        selectedAsset.value = null;
+        searchError.value = '';
     }
 });
 
 const searchAssets = async (event) => {
-    if (!isVisible.value || !event.query.trim().length) {
-        searchResults.value = [];
-        return;
-    }
-    searchError.value = ''; // Clear previous errors
-    try {
-        const response = await fetch(`/api/search-assets?query=${event.query}`);
-        
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || 'An unknown error occurred.');
-        }
+    clearTimeout(searchTimer.value);
 
-        const data = await response.json();
-        searchResults.value = data;
-    } catch (error) {
-        console.error("Error searching assets:", error);
-        searchError.value = error.message;
-        searchResults.value = [];
-    }
+    searchTimer.value = setTimeout(async () => {
+        if (!isVisible.value || !event.query.trim().length) {
+            searchResults.value = [];
+            return;
+        }
+        searchError.value = '';
+        try {
+            const assetType = newAssetType.value.code;
+            const response = await fetch(`/api/search-assets?query=${event.query}&type=${assetType}`);
+            
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'An unknown error occurred.');
+            }
+
+            const data = await response.json();
+            searchResults.value = data;
+        } catch (error) {
+            console.error("Error searching assets:", error);
+            searchError.value = error.message;
+            searchResults.value = [];
+        }
+    }, 350);
 };
 
 const handleAddModule = async () => {
@@ -123,7 +130,10 @@ const handleRemoveModule = (module) => {
                 <div v-if="currentModules.length > 0" class="space-y-2 max-h-48 overflow-y-auto">
                     <div v-for="module in currentModules" :key="module.id"
                          class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                        <span class="font-semibold">{{ module.asset_symbol }}</span>
+                        <div class="flex flex-col">
+                            <span class="font-semibold">{{ getDisplaySymbol(module.asset_symbol) }}</span>
+                            <span class="text-xs text-gray-500">{{ module.name }}</span>
+                        </div>
                         <Button icon="pi pi-trash" severity="danger" text rounded @click="handleRemoveModule(module)" />
                     </div>
                 </div>
@@ -149,10 +159,10 @@ const handleRemoveModule = (module) => {
                             <template #option="slotProps">
                                 <div class="flex items-center justify-between w-full">
                                     <div class="flex-1 overflow-hidden">
-                                        <div class="font-bold truncate">{{ slotProps.option.symbol }}</div>
+                                        <div class="font-bold truncate">{{ slotProps.option.displaySymbol || slotProps.option.symbol }}</div>
                                         <div class="text-sm truncate">{{ slotProps.option.name }}</div>
                                     </div>
-                                    <span class="text-xs text-gray-500 ml-4 flex-shrink-0">{{ slotProps.option.region }}</span>
+                                    <span class="text-xs text-gray-500 ml-4 flex-shrink-0">{{ slotProps.option.type === 'crypto' ? 'Crypto' : slotProps.option.region }}</span>
                                 </div>
                             </template>
                         </AutoComplete>

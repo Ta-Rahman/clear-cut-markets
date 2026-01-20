@@ -6,6 +6,7 @@ import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
 import Message from 'primevue/message';
 import { useI18n } from 'vue-i18n';
+import GradientBackground from '@/components/shared/GradientBackground.vue';
 
 const router = useRouter();
 const { t } = useI18n();
@@ -30,7 +31,7 @@ const handleWaitlistJoin = async () => {
             .insert({ email: email.value });
 
         if (error) {
-            if (error.code === '23505') { // PostgreSQL unique violation code
+            if (error.code === '23505') {
                 errorMessage.value = t('signup.error_email_exists');
             } else {
                 throw error;
@@ -50,16 +51,9 @@ const handleWaitlistJoin = async () => {
 
 <template>
     <div class="flex items-center justify-center min-h-screen p-4 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-violet-500 to-purple-600 opacity-5 -z-10"></div>
-        <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <div class="absolute inset-0">
-                <div class="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-violet-500/[0.07] via-transparent to-transparent"></div>
-                <div class="absolute bottom-0 right-0 w-full h-1/2 bg-gradient-to-t from-purple-500/[0.07] via-transparent to-transparent"></div>
-            </div>
-        </div>
-        <div class="absolute inset-0 bg-[radial-gradient(#e0e0e0_1px,transparent_1px)] dark:bg-[radial-gradient(#404040_1px,transparent_1px)] [background-size:20px_20px] opacity-20 -z-10"></div>
+        <GradientBackground />
 
-        <div class="w-full max-w-md p-8 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-2xl shadow-lg border border-black/5 dark:border-white/10">
+        <div class="w-full max-w-md p-8 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-2xl shadow-lg border border-black/5 dark:border-white/10 relative z-10">
             <div class="text-center mb-8">
                 <img src="/layout/images/logo-dark.svg" alt="Image" height="60" class="mx-auto mb-4" />
                 <h1 class="text-3xl font-bold text-gray-900 dark:text-white">{{ t('signup.title') }}</h1>

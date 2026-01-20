@@ -4,6 +4,8 @@ import Button from 'primevue/button';
 import Tag from 'primevue/tag';
 import Chart from 'primevue/chart';
 import { useI18n } from 'vue-i18n';
+import { useChartConfig } from '@/composables/useChartConfig';
+import { formatMarketCap, formatVolume, getDisplaySymbol, isCryptoSymbol } from '@/utils/formatters';
 
 const { t } = useI18n();
 const emit = defineEmits(['view-details']);
@@ -14,37 +16,32 @@ const props = defineProps({
     }
 });
 
-const lineChartData = computed(() => {
-    if (!props.module || !props.module.chart) {
-        return { labels: [], datasets: [] };
-    }
-    const change = typeof props.module.percentChange === 'number' ? props.module.percentChange : 0;
-    return {
-        labels: props.module.labels,
-        datasets: [{
-            data: props.module.chart,
-            fill: true,
-            borderColor: change > 0 ? '#22c55e' : '#ef4444',
-            tension: 0.4,
-            backgroundColor: change > 0 ? 'rgba(34, 197, 94, 0.1)' : 'rgba(239, 68, 68, 0.1)',
-            pointRadius: 0
-        }]
-    };
+// Use the shared chart config composable
+const moduleRef = computed(() => props.module);
+const { lineChartData, lineChartOptions } = useChartConfig(moduleRef);
+
+// Computed property for display symbol (handles crypto formatting)
+const displaySymbol = computed(() => {
+    return getDisplaySymbol(props.module.asset_symbol);
 });
 
-const lineChartOptions = computed(() => {
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColorSecondary = documentStyle.getPropertyValue('--p-text-muted-color');
-    const surfaceBorder = documentStyle.getPropertyValue('--p-content-border-color');
-    return {
-        maintainAspectRatio: false,
-        aspectRatio: 2.5,
-        plugins: { legend: { display: false } },
-        scales: {
-            x: { ticks: { color: textColorSecondary, maxTicksLimit: 6, font: { size: 9 } }, grid: { display: false, drawBorder: false } },
-            y: { ticks: { color: textColorSecondary, callback: (value) => Math.round(value), padding: 5, font: { size: 9 } }, grid: { color: surfaceBorder, drawBorder: false } }
-        }
-    };
+// Check if this is a crypto asset
+const isCrypto = computed(() => {
+    return isCryptoSymbol(props.module.asset_symbol);
+});
+
+// Format price based on asset type (crypto may need more decimal places)
+const formattedPrice = computed(() => {
+    const price = props.module.lastPrice;
+    if (!price) return '...';
+    
+    // For low-value crypto, show more decimal places
+    if (isCrypto.value && price < 1) {
+        return price.toFixed(6);
+    } else if (isCrypto.value && price < 100) {
+        return price.toFixed(4);
+    }
+    return price.toFixed(2);
 });
 
 const getSentimentColor = (sentiment) => {
@@ -53,22 +50,6 @@ const getSentimentColor = (sentiment) => {
     return '#ef4444';
 };
 
-const formatMarketCap = (num) => {
-    if (!num) return '...';
-    const fullValue = num * 1000000;
-    if (fullValue >= 1e12) return `$${(fullValue / 1e12).toFixed(2)}T`;
-    if (fullValue >= 1e9) return `$${(fullValue / 1e9).toFixed(2)}B`;
-    return `$${(fullValue / 1e6).toFixed(2)}M`;
-};
-
-const formatVolume = (num) => {
-    if (!num) return '...';
-    if (num >= 1e9) return `${(num / 1e9).toFixed(2)}B`;
-    if (num >= 1e6) return `${(num / 1e6).toFixed(2)}M`;
-    return num.toLocaleString();
-};
-
-// **NEW: Placeholder functions for the buttons**
 const handleAlertsClick = () => {
     console.log('Alerts button clicked for:', props.module.asset_symbol);
     // Future logic for alert modal will go here
@@ -86,9 +67,9 @@ const handleSettingsClick = () => {
         <div class="mb-4">
             <div class="flex justify-between items-start">
                 <div>
-                    <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 m-0">{{ module.asset_symbol }}</h3>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 m-0">{{ displaySymbol }}</h3>
                     <p class="text-lg text-gray-800 dark:text-gray-200 m-0 truncate">{{ module.name }}</p>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 m-0">{{ module.region }}</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 m-0">{{ isCrypto ? 'Cryptocurrency' : module.region }}</p>
                 </div>
                 <Tag v-if="typeof module.percentChange === 'number'" :severity="module.percentChange > 0 ? 'success' : 'danger'" class="font-semibold flex-shrink-0">
                     {{ module.percentChange > 0 ? '+' : '' }}{{ module.percentChange.toFixed(2) }}%
@@ -100,9 +81,14 @@ const handleSettingsClick = () => {
             <div class="flex items-center mb-1">
                 <div class="flex items-baseline">
                     <span class="text-xl text-gray-600 dark:text-gray-500 mr-1">$</span>
-                    <span class="text-4xl font-bold text-gray-900 dark:text-gray-100">{{ module.lastPrice ? module.lastPrice.toFixed(2) : '...' }}</span>
+                    <span class="text-4xl font-bold text-gray-900 dark:text-gray-100">{{ formattedPrice }}</span>
                 </div>
-                <i v-if="module.marketStatus === 'closed'"
+                <!-- Show 24/7 indicator for crypto, clock for closed stock markets -->
+                <i v-if="isCrypto && module.marketStatus === 'open'"
+                   class="pi pi-circle-fill text-xs text-green-500 opacity-70 ml-2"
+                   v-tooltip.top="'Crypto markets trade 24/7'">
+                </i>
+                <i v-else-if="module.marketStatus === 'closed'"
                    class="pi pi-clock text-lg text-gray-500 dark:text-gray-400 opacity-70 ml-2"
                    v-tooltip.top="'Market closed. Price from last close.'">
                 </i>
@@ -113,18 +99,37 @@ const handleSettingsClick = () => {
             <Chart type="line" :data="lineChartData" :options="lineChartOptions" />
         </div>
 
+        <!-- Stats grid - adapts based on asset type -->
         <div class="grid grid-cols-3 gap-4 py-4 border-t border-b border-gray-200 dark:border-gray-700 mb-6 flex-shrink-0">
             <div class="text-center">
                 <span class="block text-xs text-gray-600 dark:text-gray-400 mb-1">{{ t('modulesDemo.cards.volume') }}</span>
                 <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">{{ formatVolume(module.volume) }}</span>
             </div>
-            <div class="text-center">
+            
+            <!-- For stocks/ETFs: show Market Cap -->
+            <div v-if="!isCrypto" class="text-center">
                 <span class="block text-xs text-gray-600 dark:text-gray-400 mb-1">{{ t('modulesDemo.cards.market_cap') }}</span>
                 <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">{{ formatMarketCap(module.marketCap) }}</span>
             </div>
-            <div class="text-center">
+            <!-- For crypto: show 24h High -->
+            <div v-else class="text-center">
+                <span class="block text-xs text-gray-600 dark:text-gray-400 mb-1">24h High</span>
+                <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">
+                    ${{ module.dayHigh ? module.dayHigh.toFixed(2) : '...' }}
+                </span>
+            </div>
+            
+            <!-- For stocks/ETFs: show P/E Ratio -->
+            <div v-if="!isCrypto" class="text-center">
                 <span class="block text-xs text-gray-600 dark:text-gray-400 mb-1">{{ t('modulesDemo.cards.pe_ratio') }}</span>
                 <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">{{ module.peRatio ? module.peRatio.toFixed(2) : '...' }}</span>
+            </div>
+            <!-- For crypto: show 24h Low -->
+            <div v-else class="text-center">
+                <span class="block text-xs text-gray-600 dark:text-gray-400 mb-1">24h Low</span>
+                <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">
+                    ${{ module.dayLow ? module.dayLow.toFixed(2) : '...' }}
+                </span>
             </div>
         </div>
         

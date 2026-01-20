@@ -3,6 +3,8 @@ import { defineProps, computed } from 'vue';
 import Dialog from 'primevue/dialog';
 import Chart from 'primevue/chart';
 import { useI18n } from 'vue-i18n';
+import { useChartConfig } from '@/composables/useChartConfig';
+import { formatMarketCap, formatVolume, getDisplaySymbol, isCryptoSymbol } from '@/utils/formatters';
 
 const { t } = useI18n();
 
@@ -19,52 +21,26 @@ const props = defineProps({
 
 const emit = defineEmits(['close']);
 
-const lineChartData = computed(() => {
-    if (!props.module || !props.module.chart) {
-        return { labels: [], datasets: [] };
-    }
-    const change = typeof props.module.percentChange === 'number' ? props.module.percentChange : 0;
-    return {
-        labels: props.module.labels,
-        datasets: [{
-            data: props.module.chart,
-            fill: true,
-            borderColor: change > 0 ? '#22c55e' : '#ef4444',
-            tension: 0.4,
-            backgroundColor: change > 0 ? 'rgba(34, 197, 94, 0.1)' : 'rgba(239, 68, 68, 0.1)',
-            pointRadius: 0
-        }]
-    };
+// Use the shared chart config composable with custom options for the modal
+const moduleRef = computed(() => props.module);
+const { lineChartData, lineChartOptions } = useChartConfig(moduleRef, {
+    maxTicksLimit: 8,
+    fontSize: 10,
+    showDollarSign: true
 });
 
-const lineChartOptions = computed(() => {
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColorSecondary = documentStyle.getPropertyValue('--p-text-muted-color');
-    const surfaceBorder = documentStyle.getPropertyValue('--p-content-border-color');
-    return {
-        maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: {
-            x: { ticks: { color: textColorSecondary, maxTicksLimit: 8, font: { size: 10 } }, grid: { color: surfaceBorder, drawBorder: false } },
-            y: { ticks: { color: textColorSecondary, callback: (value) => '$' + value.toFixed(2), padding: 5, font: { size: 10 } }, grid: { color: surfaceBorder, drawBorder: false } }
-        }
-    };
+// Display symbol for crypto-friendly formatting
+const displaySymbol = computed(() => getDisplaySymbol(props.module?.asset_symbol));
+const isCrypto = computed(() => isCryptoSymbol(props.module?.asset_symbol));
+
+// Format price based on asset type
+const formattedPrice = computed(() => {
+    const price = props.module?.lastPrice;
+    if (!price) return '0.00';
+    if (isCrypto.value && price < 1) return price.toFixed(6);
+    if (isCrypto.value && price < 100) return price.toFixed(4);
+    return price.toFixed(2);
 });
-
-const formatMarketCap = (num) => {
-    if (!num) return '...';
-    const fullValue = num * 1000000;
-    if (fullValue >= 1e12) return `$${(fullValue / 1e12).toFixed(2)}T`;
-    if (fullValue >= 1e9) return `$${(fullValue / 1e9).toFixed(2)}B`;
-    return `$${(fullValue / 1e6).toFixed(2)}M`;
-};
-
-const formatVolume = (num) => {
-    if (!num) return '...';
-    if (num >= 1e9) return `${(num / 1e9).toFixed(2)}B`;
-    if (num >= 1e6) return `${(num / 1e6).toFixed(2)}M`;
-    return num.toLocaleString();
-};
 </script>
 
 <template>
@@ -74,12 +50,12 @@ const formatVolume = (num) => {
                 <div class="flex items-center gap-3">
                     <i class="pi pi-chart-line text-2xl text-primary"></i>
                     <div>
-                        <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 m-0">{{ module.name }} ({{ module.asset_symbol }})</h2>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 m-0">{{ module.region }}</p>
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 m-0">{{ module.name }} ({{ displaySymbol }})</h2>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 m-0">{{ isCrypto ? 'Cryptocurrency' : module.region }}</p>
                     </div>
                 </div>
                 <div class="text-right">
-                    <p class="text-2xl font-bold text-gray-900 dark:text-gray-100 m-0">${{ module.lastPrice ? module.lastPrice.toFixed(2) : '0.00' }}</p>
+                    <p class="text-2xl font-bold text-gray-900 dark:text-gray-100 m-0">${{ formattedPrice }}</p>
                 </div>
             </div>
         </template>
