@@ -351,44 +351,15 @@ onMounted(() => {
     color: #86efac !important;
 }
 
-/* Fix Sticky Bottom Bar */
-.app-dark .bg-gradient-to-r.from-violet-600.to-purple-600 {
-    background: linear-gradient(to right, #7c3aed, #9333ea) !important;
+/* Fix Sticky Bottom Bar - keep consistent purple/indigo style */
+.app-dark .fixed.bottom-0 .p-button-outlined {
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    color: #e5e7eb !important;
 }
 
-/* Fix the sticky bar button */
-.app-dark .bg-white.text-violet-600 {
-    background-color: #86efac !important;
-    color: #7c3aed !important;
-}
-
-.app-dark .bg-white.text-violet-600:hover {
-    background-color: #f3f4f6 !important;
-    color: #000000 !important;
-}
-
-/* Alternative: Make the button more prominent in dark mode */
-.app-dark .fixed.bottom-0 .p-button {
-    background-color: #86efac !important;
-    color: #000000 !important;
-    font-weight: 600 !important;
-}
-
-.app-dark .fixed.bottom-0 .p-button:hover {
-    background-color: #16a34a !important;
-    color: #ffffff !important;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-/* Fix the text in sticky bar */
-.app-dark .fixed.bottom-0 p {
-    color: #ffffff !important;
-}
-
-.app-dark .fixed.bottom-0 .opacity-90 {
-    opacity: 1 !important;
-    color: #e9d5ff !important;
+.app-dark .fixed.bottom-0 .p-button-outlined:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
 }
 
 /* Ensure FAQ section text is readable */

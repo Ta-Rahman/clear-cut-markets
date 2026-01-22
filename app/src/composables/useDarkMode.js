@@ -6,10 +6,10 @@ export function useDarkMode() {
     // Initialize dark mode
     const initDarkMode = () => {
         // Check localStorage first
-        const savedTheme = localStorage.getItem('theme');
+        const savedTheme = localStorage.getItem('app-dark-mode');
         
         if (savedTheme) {
-            isDarkMode.value = savedTheme === 'dark';
+            isDarkMode.value = savedTheme === 'true';
         } else {
             // Check system preference
             isDarkMode.value = window.matchMedia && 
@@ -24,16 +24,16 @@ export function useDarkMode() {
         const element = document.documentElement;
         
         if (isDarkMode.value) {
-            element.classList.add('p-dark');
+            element.classList.add('app-dark');
         } else {
-            element.classList.remove('p-dark');
+            element.classList.remove('app-dark');
         }
     };
 
     // Toggle dark mode
     const toggleDarkMode = () => {
         isDarkMode.value = !isDarkMode.value;
-        localStorage.setItem('theme', isDarkMode.value ? 'dark' : 'light');
+        localStorage.setItem('app-dark-mode', isDarkMode.value ? 'true' : 'false');
         applyTheme();
     };
 
@@ -43,7 +43,7 @@ export function useDarkMode() {
         
         mediaQuery.addEventListener('change', (e) => {
             // Only update if no saved preference
-            if (!localStorage.getItem('theme')) {
+            if (!localStorage.getItem('app-dark-mode')) {
                 isDarkMode.value = e.matches;
                 applyTheme();
             }
