@@ -1,11 +1,5 @@
 <template>
-    <section id="features" class="relative py-24 px-4 md:px-6 lg:px-8 overflow-hidden">
-        <!-- Background decoration -->
-        <div class="absolute inset-0 pointer-events-none">
-            <div class="absolute top-0 left-1/4 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl"></div>
-            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
-        </div>
-        
+    <section id="features" class="relative py-16 sm:py-24 px-4 md:px-6 lg:px-8 overflow-hidden">
         <div class="relative max-w-7xl mx-auto">
             <!-- Header -->
             <div class="text-center mb-16">

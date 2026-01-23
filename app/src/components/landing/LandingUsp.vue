@@ -1,5 +1,5 @@
 <template>
-    <section class="relative py-24 px-4 md:px-6 lg:px-8 overflow-hidden">
+    <section class="relative py-16 sm:py-24 px-4 md:px-6 lg:px-8 overflow-hidden">
         <div class="relative max-w-6xl mx-auto">
             <!-- Header -->
             <div class="text-center mb-16">
@@ -17,12 +17,12 @@
             </div>
             
             <!-- Steps -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 pl-6 md:pl-0">
                 <!-- Step 1 -->
                 <div class="relative fade-up stagger-2">
                     <div class="step-card group">
-                        <!-- Step number -->
-                        <div class="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold shadow-lg shadow-indigo-500/30 z-10">
+                        <!-- Step number - adjusted position on mobile -->
+                        <div class="absolute -top-3 -left-3 md:-top-4 md:-left-4 w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-sm md:text-base font-bold shadow-lg shadow-indigo-500/30 z-10">
                             1
                         </div>
                         
@@ -44,7 +44,7 @@
                 <!-- Step 2 -->
                 <div class="relative fade-up stagger-3">
                     <div class="step-card group">
-                        <div class="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold shadow-lg shadow-indigo-500/30 z-10">
+                        <div class="absolute -top-3 -left-3 md:-top-4 md:-left-4 w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-sm md:text-base font-bold shadow-lg shadow-indigo-500/30 z-10">
                             2
                         </div>
                         
@@ -64,7 +64,7 @@
                 <!-- Step 3 -->
                 <div class="relative fade-up stagger-4">
                     <div class="step-card group">
-                        <div class="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold shadow-lg shadow-indigo-500/30 z-10">
+                        <div class="absolute -top-3 -left-3 md:-top-4 md:-left-4 w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-sm md:text-base font-bold shadow-lg shadow-indigo-500/30 z-10">
                             3
                         </div>
                         

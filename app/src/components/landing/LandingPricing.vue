@@ -1,10 +1,5 @@
 <template>
-    <section id="pricing" class="relative py-24 px-4 md:px-6 lg:px-8">
-        <!-- Background decoration -->
-        <div class="absolute inset-0 pointer-events-none">
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-500/5 rounded-full blur-3xl"></div>
-        </div>
-        
+    <section id="pricing" class="relative py-16 sm:py-24 px-4 md:px-6 lg:px-8">
         <div class="relative max-w-6xl mx-auto">
             <!-- Header -->
             <div class="text-center mb-16">

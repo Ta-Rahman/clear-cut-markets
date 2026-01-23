@@ -1,55 +1,41 @@
 <template>
-    <div class="absolute inset-0 -z-10 overflow-hidden min-h-full">
+    <div class="gradient-bg fixed inset-0 -z-10 overflow-hidden">
         <!-- Base gradient -->
-        <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-white dark:from-gray-950 dark:to-gray-900 transition-colors duration-300"></div>
+        <div class="base-gradient absolute inset-0 transition-colors duration-300"></div>
+        
+        <!-- Animated mesh gradient - covers entire viewport -->
+        <template v-if="showOrbs">
+            <div class="mesh-gradient"></div>
+        </template>
         
         <!-- Gradient overlays -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <div class="absolute top-0 left-0 w-full h-[50vh] bg-gradient-to-b from-violet-500/[0.07] via-transparent to-transparent"></div>
-            <div class="absolute bottom-0 right-0 w-full h-[50vh] bg-gradient-to-t from-purple-500/[0.07] via-transparent to-transparent"></div>
+            <div class="gradient-overlay-top absolute top-0 left-0 w-full h-1/2"></div>
+            <div class="gradient-overlay-bottom absolute bottom-0 right-0 w-full h-1/2"></div>
             
-            <!-- Floating blur orbs - distributed throughout the page -->
+            <!-- Floating blur orbs -->
             <template v-if="showOrbs">
-                <!-- Hero section orbs -->
-                <div class="floating-orb absolute top-0 -left-[200px] w-[600px] h-[600px] bg-gradient-to-br from-violet-500/10 to-indigo-500/5 dark:from-violet-500/[0.08] dark:to-indigo-500/[0.03] rounded-full blur-3xl"></div>
-                <div class="floating-orb floating-orb-delayed absolute top-[5vh] -right-[200px] w-[500px] h-[500px] bg-gradient-to-bl from-purple-500/10 to-pink-500/5 dark:from-purple-500/[0.08] dark:to-pink-500/[0.03] rounded-full blur-3xl"></div>
+                <!-- Top orbs -->
+                <div class="floating-orb orb-1 absolute -top-[10%] -left-[10%] w-[500px] h-[500px] rounded-full blur-3xl"></div>
+                <div class="floating-orb floating-orb-delayed orb-2 absolute -top-[5%] -right-[10%] w-[400px] h-[400px] rounded-full blur-3xl"></div>
                 
-                <!-- Modules Demo section orbs -->
-                <div class="floating-orb floating-orb-slow absolute top-[100vh] -left-[150px] w-[400px] h-[400px] bg-gradient-to-r from-indigo-500/10 to-cyan-500/5 dark:from-indigo-500/[0.06] dark:to-cyan-500/[0.03] rounded-full blur-3xl"></div>
-                <div class="floating-orb floating-orb-delayed absolute top-[120vh] -right-[150px] w-[450px] h-[450px] bg-gradient-to-l from-amber-500/8 to-orange-500/4 dark:from-amber-500/[0.05] dark:to-orange-500/[0.02] rounded-full blur-3xl"></div>
+                <!-- Middle orbs -->
+                <div class="floating-orb floating-orb-slow orb-3 absolute top-[30%] -left-[15%] w-[450px] h-[450px] rounded-full blur-3xl"></div>
+                <div class="floating-orb orb-4 absolute top-[40%] -right-[15%] w-[400px] h-[400px] rounded-full blur-3xl"></div>
                 
-                <!-- USP section orbs -->
-                <div class="floating-orb absolute top-[200vh] -left-[200px] w-[500px] h-[500px] bg-gradient-to-tr from-purple-500/8 to-pink-500/4 dark:from-purple-500/[0.05] dark:to-pink-500/[0.02] rounded-full blur-3xl"></div>
-                <div class="floating-orb floating-orb-slow absolute top-[220vh] -right-[200px] w-[400px] h-[400px] bg-gradient-to-l from-teal-500/8 to-emerald-500/4 dark:from-teal-500/[0.05] dark:to-emerald-500/[0.02] rounded-full blur-3xl"></div>
-                
-                <!-- Features section orbs -->
-                <div class="floating-orb floating-orb-delayed absolute top-[300vh] -left-[150px] w-[450px] h-[450px] bg-gradient-to-r from-cyan-500/10 to-blue-500/5 dark:from-cyan-500/[0.06] dark:to-blue-500/[0.03] rounded-full blur-3xl"></div>
-                <div class="floating-orb absolute top-[320vh] -right-[150px] w-[350px] h-[350px] bg-gradient-to-l from-indigo-500/8 to-violet-500/4 dark:from-indigo-500/[0.05] dark:to-violet-500/[0.02] rounded-full blur-3xl"></div>
-                
-                <!-- Use Cases section orbs -->
-                <div class="floating-orb floating-orb-slow absolute top-[400vh] -left-[200px] w-[500px] h-[500px] bg-gradient-to-tr from-violet-500/10 to-purple-500/5 dark:from-violet-500/[0.06] dark:to-purple-500/[0.03] rounded-full blur-3xl"></div>
-                <div class="floating-orb absolute top-[420vh] -right-[200px] w-[450px] h-[450px] bg-gradient-to-l from-pink-500/8 to-rose-500/4 dark:from-pink-500/[0.05] dark:to-rose-500/[0.02] rounded-full blur-3xl"></div>
-                
-                <!-- Pricing section orbs -->
-                <div class="floating-orb floating-orb-delayed absolute top-[500vh] -left-[150px] w-[400px] h-[400px] bg-gradient-to-r from-teal-500/10 to-emerald-500/5 dark:from-teal-500/[0.06] dark:to-emerald-500/[0.03] rounded-full blur-3xl"></div>
-                <div class="floating-orb absolute top-[520vh] -right-[200px] w-[500px] h-[500px] bg-gradient-to-tl from-amber-500/8 to-yellow-500/4 dark:from-amber-500/[0.05] dark:to-yellow-500/[0.02] rounded-full blur-3xl"></div>
-                
-                <!-- FAQ/Footer section orbs -->
-                <div class="floating-orb floating-orb-slow absolute top-[600vh] -left-[200px] w-[550px] h-[550px] bg-gradient-to-tr from-indigo-500/10 to-blue-500/5 dark:from-indigo-500/[0.06] dark:to-blue-500/[0.03] rounded-full blur-3xl"></div>
-                <div class="floating-orb absolute top-[650vh] -right-[150px] w-[600px] h-[600px] bg-gradient-to-tl from-purple-500/10 to-violet-500/5 dark:from-purple-500/[0.08] dark:to-violet-500/[0.03] rounded-full blur-3xl"></div>
+                <!-- Bottom orbs -->
+                <div class="floating-orb floating-orb-delayed orb-5 absolute top-[60%] -left-[10%] w-[350px] h-[350px] rounded-full blur-3xl"></div>
+                <div class="floating-orb floating-orb-slow orb-6 absolute -bottom-[10%] -right-[10%] w-[500px] h-[500px] rounded-full blur-3xl"></div>
             </template>
         </div>
         
-        <!-- Dot pattern -->
-        <div class="absolute inset-0 bg-[radial-gradient(#d1d5db_1px,transparent_1px)] dark:bg-[radial-gradient(#374151_1px,transparent_1px)] [background-size:24px_24px] opacity-30 dark:opacity-20"></div>
+        <!-- Subtle dot pattern -->
+        <div class="dot-pattern absolute inset-0"></div>
     </div>
 </template>
 
 <script setup>
 defineProps({
-    /**
-     * Whether to show the decorative blur orbs (used on landing page)
-     */
     showOrbs: {
         type: Boolean,
         default: false
@@ -85,4 +71,112 @@ defineProps({
         transform: translate(20px, 10px) scale(1.02);
     }
 }
+
+@keyframes mesh-move {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(1%, 1%) rotate(0.5deg); }
+    50% { transform: translate(0, 2%) rotate(0deg); }
+    75% { transform: translate(-1%, 1%) rotate(-0.5deg); }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    .mesh-gradient,
+    .floating-orb {
+        animation: none;
+    }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .floating-orb {
+        transform: scale(0.6);
+        animation-duration: 30s;
+    }
+    
+    .mesh-gradient {
+        animation-duration: 45s;
+    }
+}
+</style>
+
+<style>
+/* Unscoped styles for proper dark mode support */
+
+/* Base gradient */
+.base-gradient {
+    background: linear-gradient(to bottom right, #f9fafb, #ffffff);
+}
+
+.app-dark .base-gradient {
+    background: linear-gradient(to bottom right, #030712, #111827);
+}
+
+/* Mesh gradient */
+.mesh-gradient {
+    position: absolute;
+    inset: -20%;
+    background: 
+        radial-gradient(at 40% 20%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
+        radial-gradient(at 80% 10%, rgba(167, 139, 250, 0.08) 0px, transparent 50%),
+        radial-gradient(at 10% 60%, rgba(236, 72, 153, 0.06) 0px, transparent 50%),
+        radial-gradient(at 90% 50%, rgba(20, 184, 166, 0.06) 0px, transparent 50%),
+        radial-gradient(at 20% 90%, rgba(245, 158, 11, 0.06) 0px, transparent 50%),
+        radial-gradient(at 70% 80%, rgba(99, 102, 241, 0.08) 0px, transparent 50%);
+    animation: mesh-move 30s ease infinite;
+}
+
+.app-dark .mesh-gradient {
+    background: 
+        radial-gradient(at 40% 20%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+        radial-gradient(at 80% 10%, rgba(167, 139, 250, 0.10) 0px, transparent 50%),
+        radial-gradient(at 10% 60%, rgba(236, 72, 153, 0.08) 0px, transparent 50%),
+        radial-gradient(at 90% 50%, rgba(20, 184, 166, 0.08) 0px, transparent 50%),
+        radial-gradient(at 20% 90%, rgba(245, 158, 11, 0.06) 0px, transparent 50%),
+        radial-gradient(at 70% 80%, rgba(99, 102, 241, 0.10) 0px, transparent 50%);
+}
+
+/* Gradient overlays */
+.gradient-overlay-top {
+    background: linear-gradient(to bottom, rgba(139, 92, 246, 0.05), transparent);
+}
+
+.gradient-overlay-bottom {
+    background: linear-gradient(to top, rgba(168, 85, 247, 0.05), transparent);
+}
+
+.app-dark .gradient-overlay-top {
+    background: linear-gradient(to bottom, rgba(139, 92, 246, 0.08), transparent);
+}
+
+.app-dark .gradient-overlay-bottom {
+    background: linear-gradient(to top, rgba(168, 85, 247, 0.08), transparent);
+}
+
+/* Dot pattern - very subtle grid overlay */
+.dot-pattern {
+    background-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+.app-dark .dot-pattern {
+    background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+/* Floating orbs - light mode */
+.orb-1 { background: linear-gradient(to bottom right, rgba(139, 92, 246, 0.10), rgba(99, 102, 241, 0.05)); }
+.orb-2 { background: linear-gradient(to bottom left, rgba(168, 85, 247, 0.10), rgba(236, 72, 153, 0.05)); }
+.orb-3 { background: linear-gradient(to right, rgba(99, 102, 241, 0.08), rgba(6, 182, 212, 0.04)); }
+.orb-4 { background: linear-gradient(to left, rgba(20, 184, 166, 0.08), rgba(16, 185, 129, 0.04)); }
+.orb-5 { background: linear-gradient(to top right, rgba(245, 158, 11, 0.08), rgba(249, 115, 22, 0.04)); }
+.orb-6 { background: linear-gradient(to top left, rgba(168, 85, 247, 0.10), rgba(139, 92, 246, 0.05)); }
+
+/* Floating orbs - dark mode */
+.app-dark .orb-1 { background: linear-gradient(to bottom right, rgba(139, 92, 246, 0.12), rgba(99, 102, 241, 0.06)); }
+.app-dark .orb-2 { background: linear-gradient(to bottom left, rgba(168, 85, 247, 0.12), rgba(236, 72, 153, 0.06)); }
+.app-dark .orb-3 { background: linear-gradient(to right, rgba(99, 102, 241, 0.10), rgba(6, 182, 212, 0.05)); }
+.app-dark .orb-4 { background: linear-gradient(to left, rgba(20, 184, 166, 0.10), rgba(16, 185, 129, 0.05)); }
+.app-dark .orb-5 { background: linear-gradient(to top right, rgba(245, 158, 11, 0.10), rgba(249, 115, 22, 0.05)); }
+.app-dark .orb-6 { background: linear-gradient(to top left, rgba(168, 85, 247, 0.12), rgba(139, 92, 246, 0.06)); }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <section class="relative py-24 px-4 md:px-6 lg:px-8 overflow-hidden">
+    <section class="relative py-16 sm:py-24 px-4 md:px-6 lg:px-8 overflow-hidden">
         <div class="relative max-w-6xl mx-auto">
             <!-- Header -->
             <div class="text-center mb-16">

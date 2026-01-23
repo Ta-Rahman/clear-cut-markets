@@ -1,5 +1,5 @@
 <template>
-    <section id="faq" class="relative py-24 px-4 md:px-6 lg:px-8">
+    <section id="faq" class="relative py-16 sm:py-24 px-4 md:px-6 lg:px-8">
         <div class="max-w-3xl mx-auto">
             <!-- Header -->
             <div class="text-center mb-12">
@@ -33,13 +33,14 @@
                             </div>
                         </button>
                         
-                        <Transition name="accordion">
-                            <div v-if="activeFaq === index" class="overflow-hidden">
+                        <!-- Accordion content with smooth height animation -->
+                        <div class="accordion-wrapper" :class="{ 'is-open': activeFaq === index }">
+                            <div class="accordion-content">
                                 <div class="px-6 pb-5 text-gray-600 dark:text-gray-400 leading-relaxed">
                                     {{ faq.answer }}
                                 </div>
                             </div>
-                        </Transition>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -90,38 +91,61 @@ const toggleFaq = (index) => {
     backdrop-filter: blur(20px);
     border: 1px solid rgba(0, 0, 0, 0.05);
     border-radius: 1rem;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Only transition border-color, not background to avoid flash */
+    transition: border-color 0.2s ease;
+    overflow: hidden;
 }
 
 .faq-card:hover {
     border-color: rgba(99, 102, 241, 0.2);
 }
 
+/* Touch feedback for mobile - no background change to avoid flash */
+.faq-card:active {
+    border-color: rgba(99, 102, 241, 0.3);
+}
+
 .faq-card.is-open {
     border-color: rgba(99, 102, 241, 0.3);
+    /* Static shadow, no animation */
     box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.1);
 }
 
-/* Accordion animation */
-.accordion-enter-active {
-    transition: all 0.3s ease-out;
+/* Accordion animation - smooth height transition */
+.accordion-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.25s ease-out;
 }
 
-.accordion-leave-active {
-    transition: all 0.2s ease-in;
+.accordion-wrapper.is-open {
+    grid-template-rows: 1fr;
 }
 
-.accordion-enter-from,
-.accordion-leave-to {
-    opacity: 0;
-    transform: translateY(-10px);
+.accordion-content {
+    overflow: hidden;
+    min-height: 0;
+    /* Ensure content has same background as card */
+    background: transparent;
 }
 </style>
 
 <style>
 /* Dark mode styles - unscoped to work with global .app-dark class */
 .app-dark .faq-card {
-    background: rgba(17, 24, 39, 0.6);
+    background: rgba(17, 24, 39, 0.8);
     border-color: rgba(255, 255, 255, 0.1);
+}
+
+.app-dark .faq-card:hover {
+    border-color: rgba(99, 102, 241, 0.3);
+}
+
+.app-dark .faq-card:active {
+    border-color: rgba(99, 102, 241, 0.4);
+}
+
+.app-dark .faq-card.is-open {
+    border-color: rgba(99, 102, 241, 0.4);
 }
 </style>

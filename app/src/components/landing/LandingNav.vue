@@ -61,10 +61,10 @@ watch(selectedLanguage, (newLang) => {
 
 <template>
     <nav :class="[
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b',
         isScrolled 
-            ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl shadow-sm border-b border-gray-200/50 dark:border-gray-800/50' 
-            : 'bg-transparent'
+            ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl shadow-sm border-gray-200/50 dark:border-gray-800/50' 
+            : 'bg-transparent border-transparent'
     ]">
         <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
@@ -117,7 +117,7 @@ watch(selectedLanguage, (newLang) => {
                             <Button label="Login" class="p-button-text !text-gray-600 dark:!text-gray-400 hover:!text-gray-900 dark:hover:!text-white" />
                         </router-link>
                         <router-link to="/auth/signup">
-                            <Button label="Get Started" class="!bg-gradient-to-r !from-indigo-600 !to-purple-600 !border-0 !shadow-lg hover:!shadow-indigo-500/25" />
+                            <Button label="Join Waitlist" class="!bg-gradient-to-r !from-indigo-600 !to-purple-600 !border-0 !shadow-lg hover:!shadow-indigo-500/25" />
                         </router-link>
                     </div>
                     
@@ -158,7 +158,7 @@ watch(selectedLanguage, (newLang) => {
                     <Button label="Login" outlined class="w-full" />
                 </router-link>
                 <router-link to="/auth/signup" @click="sidebarVisible = false">
-                    <Button label="Get Started" class="w-full !bg-gradient-to-r !from-indigo-600 !to-purple-600 !border-0" />
+                    <Button label="Join Waitlist" class="w-full !bg-gradient-to-r !from-indigo-600 !to-purple-600 !border-0" />
                 </router-link>
             </div>
         </Sidebar>
@@ -174,6 +174,6 @@ watch(selectedLanguage, (newLang) => {
 }
 
 .mobile-nav-link {
-    @apply flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all w-full text-left;
+    @apply flex items-center gap-3 px-4 py-4 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all w-full text-left text-base active:bg-gray-200 dark:active:bg-gray-700;
 }
 </style>

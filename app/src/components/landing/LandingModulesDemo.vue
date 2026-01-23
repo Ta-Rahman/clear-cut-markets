@@ -1,5 +1,5 @@
 <template>
-    <section class="relative py-24 px-4 md:px-6 lg:px-8 overflow-hidden">
+    <section class="relative py-16 sm:py-24 px-4 md:px-6 lg:px-8 overflow-hidden">
         <!-- Section header -->
         <div class="text-center mb-16 max-w-3xl mx-auto">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400 text-sm font-medium mb-4 fade-up">

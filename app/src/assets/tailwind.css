@@ -11,19 +11,19 @@
     .fade-right,
     .scale-in {
         opacity: 0;
-        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: opacity 0.4s ease-out, transform 0.4s ease-out;
     }
 
     .fade-up {
-        transform: translateY(30px);
+        transform: translateY(20px);
     }
 
     .fade-left {
-        transform: translateX(-30px);
+        transform: translateX(-20px);
     }
 
     .fade-right {
-        transform: translateX(30px);
+        transform: translateX(20px);
     }
 
     .scale-in {
@@ -40,15 +40,11 @@
         transform: translateY(0) translateX(0) scale(1);
     }
 
-    /* Stagger delays */
-    .stagger-1 { transition-delay: 0.1s; }
-    .stagger-2 { transition-delay: 0.2s; }
-    .stagger-3 { transition-delay: 0.3s; }
-    .stagger-4 { transition-delay: 0.4s; }
-    .stagger-5 { transition-delay: 0.5s; }
-    .stagger-6 { transition-delay: 0.6s; }
-    .stagger-7 { transition-delay: 0.7s; }
-    .stagger-8 { transition-delay: 0.8s; }
+    /* Stagger classes - kept for backwards compatibility but delays handled by JS */
+    .stagger-1, .stagger-2, .stagger-3, .stagger-4, 
+    .stagger-5, .stagger-6, .stagger-7, .stagger-8 {
+        /* No transition-delay - JS controls timing */
+    }
 }
 
 /* Smooth scrolling */

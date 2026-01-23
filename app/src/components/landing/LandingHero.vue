@@ -1,10 +1,5 @@
 <template>
     <section id="hero-section" class="relative min-h-[90vh] flex items-center justify-center px-4 py-16 overflow-hidden">
-        <!-- Animated mesh gradient background -->
-        <div class="absolute inset-0 overflow-hidden">
-            <div class="mesh-gradient"></div>
-        </div>
-        
         <!-- Floating asset cards (decorative) -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
             <div class="floating-card floating-card-1">
@@ -63,7 +58,7 @@
             </div>
             
             <!-- Main headline -->
-            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6 animate-fade-in-down animation-delay-100 leading-tight">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6 animate-fade-in-down animation-delay-100 leading-tight">
                 Your Markets.
                 <br />
                 <span class="text-gradient">One Dashboard.</span>
@@ -72,31 +67,43 @@
             </h1>
             
             <!-- Subheadline -->
-            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto animate-fade-in-down animation-delay-200 leading-relaxed">
+            <p class="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto animate-fade-in-down animation-delay-200 leading-relaxed px-2">
                 AI-powered insights for the assets you care about. Track stocks, crypto, and ETFs with personalized analysis that cuts through the noise.
             </p>
             
             <!-- CTA Section -->
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 animate-fade-in-down animation-delay-300">
-                <div class="relative group w-full sm:w-auto">
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 animate-fade-in-down animation-delay-300 px-4 sm:px-0">
+                <div class="relative group w-full sm:w-auto max-w-sm sm:max-w-md">
                     <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-xl blur opacity-30 group-hover:opacity-50 transition duration-500"></div>
-                    <div class="relative flex items-center gap-2 bg-white dark:bg-gray-900 rounded-xl p-1.5 shadow-xl">
+                    <div class="relative flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-0 bg-white dark:bg-gray-900 rounded-xl p-3 sm:p-1.5 shadow-xl">
                         <input 
                             v-model="email" 
                             type="email"
                             :placeholder="t('hero.form.placeholder')" 
                             @keyup.enter="joinWaitlist"
-                            class="w-64 px-4 py-3 bg-transparent text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none text-sm"
+                            class="w-full sm:w-56 px-4 py-2.5 sm:py-3 bg-transparent text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none text-base sm:text-sm rounded-lg"
                             :class="{'shake-animation': emailError}"
                         />
                         <Button 
-                            :label="loading ? '' : 'Get Early Access'" 
-                            class="!bg-gradient-to-r !from-indigo-600 !to-purple-600 !border-0 !shadow-lg hover:!shadow-indigo-500/25 !transition-all !duration-300 whitespace-nowrap"
+                            :label="loading ? '' : 'Join Waitlist'" 
+                            icon="pi pi-arrow-right"
+                            iconPos="right"
+                            class="w-full sm:w-auto !bg-gradient-to-r !from-indigo-600 !to-purple-600 !border-0 !shadow-lg hover:!shadow-indigo-500/25 !transition-all !duration-300 whitespace-nowrap !py-3 sm:!py-2"
                             @click="joinWaitlist"
                             :loading="loading"
                         />
                     </div>
                 </div>
+            </div>
+            
+            <!-- Waitlist count -->
+            <div class="mb-6 animate-fade-in-down animation-delay-350">
+                <p class="text-sm text-gray-500 dark:text-gray-400 flex items-center justify-center gap-2">
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold">
+                        <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                        {{ waitlistCount.toLocaleString() }}+ on the waitlist
+                    </span>
+                </p>
             </div>
             
             <!-- Message -->
@@ -186,6 +193,7 @@ const messageType = ref('success');
 const emailError = ref(false);
 const animatedVolume = ref(0);
 const animatedAssets = ref(0);
+const waitlistCount = ref(0);
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -206,11 +214,29 @@ const animateValue = (refVar, end, duration) => {
     }, 16);
 };
 
+const fetchWaitlistCount = async () => {
+    try {
+        const { count, error } = await supabase
+            .from('waitlist')
+            .select('*', { count: 'exact', head: true });
+        
+        if (!error && count !== null) {
+            waitlistCount.value = count;
+        }
+    } catch (e) {
+        // Fallback to a default value if fetch fails
+        waitlistCount.value = 247;
+    }
+};
+
 onMounted(() => {
     setTimeout(() => {
         animateValue(animatedVolume, 2.4, 2000);
         animateValue(animatedAssets, 500, 2500);
     }, 500);
+    
+    // Fetch waitlist count
+    fetchWaitlistCount();
 });
 
 const joinWaitlist = async () => {
@@ -232,9 +258,11 @@ const joinWaitlist = async () => {
 
         if (error) throw error;
 
-        message.value = "You're in! We'll notify you when we launch.";
+        message.value = "You're on the waitlist! We'll notify you when we launch.";
         messageType.value = 'success';
         email.value = '';
+        // Refresh waitlist count
+        fetchWaitlistCount();
 
     } catch (error) {
         message.value = 'This email is already on the list.';
@@ -259,26 +287,6 @@ const joinWaitlist = async () => {
 @keyframes gradient-shift {
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
-}
-
-/* Animated mesh gradient */
-.mesh-gradient {
-    position: absolute;
-    inset: -50%;
-    background: 
-        radial-gradient(at 40% 20%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
-        radial-gradient(at 80% 0%, rgba(167, 139, 250, 0.1) 0px, transparent 50%),
-        radial-gradient(at 0% 50%, rgba(236, 72, 153, 0.1) 0px, transparent 50%),
-        radial-gradient(at 80% 50%, rgba(20, 184, 166, 0.1) 0px, transparent 50%),
-        radial-gradient(at 0% 100%, rgba(245, 158, 11, 0.1) 0px, transparent 50%);
-    animation: mesh-move 20s ease infinite;
-}
-
-@keyframes mesh-move {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    25% { transform: translate(2%, 2%) rotate(1deg); }
-    50% { transform: translate(0, 4%) rotate(0deg); }
-    75% { transform: translate(-2%, 2%) rotate(-1deg); }
 }
 
 /* Floating cards */
