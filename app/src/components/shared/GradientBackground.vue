@@ -3,17 +3,15 @@
         <!-- Base gradient -->
         <div class="base-gradient absolute inset-0 transition-colors duration-300"></div>
         
-        <!-- Animated mesh gradient - covers entire viewport -->
-        <template v-if="showOrbs">
-            <div class="mesh-gradient"></div>
-        </template>
+        <!-- Animated mesh gradient - always visible -->
+        <div class="mesh-gradient"></div>
         
         <!-- Gradient overlays -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
             <div class="gradient-overlay-top absolute top-0 left-0 w-full h-1/2"></div>
             <div class="gradient-overlay-bottom absolute bottom-0 right-0 w-full h-1/2"></div>
             
-            <!-- Floating blur orbs -->
+            <!-- Floating blur orbs - only on landing -->
             <template v-if="showOrbs">
                 <!-- Top orbs -->
                 <div class="floating-orb orb-1 absolute -top-[10%] -left-[10%] w-[500px] h-[500px] rounded-full blur-3xl"></div>

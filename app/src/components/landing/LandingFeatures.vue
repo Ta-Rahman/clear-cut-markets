@@ -18,65 +18,65 @@
             
             <!-- Bento Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Feature 1: AI Insights (Large) -->
+                <!-- Feature 1: News Aggregation (Large) -->
                 <div class="lg:col-span-2 fade-up stagger-2">
                     <div class="feature-card h-full p-8 group">
                         <div class="flex flex-col md:flex-row gap-6 items-start">
                             <div class="flex-shrink-0">
-                                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-lg shadow-violet-500/25 group-hover:scale-110 transition-transform duration-300">
-                                    <i class="pi pi-sparkles text-white text-2xl"></i>
+                                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center shadow-lg shadow-rose-500/25 group-hover:scale-110 transition-transform duration-300">
+                                    <i class="pi pi-inbox text-white text-2xl"></i>
                                 </div>
                             </div>
                             <div class="flex-1">
-                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">AI-Powered Insights</h3>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Smart News Aggregation</h3>
                                 <p class="text-gray-600 dark:text-gray-400 mb-4">
-                                    Get personalized analysis for every asset in your portfolio. Our AI processes market data, news sentiment, and technical indicators to deliver actionable insights.
+                                    We scan 15+ trusted sources including Reuters, Bloomberg, SEC filings, and social sentiment — filtering out the noise to show only what matters to your holdings.
                                 </p>
                                 <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1 rounded-full bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-400 text-xs font-medium">Sentiment Analysis</span>
-                                    <span class="px-3 py-1 rounded-full bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-400 text-xs font-medium">Pattern Recognition</span>
-                                    <span class="px-3 py-1 rounded-full bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-400 text-xs font-medium">Risk Assessment</span>
+                                    <span class="px-3 py-1 rounded-full bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-400 text-xs font-medium">Financial News</span>
+                                    <span class="px-3 py-1 rounded-full bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-400 text-xs font-medium">SEC Filings</span>
+                                    <span class="px-3 py-1 rounded-full bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-400 text-xs font-medium">Social Sentiment</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Feature 2: Real-time Data -->
+                <!-- Feature 2: AI Analysis -->
                 <div class="fade-up stagger-3">
                     <div class="feature-card h-full p-6 group">
-                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg shadow-green-500/25 mb-4 group-hover:scale-110 transition-transform duration-300">
-                            <i class="pi pi-bolt text-white text-xl"></i>
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-lg shadow-violet-500/25 mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="pi pi-sparkles text-white text-xl"></i>
                         </div>
-                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Real-time Updates</h3>
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">AI-Powered Analysis</h3>
                         <p class="text-gray-600 dark:text-gray-400 text-sm">
-                            Live price feeds for stocks and 24/7 crypto tracking. Never miss a market move.
+                            Our AI reads and summarizes articles, extracts sentiment, and explains potential impact in plain English.
                         </p>
                     </div>
                 </div>
                 
-                <!-- Feature 3: Multi-asset -->
+                <!-- Feature 3: Real-time Alerts -->
                 <div class="fade-up stagger-3">
+                    <div class="feature-card h-full p-6 group">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg shadow-amber-500/25 mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="pi pi-bell text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Instant Alerts</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">
+                            Get notified within minutes when news breaks that could affect your portfolio. Email and in-app alerts.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Feature 4: Multi-asset -->
+                <div class="fade-up stagger-4">
                     <div class="feature-card h-full p-6 group">
                         <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/25 mb-4 group-hover:scale-110 transition-transform duration-300">
                             <i class="pi pi-th-large text-white text-xl"></i>
                         </div>
                         <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Multi-Asset Support</h3>
                         <p class="text-gray-600 dark:text-gray-400 text-sm">
-                            Track stocks, crypto, and ETFs all in one unified dashboard.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Feature 4: Smart Alerts -->
-                <div class="fade-up stagger-4">
-                    <div class="feature-card h-full p-6 group">
-                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg shadow-amber-500/25 mb-4 group-hover:scale-110 transition-transform duration-300">
-                            <i class="pi pi-bell text-white text-xl"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Smart Alerts</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm">
-                            Custom price and sentiment alerts that notify you when opportunities arise.
+                            Track stocks, crypto, and ETFs all in one unified dashboard with asset-specific insights.
                         </p>
                     </div>
                 </div>
@@ -84,25 +84,25 @@
                 <!-- Feature 5: Cross-device -->
                 <div class="fade-up stagger-4">
                     <div class="feature-card h-full p-6 group">
-                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center shadow-lg shadow-rose-500/25 mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg shadow-green-500/25 mb-4 group-hover:scale-110 transition-transform duration-300">
                             <i class="pi pi-mobile text-white text-xl"></i>
                         </div>
-                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Cross-Device Sync</h3>
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Access Anywhere</h3>
                         <p class="text-gray-600 dark:text-gray-400 text-sm">
-                            Access your dashboard from any device. Your data syncs seamlessly across desktop and mobile.
+                            Works beautifully on desktop, tablet, and mobile. Your data syncs seamlessly across all devices.
                         </p>
                     </div>
                 </div>
                 
-                <!-- Feature 6: Portfolio Analytics -->
+                <!-- Feature 6: Weekly Digest -->
                 <div class="fade-up stagger-5">
                     <div class="feature-card h-full p-6 group">
                         <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/25 mb-4 group-hover:scale-110 transition-transform duration-300">
-                            <i class="pi pi-chart-bar text-white text-xl"></i>
+                            <i class="pi pi-envelope text-white text-xl"></i>
                         </div>
-                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Portfolio Analytics</h3>
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Weekly Digest</h3>
                         <p class="text-gray-600 dark:text-gray-400 text-sm">
-                            Track performance over time with detailed charts, gain/loss analysis, and portfolio allocation insights.
+                            Prefer a summary? Get a weekly email with the most important news and insights for your portfolio.
                         </p>
                     </div>
                 </div>
@@ -117,18 +117,18 @@
                                 </div>
                             </div>
                             <div class="flex-1">
-                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Bank-Grade Security</h3>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Privacy-First Design</h3>
                                 <p class="text-gray-600 dark:text-gray-400 mb-4">
-                                    Your data is protected with enterprise-level encryption. We never store sensitive financial information or connect to your brokerage accounts.
+                                    We never connect to your brokerage. You just tell us what to track — no sensitive financial data required. Your email and preferences are encrypted.
                                 </p>
                                 <div class="flex items-center gap-4">
                                     <div class="flex items-center gap-2 text-sm text-gray-500">
                                         <i class="pi pi-lock text-teal-500"></i>
-                                        <span>256-bit encryption</span>
+                                        <span>No brokerage access</span>
                                     </div>
                                     <div class="flex items-center gap-2 text-sm text-gray-500">
                                         <i class="pi pi-check-circle text-teal-500"></i>
-                                        <span>SOC 2 compliant</span>
+                                        <span>GDPR compliant</span>
                                     </div>
                                 </div>
                             </div>

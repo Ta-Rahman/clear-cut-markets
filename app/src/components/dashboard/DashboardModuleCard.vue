@@ -1,10 +1,6 @@
 <script setup>
 import { defineProps, computed } from 'vue';
-import Button from 'primevue/button';
-import Tag from 'primevue/tag';
-import Chart from 'primevue/chart';
 import { useI18n } from 'vue-i18n';
-import { useChartConfig } from '@/composables/useChartConfig';
 import { formatMarketCap, formatVolume, getDisplaySymbol, isCryptoSymbol } from '@/utils/formatters';
 
 const { t } = useI18n();
@@ -16,32 +12,29 @@ const props = defineProps({
     }
 });
 
-// Use the shared chart config composable
-const moduleRef = computed(() => props.module);
-const { lineChartData, lineChartOptions } = useChartConfig(moduleRef);
+const displaySymbol = computed(() => getDisplaySymbol(props.module.asset_symbol));
+const isCrypto = computed(() => isCryptoSymbol(props.module.asset_symbol));
 
-// Computed property for display symbol (handles crypto formatting)
-const displaySymbol = computed(() => {
-    return getDisplaySymbol(props.module.asset_symbol);
+const assetType = computed(() => {
+    if (isCrypto.value) return 'crypto';
+    return 'stock';
 });
 
-// Check if this is a crypto asset
-const isCrypto = computed(() => {
-    return isCryptoSymbol(props.module.asset_symbol);
-});
-
-// Format price based on asset type (crypto may need more decimal places)
 const formattedPrice = computed(() => {
     const price = props.module.lastPrice;
-    if (!price) return '...';
+    if (!price) return { whole: '...', decimal: '' };
     
-    // For low-value crypto, show more decimal places
+    let priceStr;
     if (isCrypto.value && price < 1) {
-        return price.toFixed(6);
+        priceStr = price.toFixed(6);
     } else if (isCrypto.value && price < 100) {
-        return price.toFixed(4);
+        priceStr = price.toFixed(4);
+    } else {
+        priceStr = price.toFixed(2);
     }
-    return price.toFixed(2);
+    
+    const parts = priceStr.split('.');
+    return { whole: parts[0], decimal: parts[1] || '00' };
 });
 
 const getSentimentColor = (sentiment) => {
@@ -50,134 +43,187 @@ const getSentimentColor = (sentiment) => {
     return '#ef4444';
 };
 
-const handleAlertsClick = () => {
-    console.log('Alerts button clicked for:', props.module.asset_symbol);
-    // Future logic for alert modal will go here
-};
+// Generate SVG chart path from chart data
+const chartPath = computed(() => {
+    const data = props.module.chart || [];
+    if (data.length < 2) return { line: '', area: '' };
+    
+    const min = Math.min(...data);
+    const max = Math.max(...data);
+    const range = max - min || 1;
+    
+    const points = data.map((price, i) => {
+        const x = (i / (data.length - 1)) * 100;
+        const y = 35 - ((price - min) / range) * 30;
+        return `${x},${y}`;
+    });
+    
+    const line = `M${points.join(' L')}`;
+    const area = `${line} L100,40 L0,40 Z`;
+    
+    return { line, area };
+});
 
-const handleSettingsClick = () => {
-    console.log('Settings button clicked for:', props.module.asset_symbol);
-    // Future logic for settings modal will go here
-};
+const chartColor = computed(() => {
+    const change = props.module.percentChange || 0;
+    return change >= 0 ? '#22c55e' : '#ef4444';
+});
 </script>
 
 <template>
-    <div @click="emit('view-details', module)" class="module-card group h-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border border-black/5 dark:border-white/10 rounded-2xl p-6 transition-all duration-300 relative overflow-hidden hover:shadow-2xl hover:-translate-y-1 hover:border-primary/30 flex flex-col cursor-pointer">
-        
-        <div class="mb-4">
-            <div class="flex justify-between items-start">
-                <div>
-                    <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 m-0">{{ displaySymbol }}</h3>
-                    <p class="text-lg text-gray-800 dark:text-gray-200 m-0 truncate">{{ module.name }}</p>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 m-0">{{ isCrypto ? 'Cryptocurrency' : module.region }}</p>
-                </div>
-                <Tag v-if="typeof module.percentChange === 'number'" :severity="module.percentChange > 0 ? 'success' : 'danger'" class="font-semibold flex-shrink-0">
-                    {{ module.percentChange > 0 ? '+' : '' }}{{ module.percentChange.toFixed(2) }}%
-                </Tag>
-            </div>
-        </div>
-
-        <div class="mb-4">
-            <div class="flex items-center mb-1">
-                <div class="flex items-baseline">
-                    <span class="text-xl text-gray-600 dark:text-gray-500 mr-1">$</span>
-                    <span class="text-4xl font-bold text-gray-900 dark:text-gray-100">{{ formattedPrice }}</span>
-                </div>
-                <!-- Show 24/7 indicator for crypto, clock for closed stock markets -->
-                <i v-if="isCrypto && module.marketStatus === 'open'"
-                   class="pi pi-circle-fill text-xs text-green-500 opacity-70 ml-2"
-                   v-tooltip.top="'Crypto markets trade 24/7'">
-                </i>
-                <i v-else-if="module.marketStatus === 'closed'"
-                   class="pi pi-clock text-lg text-gray-500 dark:text-gray-400 opacity-70 ml-2"
-                   v-tooltip.top="'Market closed. Price from last close.'">
-                </i>
-            </div>
+    <div 
+        @click="emit('view-details', module)" 
+        :class="['demo-card', assetType, 'group h-full cursor-pointer']"
+    >
+        <!-- Asset type indicator -->
+        <div class="absolute top-3 right-3 z-10">
+            <span v-if="isCrypto" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-100/90 dark:bg-amber-900/50 text-amber-700 dark:text-amber-400 text-[10px] font-semibold backdrop-blur-sm">
+                <i class="pi pi-bitcoin text-[8px]"></i>
+                Crypto
+            </span>
+            <span v-else class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-indigo-100/90 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-400 text-[10px] font-semibold backdrop-blur-sm">
+                <i class="pi pi-building text-[8px]"></i>
+                Stock
+            </span>
         </div>
         
-        <div class="relative h-40 my-4 bg-white/50 dark:bg-gray-900/50 rounded-md p-2 flex-shrink-0">
-            <Chart type="line" :data="lineChartData" :options="lineChartOptions" />
+        <!-- Header -->
+        <div class="mb-3 pr-14">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white">{{ displaySymbol }}</h3>
+            <p class="text-xs text-gray-600 dark:text-gray-400 truncate">{{ module.name }}</p>
         </div>
-
-        <!-- Stats grid - adapts based on asset type -->
-        <div class="grid grid-cols-3 gap-4 py-4 border-t border-b border-gray-200 dark:border-gray-700 mb-6 flex-shrink-0">
+        
+        <!-- Price -->
+        <div class="mb-3">
+            <div class="flex items-baseline gap-0.5">
+                <span class="text-sm text-gray-500">$</span>
+                <span class="text-2xl font-bold text-gray-900 dark:text-white">{{ formattedPrice.whole }}</span>
+                <span class="text-base text-gray-500">.{{ formattedPrice.decimal }}</span>
+            </div>
+            <div class="flex items-center gap-2 mt-0.5">
+                <span 
+                    v-if="typeof module.percentChange === 'number'"
+                    :class="[
+                        'inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold',
+                        module.percentChange >= 0 
+                            ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400' 
+                            : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400'
+                    ]"
+                >
+                    <i :class="['pi text-[8px] mr-0.5', module.percentChange >= 0 ? 'pi-arrow-up' : 'pi-arrow-down']"></i>
+                    {{ Math.abs(module.percentChange).toFixed(2) }}%
+                </span>
+            </div>
+        </div>
+        
+        <!-- Mini chart -->
+        <div class="h-16 mb-3 bg-gray-50/50 dark:bg-gray-800/30 rounded-lg p-1.5">
+            <svg viewBox="0 0 100 40" preserveAspectRatio="none" class="w-full h-full">
+                <defs>
+                    <linearGradient :id="'grad-' + module.id" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" :style="`stop-color:${chartColor};stop-opacity:0.3`" />
+                        <stop offset="100%" :style="`stop-color:${chartColor};stop-opacity:0`" />
+                    </linearGradient>
+                </defs>
+                <path :d="chartPath.area" :fill="`url(#grad-${module.id})`" />
+                <path :d="chartPath.line" fill="none" :stroke="chartColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+        </div>
+        
+        <!-- Stats -->
+        <div class="grid grid-cols-3 gap-2 py-2 border-t border-gray-200/50 dark:border-gray-700/50 mb-3">
             <div class="text-center">
-                <span class="block text-xs text-gray-600 dark:text-gray-400 mb-1">{{ t('modulesDemo.cards.volume') }}</span>
-                <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">{{ formatVolume(module.volume) }}</span>
-            </div>
-            
-            <!-- For stocks/ETFs: show Market Cap -->
-            <div v-if="!isCrypto" class="text-center">
-                <span class="block text-xs text-gray-600 dark:text-gray-400 mb-1">{{ t('modulesDemo.cards.market_cap') }}</span>
-                <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">{{ formatMarketCap(module.marketCap) }}</span>
-            </div>
-            <!-- For crypto: show 24h High -->
-            <div v-else class="text-center">
-                <span class="block text-xs text-gray-600 dark:text-gray-400 mb-1">24h High</span>
-                <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">
-                    ${{ module.dayHigh ? module.dayHigh.toFixed(2) : '...' }}
-                </span>
-            </div>
-            
-            <!-- For stocks/ETFs: show P/E Ratio -->
-            <div v-if="!isCrypto" class="text-center">
-                <span class="block text-xs text-gray-600 dark:text-gray-400 mb-1">{{ t('modulesDemo.cards.pe_ratio') }}</span>
-                <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">{{ module.peRatio ? module.peRatio.toFixed(2) : '...' }}</span>
-            </div>
-            <!-- For crypto: show 24h Low -->
-            <div v-else class="text-center">
-                <span class="block text-xs text-gray-600 dark:text-gray-400 mb-1">24h Low</span>
-                <span class="block text-base font-semibold text-gray-900 dark:text-gray-100">
-                    ${{ module.dayLow ? module.dayLow.toFixed(2) : '...' }}
-                </span>
-            </div>
-        </div>
-        
-        <div class="mb-4 flex flex-col flex-grow">
-            <div class="flex items-center gap-2 mb-3">
-                <i class="pi pi-sparkles text-primary"></i>
-                <span class="font-semibold text-gray-900 dark:text-gray-100">{{ t('dashboard.card.ai_analysis') }}</span>
-            </div>
-            <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{{ module.insight }}</p>
-            
-            <div class="mt-auto bg-white/50 dark:bg-gray-900/50 p-3 rounded-lg">
-                <div class="flex justify-between items-center mb-2">
-                    <span class="text-xs text-gray-500 dark:text-gray-400">{{ t('dashboard.card.sentiment') }}</span>
-                    <span class="text-xs font-bold text-gray-900 dark:text-gray-100">{{ module.sentiment }}% {{ t('dashboard.card.bullish') }}</span>
+                <div class="text-[10px] text-gray-500">{{ isCrypto ? '24h Vol' : 'Mkt Cap' }}</div>
+                <div class="text-xs font-semibold text-gray-900 dark:text-white">
+                    {{ isCrypto ? formatVolume(module.volume) : formatMarketCap(module.marketCap) }}
                 </div>
-                <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                    <div class="h-full rounded-full transition-all duration-500"
-                         :style="{ width: module.sentiment + '%', backgroundColor: getSentimentColor(module.sentiment) }">
-                    </div>
+            </div>
+            <div class="text-center">
+                <div class="text-[10px] text-gray-500">{{ isCrypto ? '24h High' : 'P/E' }}</div>
+                <div class="text-xs font-semibold text-gray-900 dark:text-white">
+                    {{ isCrypto ? (module.dayHigh ? '$' + module.dayHigh.toFixed(0) : '...') : (module.peRatio ? module.peRatio.toFixed(1) : '...') }}
+                </div>
+            </div>
+            <div class="text-center">
+                <div class="text-[10px] text-gray-500">{{ isCrypto ? '24h Low' : 'Volume' }}</div>
+                <div class="text-xs font-semibold text-gray-900 dark:text-white">
+                    {{ isCrypto ? (module.dayLow ? '$' + module.dayLow.toFixed(0) : '...') : formatVolume(module.volume) }}
                 </div>
             </div>
         </div>
         
-        <div class="flex justify-center gap-4 pt-2 flex-shrink-0">
-            <Button @click.stop="handleAlertsClick" icon="pi pi-bell" class="p-button-text p-button-sm p-button-rounded" v-tooltip="'Set custom price and sentiment alerts'" />
-            <Button icon="pi pi-chart-line" class="p-button-text p-button-sm p-button-rounded" v-tooltip="'View Details'" />
-            <Button @click.stop="handleSettingsClick" icon="pi pi-cog" class="p-button-text p-button-sm p-button-rounded" v-tooltip="'Customize module settings'" />
+        <!-- Sentiment bar (compact) -->
+        <div class="mt-auto">
+            <div class="p-2 bg-gray-50/50 dark:bg-gray-800/30 rounded-lg">
+                <div class="flex justify-between text-[10px] mb-1">
+                    <span class="text-gray-500 flex items-center gap-1">
+                        <i :class="['pi pi-sparkles', isCrypto ? 'text-amber-500' : 'text-indigo-500']" style="font-size: 8px;"></i>
+                        Sentiment
+                    </span>
+                    <span class="font-semibold text-gray-900 dark:text-white">{{ module.sentiment }}% Bullish</span>
+                </div>
+                <div class="h-1 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                    <div 
+                        class="h-full rounded-full transition-all duration-500"
+                        :style="{ width: module.sentiment + '%', backgroundColor: getSentimentColor(module.sentiment) }"
+                    ></div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <style scoped>
-.module-card::before {
+.demo-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 1.5rem;
+    padding: 1rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.demo-card::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0;
+    top: 0;
+    left: 0;
+    right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #667eea, #764ba2);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s ease;
 }
-.module-card:hover::before {
+
+.demo-card.stock::before { background: linear-gradient(90deg, #6366f1, #8b5cf6); }
+.demo-card.crypto::before { background: linear-gradient(90deg, #f59e0b, #ea580c); }
+.demo-card.etf::before { background: linear-gradient(90deg, #14b8a6, #06b6d4); }
+
+.demo-card:hover::before {
     transform: scaleX(1);
 }
 
-:deep(.p-chart) {
-    height: 100%;
-    width: 100%;
+.demo-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+}
+
+.demo-card.stock:hover { border-color: rgba(99, 102, 241, 0.3); }
+.demo-card.crypto:hover { border-color: rgba(245, 158, 11, 0.3); }
+.demo-card.etf:hover { border-color: rgba(20, 184, 166, 0.3); }
+</style>
+
+<style>
+.app-dark .demo-card {
+    background: rgba(17, 24, 39, 0.8);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.app-dark .demo-card:hover {
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.4);
 }
 </style>

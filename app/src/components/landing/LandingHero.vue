@@ -53,22 +53,22 @@
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                     </span>
-                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Now tracking Stocks, Crypto & ETFs</span>
+                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">AI-Powered News Intelligence for Investors</span>
                 </div>
             </div>
             
             <!-- Main headline -->
             <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6 animate-fade-in-down animation-delay-100 leading-tight">
-                Your Markets.
+                Your Assets.
                 <br />
-                <span class="text-gradient">One Dashboard.</span>
+                <span class="text-gradient">Global Insights.</span>
                 <br />
                 <span class="text-gray-600 dark:text-gray-400">Zero Noise.</span>
             </h1>
             
             <!-- Subheadline -->
             <p class="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto animate-fade-in-down animation-delay-200 leading-relaxed px-2">
-                AI-powered insights for the assets you care about. Track stocks, crypto, and ETFs with personalized analysis that cuts through the noise.
+                Our AI scans global news and tells you exactly what impacts <em>your</em> stocks, crypto, and ETFs — so you can act before the market catches on.
             </p>
             
             <!-- CTA Section -->
@@ -96,14 +96,12 @@
                 </div>
             </div>
             
-            <!-- Waitlist count -->
-            <div class="mb-6 animate-fade-in-down animation-delay-350">
-                <p class="text-sm text-gray-500 dark:text-gray-400 flex items-center justify-center gap-2">
-                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold">
-                        <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                        {{ waitlistCount.toLocaleString() }}+ on the waitlist
-                    </span>
-                </p>
+            <!-- Waitlist count badge -->
+            <div v-if="waitlistDisplayCount" class="mb-6 animate-fade-in-down animation-delay-350">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold">
+                    <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                    {{ waitlistDisplayCount }} people on the waitlist
+                </span>
             </div>
             
             <!-- Message -->
@@ -115,31 +113,31 @@
 
             <!-- Social proof -->
             <div class="animate-fade-in-up animation-delay-400">
-                <p class="text-sm text-gray-500 dark:text-gray-500 mb-4">Trusted by investors tracking</p>
+                <p class="text-sm text-gray-500 dark:text-gray-500 mb-4">Your AI investment analyst that never sleeps</p>
                 <div class="flex flex-wrap justify-center items-center gap-6 md:gap-10">
                     <div class="stat-item group cursor-default">
                         <div class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                            ${{ animatedVolume }}B+
+                            15+
                         </div>
-                        <div class="text-xs text-gray-500 dark:text-gray-500 uppercase tracking-wide">in assets</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-500 uppercase tracking-wide">News Sources</div>
                     </div>
                     
                     <div class="hidden sm:block w-px h-10 bg-gray-300 dark:bg-gray-700"></div>
                     
                     <div class="stat-item group cursor-default">
                         <div class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white group-hover:text-amber-500 transition-colors">
-                            {{ animatedAssets }}+
+                            24/7
                         </div>
-                        <div class="text-xs text-gray-500 dark:text-gray-500 uppercase tracking-wide">assets supported</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-500 uppercase tracking-wide">AI Monitoring</div>
                     </div>
                     
                     <div class="hidden sm:block w-px h-10 bg-gray-300 dark:bg-gray-700"></div>
                     
                     <div class="stat-item group cursor-default">
                         <div class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white group-hover:text-teal-500 transition-colors">
-                            3
+                            &lt;5min
                         </div>
-                        <div class="text-xs text-gray-500 dark:text-gray-500 uppercase tracking-wide">asset classes</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-500 uppercase tracking-wide">Alert Speed</div>
                     </div>
                 </div>
                 
@@ -171,7 +169,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import Button from 'primevue/button';
 import Message from 'primevue/message';
@@ -193,7 +191,16 @@ const messageType = ref('success');
 const emailError = ref(false);
 const animatedVolume = ref(0);
 const animatedAssets = ref(0);
-const waitlistCount = ref(0);
+
+// Waitlist state
+const waitlistCount = ref(null);
+
+// Display count in increments of 10 (e.g., "10+", "20+", "30+")
+const waitlistDisplayCount = computed(() => {
+    if (waitlistCount.value === null || waitlistCount.value < 10) return null;
+    const rounded = Math.floor(waitlistCount.value / 10) * 10;
+    return `${rounded}+`;
+});
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -214,18 +221,21 @@ const animateValue = (refVar, end, duration) => {
     }, 16);
 };
 
+// Fetch waitlist count from Supabase
 const fetchWaitlistCount = async () => {
     try {
         const { count, error } = await supabase
             .from('waitlist')
             .select('*', { count: 'exact', head: true });
         
-        if (!error && count !== null) {
-            waitlistCount.value = count;
+        if (error) {
+            console.error('Waitlist count error:', error.message);
+            return;
         }
+        
+        waitlistCount.value = count;
     } catch (e) {
-        // Fallback to a default value if fetch fails
-        waitlistCount.value = 247;
+        console.error('Waitlist fetch failed:', e);
     }
 };
 
@@ -235,7 +245,7 @@ onMounted(() => {
         animateValue(animatedAssets, 500, 2500);
     }, 500);
     
-    // Fetch waitlist count
+    // Fetch waitlist count on mount
     fetchWaitlistCount();
 });
 
@@ -256,17 +266,29 @@ const joinWaitlist = async () => {
             .from('waitlist')
             .insert({ email: email.value });
 
-        if (error) throw error;
-
-        message.value = "You're on the waitlist! We'll notify you when we launch.";
-        messageType.value = 'success';
-        email.value = '';
-        // Refresh waitlist count
-        fetchWaitlistCount();
-
+        if (error) {
+            // Check if it's a duplicate email error
+            if (error.code === '23505') {
+                message.value = 'This email is already on the waitlist!';
+                messageType.value = 'warn';
+            } else {
+                throw error;
+            }
+        } else {
+            message.value = "You're on the waitlist! We'll notify you when we launch.";
+            messageType.value = 'success';
+            email.value = '';
+            
+            // Update count
+            if (waitlistCount.value !== null) {
+                waitlistCount.value++;
+            }
+            fetchWaitlistCount();
+        }
     } catch (error) {
-        message.value = 'This email is already on the list.';
-        messageType.value = 'warn';
+        console.error('Join waitlist error:', error);
+        message.value = 'Something went wrong. Please try again.';
+        messageType.value = 'error';
     } finally {
         loading.value = false;
         setTimeout(() => { message.value = ''; }, 5000);

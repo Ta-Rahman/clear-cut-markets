@@ -1,6 +1,6 @@
 <template>
     <section id="pricing" class="relative py-16 sm:py-24 px-4 md:px-6 lg:px-8">
-        <div class="relative max-w-6xl mx-auto">
+        <div class="relative max-w-5xl mx-auto">
             <!-- Header -->
             <div class="text-center mb-16">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-sm font-medium mb-4 fade-up">
@@ -8,194 +8,190 @@
                     Simple Pricing
                 </div>
                 <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 fade-up stagger-1">
-                    Choose Your
-                    <span class="text-gradient">Plan</span>
+                    Start Free.
+                    <span class="text-gradient">Upgrade When Ready.</span>
                 </h2>
                 <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto fade-up stagger-2">
-                    {{ t('pricing.subtitle') }}
+                    Try Clear Cut Markets with no commitment. Upgrade to Pro when you're ready for the full experience.
                 </p>
             </div>
 
             <!-- Pricing Cards -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-16">
-                <!-- Essential -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
+                <!-- Free Tier -->
                 <div class="fade-up stagger-2">
                     <div class="pricing-card h-full">
-                        <div class="text-center mb-6">
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">{{ t('pricing.essential_name') }}</h3>
-                            <p class="text-gray-500 text-sm">{{ t('pricing.essential_desc') }}</p>
+                        <div class="mb-6">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Free</h3>
+                            <p class="text-gray-500 text-sm">Get started and explore</p>
                         </div>
                         
-                        <div class="text-center mb-6">
-                            <div class="inline-flex items-center gap-1 px-4 py-2 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400 font-semibold text-sm mb-4">
-                                <i class="pi pi-th-large text-xs"></i>
-                                3 Modules
-                            </div>
-                            <div class="flex items-baseline justify-center">
-                                <span class="text-4xl font-bold text-gray-900 dark:text-white">{{ t('pricing.currency_symbol') }}{{ t('pricing.essential_price') }}</span>
-                                <span class="text-gray-500 ml-2">{{ t('pricing.per_month') }}</span>
+                        <div class="mb-6">
+                            <div class="flex items-baseline">
+                                <span class="text-5xl font-bold text-gray-900 dark:text-white">€0</span>
+                                <span class="text-gray-500 ml-2">forever</span>
                             </div>
                         </div>
                         
                         <Button 
-                            :label="t('pricing.trial_button')" 
+                            label="Start Free" 
                             outlined
-                            class="w-full mb-6"
+                            class="w-full mb-8"
                             @click="scrollToWaitlist"
                         />
                         
-                        <ul class="space-y-3">
-                            <li class="flex items-center gap-3 text-sm">
-                                <i class="pi pi-check text-green-500"></i>
-                                <span class="text-gray-600 dark:text-gray-400">{{ t('pricing.features.real_time') }}</span>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3">
+                                <i class="pi pi-check text-green-500 mt-1"></i>
+                                <div>
+                                    <span class="text-gray-700 dark:text-gray-300 font-medium">1 Module</span>
+                                    <p class="text-sm text-gray-500">Track one stock, crypto, or ETF</p>
+                                </div>
                             </li>
-                            <li class="flex items-center gap-3 text-sm">
-                                <i class="pi pi-check text-green-500"></i>
-                                <span class="text-gray-600 dark:text-gray-400">{{ t('pricing.features.sentiment') }}</span>
+                            <li class="flex items-start gap-3">
+                                <i class="pi pi-check text-green-500 mt-1"></i>
+                                <div>
+                                    <span class="text-gray-700 dark:text-gray-300 font-medium">Basic AI Analysis</span>
+                                    <p class="text-sm text-gray-500">3 AI insights per week</p>
+                                </div>
                             </li>
-                            <li class="flex items-center gap-3 text-sm">
-                                <i class="pi pi-check text-green-500"></i>
-                                <span class="text-gray-600 dark:text-gray-400">{{ t('pricing.features.standard_support') }}</span>
+                            <li class="flex items-start gap-3">
+                                <i class="pi pi-check text-green-500 mt-1"></i>
+                                <div>
+                                    <span class="text-gray-700 dark:text-gray-300 font-medium">Daily News Digest</span>
+                                    <p class="text-sm text-gray-500">Curated news for your asset</p>
+                                </div>
                             </li>
-                            <li class="flex items-center gap-3 text-sm">
-                                <i class="pi pi-check text-green-500"></i>
-                                <span class="text-gray-600 dark:text-gray-400">{{ t('pricing.features.works_on_all') }}</span>
+                            <li class="flex items-start gap-3 opacity-50">
+                                <i class="pi pi-times text-gray-400 mt-1"></i>
+                                <div>
+                                    <span class="text-gray-500">Cross-asset alerts</span>
+                                </div>
                             </li>
-                            <li class="flex items-center gap-3 text-sm text-gray-400">
-                                <i class="pi pi-times text-gray-300 dark:text-gray-600"></i>
-                                <span>{{ t('pricing.features.custom_alerts') }}</span>
+                            <li class="flex items-start gap-3 opacity-50">
+                                <i class="pi pi-times text-gray-400 mt-1"></i>
+                                <div>
+                                    <span class="text-gray-500">Priority support</span>
+                                </div>
                             </li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Advanced (Popular) -->
+                <!-- Pro Tier -->
                 <div class="fade-up stagger-3">
-                    <div class="pricing-card popular h-full relative">
+                    <div class="pricing-card pro h-full relative">
+                        <!-- Popular badge -->
                         <div class="absolute -top-4 left-1/2 -translate-x-1/2">
                             <span class="px-4 py-1.5 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-semibold shadow-lg">
-                                {{ t('pricing.popular_badge') }}
+                                Most Popular
                             </span>
                         </div>
                         
-                        <div class="text-center mb-6 pt-2">
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">{{ t('pricing.advanced_name') }}</h3>
-                            <p class="text-gray-500 text-sm">{{ t('pricing.advanced_desc') }}</p>
+                        <div class="mb-6 pt-2">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Pro</h3>
+                            <p class="text-gray-500 text-sm">Full power for serious investors</p>
                         </div>
                         
-                        <div class="text-center mb-6">
-                            <div class="inline-flex items-center gap-1 px-4 py-2 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400 font-semibold text-sm mb-4">
-                                <i class="pi pi-th-large text-xs"></i>
-                                6 Modules
+                        <div class="mb-6">
+                            <div class="flex items-baseline">
+                                <span class="text-5xl font-bold text-gray-900 dark:text-white">€14</span>
+                                <span class="text-2xl font-bold text-gray-900 dark:text-white">.99</span>
+                                <span class="text-gray-500 ml-2">/ month</span>
                             </div>
-                            <div class="flex items-baseline justify-center">
-                                <span class="text-4xl font-bold text-gray-900 dark:text-white">{{ t('pricing.currency_symbol') }}{{ t('pricing.advanced_price') }}</span>
-                                <span class="text-gray-500 ml-2">{{ t('pricing.per_month') }}</span>
-                            </div>
+                            <p class="text-sm text-green-600 dark:text-green-400 mt-1">14-day free trial included</p>
                         </div>
                         
                         <Button 
-                            :label="t('pricing.trial_button')"
-                            class="w-full mb-6 !bg-gradient-to-r !from-indigo-600 !to-purple-600 !border-0"
+                            label="Start 14-Day Trial"
+                            icon="pi pi-arrow-right"
+                            iconPos="right"
+                            class="w-full mb-8 !bg-gradient-to-r !from-indigo-600 !to-purple-600 !border-0"
                             @click="scrollToWaitlist"
                         />
                         
-                        <ul class="space-y-3">
-                            <li class="flex items-center gap-3 text-sm">
-                                <i class="pi pi-check text-green-500"></i>
-                                <span class="text-gray-600 dark:text-gray-400">{{ t('pricing.features.real_time') }}</span>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3">
+                                <i class="pi pi-check text-green-500 mt-1"></i>
+                                <div>
+                                    <span class="text-gray-700 dark:text-gray-300 font-medium">6 Modules</span>
+                                    <p class="text-sm text-gray-500">Track your full portfolio</p>
+                                </div>
                             </li>
-                            <li class="flex items-center gap-3 text-sm">
-                                <i class="pi pi-check text-green-500"></i>
-                                <span class="text-gray-600 dark:text-gray-400">{{ t('pricing.features.sentiment') }}</span>
+                            <li class="flex items-start gap-3">
+                                <i class="pi pi-check text-green-500 mt-1"></i>
+                                <div>
+                                    <span class="text-gray-700 dark:text-gray-300 font-medium">Unlimited AI Analysis</span>
+                                    <p class="text-sm text-gray-500">Real-time insights for all assets</p>
+                                </div>
                             </li>
-                            <li class="flex items-center gap-3 text-sm">
-                                <i class="pi pi-check text-green-500"></i>
-                                <span class="text-gray-600 dark:text-gray-400 font-medium">{{ t('pricing.features.priority_support') }}</span>
+                            <li class="flex items-start gap-3">
+                                <i class="pi pi-check text-green-500 mt-1"></i>
+                                <div>
+                                    <span class="text-gray-700 dark:text-gray-300 font-medium">Full News Intelligence</span>
+                                    <p class="text-sm text-gray-500">15+ sources, real-time alerts</p>
+                                </div>
                             </li>
-                            <li class="flex items-center gap-3 text-sm">
-                                <i class="pi pi-check text-green-500"></i>
-                                <span class="text-gray-600 dark:text-gray-400">{{ t('pricing.features.works_on_all') }}</span>
+                            <li class="flex items-start gap-3">
+                                <i class="pi pi-star-fill text-amber-500 mt-1"></i>
+                                <div>
+                                    <span class="text-gray-700 dark:text-gray-300 font-medium">Cross-Asset Correlation Alerts</span>
+                                    <p class="text-sm text-gray-500">AI finds connections others miss</p>
+                                </div>
                             </li>
-                            <li class="flex items-center gap-3 text-sm">
-                                <i class="pi pi-check text-green-500"></i>
-                                <span class="text-gray-600 dark:text-gray-400 font-medium">{{ t('pricing.features.cross_investment') }}</span>
+                            <li class="flex items-start gap-3">
+                                <i class="pi pi-check text-green-500 mt-1"></i>
+                                <div>
+                                    <span class="text-gray-700 dark:text-gray-300 font-medium">Priority Support</span>
+                                    <p class="text-sm text-gray-500">Get help when you need it</p>
+                                </div>
                             </li>
-                            <li class="flex items-center gap-3 text-sm">
-                                <i class="pi pi-check text-green-500"></i>
-                                <span class="text-gray-600 dark:text-gray-400">{{ t('pricing.features.custom_alerts') }}</span>
+                            <li class="flex items-start gap-3">
+                                <i class="pi pi-check text-green-500 mt-1"></i>
+                                <div>
+                                    <span class="text-gray-700 dark:text-gray-300 font-medium">Custom Alert Thresholds</span>
+                                    <p class="text-sm text-gray-500">Set your own sensitivity levels</p>
+                                </div>
                             </li>
                         </ul>
                     </div>
                 </div>
-                
-                <!-- Professional -->
-                <div class="fade-up stagger-4">
-                    <div class="pricing-card h-full">
-                        <div class="text-center mb-6">
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">{{ t('pricing.professional_name') }}</h3>
-                            <p class="text-gray-500 text-sm">{{ t('pricing.professional_desc') }}</p>
-                        </div>
-                        
-                        <div class="text-center mb-6">
-                            <div class="inline-flex items-center gap-1 px-4 py-2 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400 font-semibold text-sm mb-4">
-                                <i class="pi pi-th-large text-xs"></i>
-                                9 Modules
-                            </div>
-                            <div class="flex items-baseline justify-center">
-                                <span class="text-4xl font-bold text-gray-900 dark:text-white">{{ t('pricing.currency_symbol') }}{{ t('pricing.professional_price') }}</span>
-                                <span class="text-gray-500 ml-2">{{ t('pricing.per_month') }}</span>
-                            </div>
-                        </div>
-                        
-                        <Button 
-                            :label="t('pricing.trial_button')"
-                            outlined
-                            class="w-full mb-6"
-                            @click="scrollToWaitlist"
-                        />
-                        
-                        <ul class="space-y-3">
-                            <li class="flex items-center gap-3 text-sm">
-                                <i class="pi pi-check text-green-500"></i>
-                                <span class="text-gray-600 dark:text-gray-400">Everything in Advanced</span>
-                            </li>
-                            <li class="flex items-center gap-3 text-sm">
-                                <i class="pi pi-check text-green-500"></i>
-                                <span class="text-gray-600 dark:text-gray-400 font-medium">{{ t('pricing.features.dedicated_support') }}</span>
-                            </li>
-                            <li class="flex items-center gap-3 text-sm">
-                                <i class="pi pi-check text-green-500"></i>
-                                <span class="text-gray-600 dark:text-gray-400 font-medium">{{ t('pricing.features.export') }}</span>
-                            </li>
-                            <li class="flex items-center gap-3 text-sm">
-                                <i class="pi pi-check text-green-500"></i>
-                                <span class="text-gray-600 dark:text-gray-400">API access</span>
-                            </li>
-                            <li class="flex items-center gap-3 text-sm">
-                                <i class="pi pi-check text-green-500"></i>
-                                <span class="text-gray-600 dark:text-gray-400">Advanced analytics</span>
-                            </li>
-                        </ul>
+            </div>
+
+            <!-- Trust badges -->
+            <div class="text-center fade-up stagger-4">
+                <div class="flex flex-wrap justify-center items-center gap-6 text-sm text-gray-500">
+                    <div class="flex items-center gap-2">
+                        <i class="pi pi-credit-card text-gray-400"></i>
+                        <span>No credit card for free tier</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="pi pi-sync text-gray-400"></i>
+                        <span>Cancel anytime</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="pi pi-lock text-gray-400"></i>
+                        <span>Secure payments via Stripe</span>
                     </div>
                 </div>
             </div>
 
             <!-- Enterprise CTA -->
-            <div class="fade-up stagger-5">
-                <div class="enterprise-cta relative overflow-hidden rounded-2xl p-8 md:p-12">
+            <div class="mt-16 fade-up stagger-5">
+                <div class="enterprise-cta relative overflow-hidden rounded-2xl p-8 md:p-10">
                     <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl"></div>
                     
                     <div class="relative flex flex-col md:flex-row items-center justify-between gap-6">
                         <div>
-                            <h3 class="enterprise-title text-2xl font-bold mb-2">{{ t('pricing.enterprise_title') }}</h3>
-                            <p class="enterprise-text max-w-lg">{{ t('pricing.enterprise_text') }}</p>
+                            <h3 class="enterprise-title text-xl font-bold mb-2">Need more than 6 modules?</h3>
+                            <p class="enterprise-text text-sm">We offer custom plans for power users and teams. Let's talk about your needs.</p>
                         </div>
                         <Button 
-                            :label="t('pricing.contact_button')"
+                            label="Contact Us"
                             icon="pi pi-arrow-right"
                             iconPos="right"
-                            class="!bg-gradient-to-r !from-indigo-600 !to-purple-600 !border-0 !text-white !shadow-lg hover:!shadow-indigo-500/25 whitespace-nowrap"
+                            outlined
+                            class="whitespace-nowrap"
                             @click="isContactModalVisible = true"
                         />
                     </div>
@@ -209,12 +205,10 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useI18n } from 'vue-i18n';
 import Button from 'primevue/button';
 import ContactSalesModal from './ContactSalesModal.vue';
 import { useWaitlist } from '@/composables/useWaitlist';
 
-const { t } = useI18n();
 const isContactModalVisible = ref(false);
 const { scrollToWaitlist } = useWaitlist();
 </script>
@@ -241,7 +235,7 @@ const { scrollToWaitlist } = useWaitlist();
     box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
 }
 
-.pricing-card.popular {
+.pricing-card.pro {
     border: 2px solid transparent;
     background: 
         linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)) padding-box,
@@ -257,7 +251,7 @@ const { scrollToWaitlist } = useWaitlist();
     border-color: rgba(255, 255, 255, 0.1);
 }
 
-.app-dark .pricing-card.popular {
+.app-dark .pricing-card.pro {
     background: 
         linear-gradient(rgba(17, 24, 39, 0.95), rgba(17, 24, 39, 0.95)) padding-box,
         linear-gradient(135deg, #6366f1, #8b5cf6) border-box;

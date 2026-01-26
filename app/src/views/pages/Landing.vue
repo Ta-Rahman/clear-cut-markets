@@ -12,6 +12,9 @@
         <!-- Modules Demo -->
         <LandingModulesDemo />
         
+        <!-- AI News Intelligence (USP Showcase) -->
+        <LandingNewsIntelligence />
+        
         <!-- How It Works -->
         <LandingUsp />
         
@@ -45,6 +48,7 @@ import LandingNav from '@/components/landing/LandingNav.vue';
 import LandingHero from '@/components/landing/LandingHero.vue';
 import LandingUsp from '@/components/landing/LandingUsp.vue';
 import LandingModulesDemo from '@/components/landing/LandingModulesDemo.vue';
+import LandingNewsIntelligence from '@/components/landing/LandingNewsIntelligence.vue';
 import LandingFeatures from '@/components/landing/LandingFeatures.vue';
 import LandingUseCases from '@/components/landing/LandingUseCases.vue';
 import LandingPricing from '@/components/landing/LandingPricing.vue';
