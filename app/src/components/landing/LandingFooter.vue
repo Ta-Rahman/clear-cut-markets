@@ -12,7 +12,7 @@
                         <span class="text-xl font-bold text-white">Clear Cut Markets</span>
                     </div>
                     <p class="text-gray-400 mb-6 max-w-md">
-                        AI-powered insights for stocks, crypto, and ETFs. Cut through the noise and focus on what matters.
+                        {{ t('footer.tagline') }}
                     </p>
                     
                     <!-- Social links -->
@@ -31,22 +31,22 @@
                 
                 <!-- Links -->
                 <div>
-                    <h4 class="text-white font-semibold mb-4">Product</h4>
+                    <h4 class="text-white font-semibold mb-4">{{ t('footer.product.title') }}</h4>
                     <ul class="space-y-2">
-                        <li><a href="#features" class="text-gray-400 hover:text-white transition-colors">Features</a></li>
-                        <li><a href="#pricing" class="text-gray-400 hover:text-white transition-colors">Pricing</a></li>
-                        <li><a href="#faq" class="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
-                        <li><router-link to="/login" class="text-gray-400 hover:text-white transition-colors">Login</router-link></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-white transition-colors">{{ t('footer.product.features') }}</a></li>
+                        <li><a href="#pricing" class="text-gray-400 hover:text-white transition-colors">{{ t('footer.product.pricing') }}</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-white transition-colors">{{ t('footer.product.faq') }}</a></li>
+                        <li><router-link to="/login" class="text-gray-400 hover:text-white transition-colors">{{ t('footer.product.login') }}</router-link></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h4 class="text-white font-semibold mb-4">Company</h4>
+                    <h4 class="text-white font-semibold mb-4">{{ t('footer.company.title') }}</h4>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">About</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Careers</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">{{ t('footer.company.about') }}</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">{{ t('footer.company.blog') }}</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">{{ t('footer.company.careers') }}</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">{{ t('footer.company.contact') }}</a></li>
                     </ul>
                 </div>
             </div>
@@ -54,12 +54,12 @@
             <!-- Bottom bar -->
             <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="text-gray-500 text-sm">
-                    © {{ currentYear }} Clear Cut Markets. All rights reserved.
+                    © {{ currentYear }} Clear Cut Markets. {{ t('footer.copyright') }}
                 </p>
                 
                 <div class="flex gap-6 text-sm">
-                    <a href="#" class="text-gray-500 hover:text-gray-400 transition-colors">Privacy Policy</a>
-                    <a href="#" class="text-gray-500 hover:text-gray-400 transition-colors">Terms of Service</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-400 transition-colors">{{ t('footer.legal.privacy') }}</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-400 transition-colors">{{ t('footer.legal.terms') }}</a>
                 </div>
             </div>
         </div>
@@ -68,6 +68,8 @@
 
 <script setup>
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const currentYear = computed(() => new Date().getFullYear());
 </script>

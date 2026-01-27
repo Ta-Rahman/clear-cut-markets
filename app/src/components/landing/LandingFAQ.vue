@@ -5,14 +5,14 @@
             <div class="text-center mb-12">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-sm font-medium mb-4 fade-up">
                     <i class="pi pi-question-circle"></i>
-                    FAQ
+                    {{ t('faq.badge') }}
                 </div>
                 <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 fade-up stagger-1">
-                    Common
-                    <span class="text-gradient">Questions</span>
+                    {{ t('faq.title') }}
+                    <span class="text-gradient">{{ t('faq.title_highlight') }}</span>
                 </h2>
                 <p class="text-lg text-gray-600 dark:text-gray-400 fade-up stagger-2">
-                    Everything you need to know about Clear Cut Markets.
+                    {{ t('faq.subtitle') }}
                 </p>
             </div>
             
@@ -47,10 +47,10 @@
             
             <!-- Contact CTA -->
             <div class="mt-12 text-center fade-up stagger-6">
-                <p class="text-gray-600 dark:text-gray-400 mb-4">Still have questions?</p>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">{{ t('faq.contact_cta.text') }}</p>
                 <a href="mailto:support@clearcutmarkets.com" class="inline-flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-medium hover:underline">
                     <i class="pi pi-envelope"></i>
-                    Contact our support team
+                    {{ t('faq.contact_cta.link') }}
                 </a>
             </div>
         </div>

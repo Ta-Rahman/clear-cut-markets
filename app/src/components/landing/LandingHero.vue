@@ -53,22 +53,22 @@
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                     </span>
-                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">AI-Powered News Intelligence for Investors</span>
+                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ t('hero.badge') }}</span>
                 </div>
             </div>
             
             <!-- Main headline -->
             <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6 animate-fade-in-down animation-delay-100 leading-tight">
-                Your Assets.
+                Your Assets
                 <br />
-                <span class="text-gradient">Global Insights.</span>
+                <span class="text-gradient">Clear Cut Insights</span>
                 <br />
-                <span class="text-gray-600 dark:text-gray-400">Zero Noise.</span>
+                <span class="text-gray-600 dark:text-gray-400">Zero Noise</span>
             </h1>
             
             <!-- Subheadline -->
             <p class="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto animate-fade-in-down animation-delay-200 leading-relaxed px-2">
-                Our AI scans global news and tells you exactly what impacts <em>your</em> stocks, crypto, and ETFs — so you can act before the market catches on.
+                {{ t('hero.subtitle') }}
             </p>
             
             <!-- CTA Section -->
@@ -85,7 +85,7 @@
                             :class="{'shake-animation': emailError}"
                         />
                         <Button 
-                            :label="loading ? '' : 'Join Waitlist'" 
+                            :label="loading ? '' : t('hero.form.button')" 
                             icon="pi pi-arrow-right"
                             iconPos="right"
                             class="w-full sm:w-auto !bg-gradient-to-r !from-indigo-600 !to-purple-600 !border-0 !shadow-lg hover:!shadow-indigo-500/25 !transition-all !duration-300 whitespace-nowrap !py-3 sm:!py-2"
@@ -100,7 +100,7 @@
             <div v-if="waitlistDisplayCount" class="mb-6 animate-fade-in-down animation-delay-350">
                 <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold">
                     <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                    {{ waitlistDisplayCount }} people on the waitlist
+                    {{ t('hero.waitlist_count', { count: waitlistDisplayCount }) }}
                 </span>
             </div>
             
@@ -113,31 +113,31 @@
 
             <!-- Social proof -->
             <div class="animate-fade-in-up animation-delay-400">
-                <p class="text-sm text-gray-500 dark:text-gray-500 mb-4">Your AI investment analyst that never sleeps</p>
+                <p class="text-sm text-gray-500 dark:text-gray-500 mb-4">{{ t('hero.social_proof') }}</p>
                 <div class="flex flex-wrap justify-center items-center gap-6 md:gap-10">
                     <div class="stat-item group cursor-default">
                         <div class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                            15+
+                            {{ t('hero.stats.news_sources') }}
                         </div>
-                        <div class="text-xs text-gray-500 dark:text-gray-500 uppercase tracking-wide">News Sources</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-500 uppercase tracking-wide">{{ t('hero.stats.news_sources_text') }}</div>
                     </div>
                     
                     <div class="hidden sm:block w-px h-10 bg-gray-300 dark:bg-gray-700"></div>
                     
                     <div class="stat-item group cursor-default">
                         <div class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white group-hover:text-amber-500 transition-colors">
-                            24/7
+                            {{ t('hero.stats.monitoring') }}
                         </div>
-                        <div class="text-xs text-gray-500 dark:text-gray-500 uppercase tracking-wide">AI Monitoring</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-500 uppercase tracking-wide">{{ t('hero.stats.monitoring_text') }}</div>
                     </div>
                     
                     <div class="hidden sm:block w-px h-10 bg-gray-300 dark:bg-gray-700"></div>
                     
                     <div class="stat-item group cursor-default">
                         <div class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white group-hover:text-teal-500 transition-colors">
-                            &lt;5min
+                            {{ t('hero.stats.alert_speed') }}
                         </div>
-                        <div class="text-xs text-gray-500 dark:text-gray-500 uppercase tracking-wide">Alert Speed</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-500 uppercase tracking-wide">{{ t('hero.stats.alert_speed_text') }}</div>
                     </div>
                 </div>
                 
@@ -145,15 +145,15 @@
                 <div class="flex justify-center gap-3 mt-6">
                     <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400 text-xs font-medium">
                         <i class="pi pi-building text-[10px]"></i>
-                        Stocks
+                        {{ t('hero.asset_badges.stocks') }}
                     </span>
                     <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-xs font-medium">
                         <i class="pi pi-bitcoin text-[10px]"></i>
-                        Crypto
+                        {{ t('hero.asset_badges.crypto') }}
                     </span>
                     <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-400 text-xs font-medium">
                         <i class="pi pi-chart-pie text-[10px]"></i>
-                        ETFs
+                        {{ t('hero.asset_badges.etfs') }}
                     </span>
                 </div>
             </div>
@@ -425,8 +425,29 @@ const joinWaitlist = async () => {
 .animation-delay-300 { animation-delay: 0.3s; }
 .animation-delay-400 { animation-delay: 0.4s; }
 
-/* Hide floating cards on mobile */
-@media (max-width: 1024px) {
+/* Hide floating cards on mobile, show on tablet+ */
+@media (max-width: 640px) {
     .floating-card { display: none; }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    .floating-card {
+        transform: scale(0.85);
+    }
+    
+    .floating-card-1 {
+        top: 10%;
+        left: 2%;
+    }
+    
+    .floating-card-2 {
+        top: 18%;
+        right: 2%;
+    }
+    
+    .floating-card-3 {
+        bottom: 22%;
+        left: 3%;
+    }
 }
 </style>

@@ -102,51 +102,76 @@ const handleRemoveModule = (module) => {
 </script>
 
 <template>
-    <Dialog v-model:visible="isVisible" modal :header="t('dashboard.configurator.title')" class="w-[90vw] md:w-[40rem]" :dismissableMask="true" @hide="$emit('close')">
+    <Dialog v-model:visible="isVisible" modal :header="t('dashboard.configurator.title')" class="configurator-modal w-[95vw] sm:w-[90vw] md:w-[40rem]" :dismissableMask="true" @hide="$emit('close')">
         <template #header>
             <div class="flex items-center gap-3">
-                <i class="pi pi-cog text-2xl text-primary"></i>
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/25">
+                    <i class="pi pi-cog text-lg text-white"></i>
+                </div>
                 <div>
-                    <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 m-0">{{ t('dashboard.configurator.title') }}</h2>
+                    <h2 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100 m-0">{{ t('dashboard.configurator.title') }}</h2>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 m-0 hidden sm:block">Manage your tracked assets</p>
                 </div>
             </div>
         </template>
 
-        <div class="p-4 space-y-6">
-            <div>
+        <div class="p-3 sm:p-4 space-y-5 sm:space-y-6">
+            <!-- Usage meter -->
+            <div class="p-3 sm:p-4 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-xl border border-indigo-100 dark:border-indigo-800/30">
                 <div class="flex justify-between items-center mb-2">
-                    <span class="font-semibold text-gray-700 dark:text-gray-300">{{ t('dashboard.configurator.modules_used') }}</span>
-                    <span class="font-bold text-primary">{{ currentModules.length }} / {{ moduleLimit }}</span>
+                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ t('dashboard.configurator.modules_used') }}</span>
+                    <span class="font-bold text-indigo-600 dark:text-indigo-400">{{ currentModules.length }} / {{ moduleLimit }}</span>
                 </div>
-                <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                    <div class="h-full bg-primary rounded-full transition-all duration-500"
+                <div class="h-2.5 bg-white/60 dark:bg-gray-800/60 rounded-full overflow-hidden shadow-inner">
+                    <div class="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full transition-all duration-500 relative"
                          :style="{ width: (currentModules.length / moduleLimit) * 100 + '%' }">
+                        <div class="absolute inset-0 bg-white/20 animate-pulse"></div>
                     </div>
                 </div>
             </div>
 
+            <!-- Current modules -->
             <div>
-                <h3 class="font-semibold mb-2 text-base sm:text-xl text-gray-700 dark:text-gray-300">{{ t('dashboard.configurator.current_modules') }}</h3>
-                <div v-if="currentModules.length > 0" class="space-y-2 max-h-48 overflow-y-auto">
+                <h3 class="font-semibold mb-3 text-sm sm:text-base text-gray-700 dark:text-gray-300 flex items-center gap-2">
+                    <i class="pi pi-list text-indigo-500" style="font-size: 12px;"></i>
+                    {{ t('dashboard.configurator.current_modules') }}
+                </h3>
+                <div v-if="currentModules.length > 0" class="space-y-2 max-h-48 overflow-y-auto pr-1">
                     <div v-for="module in currentModules" :key="module.id"
-                         class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                        <div class="flex flex-col">
-                            <span class="font-semibold">{{ getDisplaySymbol(module.asset_symbol) }}</span>
-                            <span class="text-xs text-gray-500">{{ module.name }}</span>
+                         class="module-item flex items-center justify-between p-3 rounded-xl group">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-gradient-to-br flex items-center justify-center text-white text-xs font-bold"
+                                 :class="module.asset_type === 'crypto' ? 'from-amber-500 to-orange-500' : 'from-indigo-500 to-purple-500'">
+                                {{ getDisplaySymbol(module.asset_symbol).slice(0, 2) }}
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="font-semibold text-sm text-gray-900 dark:text-white">{{ getDisplaySymbol(module.asset_symbol) }}</span>
+                                <span class="text-xs text-gray-500 dark:text-gray-400 truncate max-w-[150px] sm:max-w-none">{{ module.name }}</span>
+                            </div>
                         </div>
-                        <Button icon="pi pi-trash" severity="danger" text rounded @click="handleRemoveModule(module)" />
+                        <Button icon="pi pi-trash" severity="danger" text rounded size="small" 
+                                class="opacity-50 group-hover:opacity-100 transition-opacity"
+                                @click="handleRemoveModule(module)" />
                     </div>
                 </div>
-                <div v-else class="text-center text-gray-500 p-4">
-                    {{ t('dashboard.configurator.no_modules_added') }}
+                <div v-else class="text-center p-6 bg-gray-50 dark:bg-gray-800/30 rounded-xl border-2 border-dashed border-gray-200 dark:border-gray-700">
+                    <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                        <i class="pi pi-inbox text-xl text-gray-400"></i>
+                    </div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">{{ t('dashboard.configurator.no_modules_added') }}</p>
                 </div>
             </div>
             
-            <div class="border-t border-gray-200 dark:border-gray-700 pt-6">
-                <h3 class="font-semibold mb-2 text-base sm:text-xl text-gray-700 dark:text-gray-300">{{ t('dashboard.configurator.add_new_module') }}</h3>
-                <div v-if="canAddMore" class="flex flex-col gap-2">
-                    <div class="flex gap-2">
-                        <Dropdown v-model="newAssetType" :options="assetTypes" optionLabel="name" placeholder="Type" class="w-[120px]" />
+            <!-- Add new module -->
+            <div class="border-t border-gray-200 dark:border-gray-700 pt-5 sm:pt-6">
+                <h3 class="font-semibold mb-3 text-sm sm:text-base text-gray-700 dark:text-gray-300 flex items-center gap-2">
+                    <i class="pi pi-plus-circle text-indigo-500" style="font-size: 12px;"></i>
+                    {{ t('dashboard.configurator.add_new_module') }}
+                </h3>
+                <div v-if="canAddMore" class="flex flex-col gap-3">
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <Dropdown v-model="newAssetType" :options="assetTypes" optionLabel="name" placeholder="Type" 
+                                  class="w-full sm:w-[120px] asset-dropdown" />
                         
                         <AutoComplete 
                             v-model="selectedAsset" 
@@ -154,32 +179,103 @@ const handleRemoveModule = (module) => {
                             @complete="searchAssets" 
                             optionLabel="name" 
                             :placeholder="t('dashboard.configurator.search_placeholder')" 
-                            class="flex-grow"
+                            class="flex-grow asset-search"
                         >
                             <template #option="slotProps">
-                                <div class="flex items-center justify-between w-full">
+                                <div class="flex items-center justify-between w-full py-1">
                                     <div class="flex-1 overflow-hidden">
-                                        <div class="font-bold truncate">{{ slotProps.option.displaySymbol || slotProps.option.symbol }}</div>
-                                        <div class="text-sm truncate">{{ slotProps.option.name }}</div>
+                                        <div class="font-bold text-sm truncate">{{ slotProps.option.displaySymbol || slotProps.option.symbol }}</div>
+                                        <div class="text-xs text-gray-500 truncate">{{ slotProps.option.name }}</div>
                                     </div>
-                                    <span class="text-xs text-gray-500 ml-4 flex-shrink-0">{{ slotProps.option.type === 'crypto' ? 'Crypto' : slotProps.option.region }}</span>
+                                    <span class="text-[10px] px-2 py-0.5 rounded-full ml-2 flex-shrink-0"
+                                          :class="slotProps.option.type === 'crypto' 
+                                              ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400' 
+                                              : 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400'">
+                                        {{ slotProps.option.type === 'crypto' ? 'Crypto' : slotProps.option.region }}
+                                    </span>
                                 </div>
                             </template>
                         </AutoComplete>
-                        
-                        <Button @click="handleAddModule" :disabled="!selectedAsset || typeof selectedAsset !== 'object'">
-                            <i class="pi pi-plus"></i>
-                            <span class="hidden sm:inline ml-2">{{ t('dashboard.configurator.add_button') }}</span>
-                        </Button>
                     </div>
-                    <div v-if="searchError" class="mt-2">
-                        <Message severity="error" :closable="false">{{ searchError }}</Message>
+                    
+                    <Button @click="handleAddModule" :disabled="!selectedAsset || typeof selectedAsset !== 'object'"
+                            class="w-full sm:w-auto add-module-btn">
+                        <i class="pi pi-plus mr-2"></i>
+                        {{ t('dashboard.configurator.add_button') }}
+                    </Button>
+                    
+                    <div v-if="searchError" class="mt-1">
+                        <Message severity="error" :closable="false" class="text-sm">{{ searchError }}</Message>
                     </div>
                 </div>
-                <div v-else class="text-center p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
-                    <p class="text-yellow-700 dark:text-yellow-300">{{ t('dashboard.configurator.limit_reached') }}</p>
+                <div v-else class="text-center p-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-xl border border-amber-200 dark:border-amber-800/30">
+                    <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-amber-100 dark:bg-amber-900/50 flex items-center justify-center">
+                        <i class="pi pi-exclamation-triangle text-amber-600 dark:text-amber-400"></i>
+                    </div>
+                    <p class="text-sm text-amber-700 dark:text-amber-300 font-medium">{{ t('dashboard.configurator.limit_reached') }}</p>
+                    <p class="text-xs text-amber-600 dark:text-amber-400 mt-1">Upgrade to track more assets</p>
                 </div>
             </div>
         </div>
     </Dialog>
 </template>
+
+<style scoped>
+.module-item {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+.module-item:hover {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(99, 102, 241, 0.2);
+}
+</style>
+
+<style>
+.app-dark .module-item {
+    background: rgba(31, 41, 55, 0.6);
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+.app-dark .module-item:hover {
+    background: rgba(31, 41, 55, 0.9);
+    border-color: rgba(99, 102, 241, 0.3);
+}
+
+.configurator-modal .p-dialog-content {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+}
+
+.app-dark .configurator-modal .p-dialog-content {
+    background: rgba(17, 24, 39, 0.95);
+}
+
+.configurator-modal .p-dialog-header {
+    background: transparent;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.app-dark .configurator-modal .p-dialog-header {
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+.add-module-btn {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+    border: none !important;
+    font-weight: 600;
+    transition: all 0.3s ease !important;
+}
+
+.add-module-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px -6px rgba(99, 102, 241, 0.5);
+}
+
+.add-module-btn:disabled {
+    opacity: 0.5;
+    background: #9ca3af !important;
+}
+</style>

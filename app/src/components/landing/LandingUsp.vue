@@ -5,14 +5,14 @@
             <div class="text-center mb-16">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400 text-sm font-medium mb-4 fade-up">
                     <i class="pi pi-play-circle"></i>
-                    How It Works
+                    {{ t('usp.badge') }}
                 </div>
                 <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 fade-up stagger-1">
-                    Get Started in
-                    <span class="text-gradient">3 Simple Steps</span>
+                    {{ t('usp.title') }}
+                    <span class="text-gradient">{{ t('usp.title_highlight') }}</span>
                 </h2>
                 <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto fade-up stagger-2">
-                    From sign-up to insights in under 2 minutes. No complex setup required.
+                    {{ t('usp.subtitle') }}
                 </p>
             </div>
             
@@ -31,9 +31,9 @@
                             <i class="pi pi-user-plus text-indigo-600 dark:text-indigo-400 text-2xl"></i>
                         </div>
                         
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Create Account</h3>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">{{ t('usp.steps.step1.title') }}</h3>
                         <p class="text-gray-600 dark:text-gray-400">
-                            Sign up with your email in seconds. No credit card required to get started.
+                            {{ t('usp.steps.step1.description') }}
                         </p>
                     </div>
                     
@@ -52,9 +52,9 @@
                             <i class="pi pi-plus-circle text-amber-600 dark:text-amber-400 text-2xl"></i>
                         </div>
                         
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Add Your Assets</h3>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">{{ t('usp.steps.step2.title') }}</h3>
                         <p class="text-gray-600 dark:text-gray-400">
-                            Search and add any stocks, crypto, or ETFs you want to track.
+                            {{ t('usp.steps.step2.description') }}
                         </p>
                     </div>
                     
@@ -72,9 +72,9 @@
                             <i class="pi pi-sparkles text-green-600 dark:text-green-400 text-2xl"></i>
                         </div>
                         
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Get AI Insights</h3>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">{{ t('usp.steps.step3.title') }}</h3>
                         <p class="text-gray-600 dark:text-gray-400">
-                            Receive personalized analysis and stay ahead of market movements.
+                            {{ t('usp.steps.step3.description') }}
                         </p>
                     </div>
                 </div>
@@ -85,32 +85,32 @@
                 <div class="demo-preview-wrapper relative rounded-2xl overflow-hidden p-1 shadow-2xl">
                     <div class="absolute inset-0 bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20 animate-gradient-x"></div>
                     
-                    <div class="demo-preview-inner relative rounded-xl p-6 md:p-8">
+                    <div class="demo-preview-inner relative rounded-xl p-4 sm:p-6 md:p-8">
                         <!-- Fake browser header -->
-                        <div class="flex items-center gap-2 mb-6">
+                        <div class="flex items-center gap-2 mb-4 sm:mb-6">
                             <div class="flex gap-1.5">
-                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                <div class="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-red-500"></div>
+                                <div class="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-green-500"></div>
                             </div>
-                            <div class="flex-1 mx-4">
-                                <div class="demo-url-bar rounded-lg px-4 py-1.5 text-sm text-center">
+                            <div class="flex-1 mx-2 sm:mx-4">
+                                <div class="demo-url-bar rounded-lg px-3 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm text-center truncate">
                                     app.clearcutmarkets.com/dashboard
                                 </div>
                             </div>
                         </div>
                         
                         <!-- Dashboard preview -->
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            <div v-for="asset in previewAssets" :key="asset.symbol" class="demo-asset-card rounded-xl p-4">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <div :class="['w-8 h-8 rounded-lg flex items-center justify-center', asset.bgClass]">
-                                        <i :class="['text-white text-xs', asset.icon]"></i>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
+                            <div v-for="asset in previewAssets" :key="asset.symbol" class="demo-asset-card rounded-lg sm:rounded-xl p-2 sm:p-4">
+                                <div class="flex items-center gap-1.5 sm:gap-2 mb-1 sm:mb-2">
+                                    <div :class="['w-6 sm:w-8 h-6 sm:h-8 rounded-md sm:rounded-lg flex items-center justify-center', asset.bgClass]">
+                                        <i :class="['text-white text-[10px] sm:text-xs', asset.icon]"></i>
                                     </div>
-                                    <span class="demo-asset-symbol font-bold text-sm">{{ asset.symbol }}</span>
+                                    <span class="demo-asset-symbol font-bold text-xs sm:text-sm">{{ asset.symbol }}</span>
                                 </div>
-                                <div class="demo-asset-price font-bold">{{ asset.price }}</div>
-                                <div :class="['text-xs font-medium', asset.change > 0 ? 'text-green-500' : 'text-red-500']">
+                                <div class="demo-asset-price font-bold text-sm sm:text-base">{{ asset.price }}</div>
+                                <div :class="['text-[10px] sm:text-xs font-medium', asset.change > 0 ? 'text-green-500' : 'text-red-500']">
                                     {{ asset.change > 0 ? '+' : '' }}{{ asset.change }}%
                                 </div>
                             </div>
@@ -124,6 +124,9 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const previewAssets = ref([
     { symbol: 'AAPL', price: '$195.89', change: 2.48, icon: 'pi pi-building', bgClass: 'bg-gradient-to-br from-indigo-500 to-purple-600' },

@@ -4,28 +4,37 @@
         <div class="text-center mb-16 max-w-3xl mx-auto">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400 text-sm font-medium mb-4 fade-up">
                 <i class="pi pi-th-large"></i>
-                Personalized Dashboard
+                {{ t('modulesDemo.badge') }}
             </div>
             <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 fade-up stagger-1">
-                All Your Assets.
-                <span class="text-gradient">One View.</span>
+                {{ t('modulesDemo.title') }}
+                <span class="text-gradient">{{ t('modulesDemo.title_highlight') }}</span>
             </h2>
             <p class="text-lg text-gray-600 dark:text-gray-400 fade-up stagger-2">
-                Track stocks, crypto, and ETFs side by side with AI-powered insights tailored to each asset type.
+                {{ t('modulesDemo.subtitle') }}
             </p>
         </div>
         
         <!-- Bento Grid -->
         <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Mobile/Tablet: Horizontal scroll carousel, Desktop (1024px+): 3 column grid -->
+            <div 
+                ref="carouselRef"
+                @scroll="onCarouselScroll"
+                class="flex lg:grid lg:grid-cols-3 gap-4 lg:gap-6 overflow-x-auto lg:overflow-visible pb-4 lg:pb-0 -mx-4 px-4 lg:mx-0 lg:px-0 snap-x snap-mandatory lg:snap-none scrollbar-hide"
+            >
                 <!-- Stock Card -->
-                <div class="fade-up stagger-2">
+                <div 
+                    ref="card0"
+                    @click="scrollToCard(0)"
+                    class="flex-shrink-0 w-[80vw] sm:w-[65vw] lg:w-auto snap-center fade-up stagger-2 cursor-pointer lg:cursor-default">
+
                     <div class="demo-card stock group h-full">
                         <!-- Asset type indicator -->
                         <div class="absolute top-4 right-4 z-10">
                             <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-indigo-100/90 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-400 text-xs font-semibold backdrop-blur-sm">
                                 <i class="pi pi-building text-[10px]"></i>
-                                Stock
+                                {{ t('modulesDemo.assets.stock') }}
                             </span>
                         </div>
                         
@@ -68,15 +77,15 @@
                         <!-- Stats -->
                         <div class="grid grid-cols-3 gap-3 py-3 border-t border-gray-200/50 dark:border-gray-700/50 mb-4">
                             <div class="text-center">
-                                <div class="text-xs text-gray-500 mb-1">Mkt Cap</div>
+                                <div class="text-xs text-gray-500 mb-1">{{ t('modulesDemo.stats.mkt_cap') }}</div>
                                 <div class="text-sm font-semibold text-gray-900 dark:text-white">$3.04T</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-xs text-gray-500 mb-1">P/E</div>
+                                <div class="text-xs text-gray-500 mb-1">{{ t('modulesDemo.stats.pe') }}</div>
                                 <div class="text-sm font-semibold text-gray-900 dark:text-white">32.1</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-xs text-gray-500 mb-1">Volume</div>
+                                <div class="text-xs text-gray-500 mb-1">{{ t('modulesDemo.stats.volume') }}</div>
                                 <div class="text-sm font-semibold text-gray-900 dark:text-white">52.3M</div>
                             </div>
                         </div>
@@ -85,15 +94,15 @@
                         <div class="mt-auto">
                             <div class="flex items-center gap-2 mb-2">
                                 <i class="pi pi-sparkles text-indigo-500"></i>
-                                <span class="text-sm font-semibold text-gray-900 dark:text-white">AI Analysis</span>
+                                <span class="text-sm font-semibold text-gray-900 dark:text-white">{{ t('modulesDemo.ai_analysis') }}</span>
                             </div>
                             <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
-                                Strong earnings momentum with services revenue growing 14% YoY. iPhone 16 cycle showing above-average demand.
+                                {{ t('modulesDemo.insights.stock') }}
                             </p>
                             <div class="mt-3 p-2 bg-gray-50/50 dark:bg-gray-800/30 rounded-lg">
                                 <div class="flex justify-between text-xs mb-1">
-                                    <span class="text-gray-500">Sentiment</span>
-                                    <span class="font-semibold text-gray-900 dark:text-white">78% Bullish</span>
+                                    <span class="text-gray-500">{{ t('modulesDemo.sentiment') }}</span>
+                                    <span class="font-semibold text-gray-900 dark:text-white">{{ t('modulesDemo.bullish', { percent: 78 }) }}</span>
                                 </div>
                                 <div class="h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                                     <div class="h-full bg-green-500 rounded-full" style="width: 78%"></div>
@@ -104,13 +113,16 @@
                 </div>
                 
                 <!-- Crypto Card -->
-                <div class="fade-up stagger-3">
+                <div 
+                    ref="card1"
+                    @click="scrollToCard(1)"
+                    class="flex-shrink-0 w-[80vw] sm:w-[65vw] lg:w-auto snap-center fade-up stagger-3 cursor-pointer lg:cursor-default">
                     <div class="demo-card crypto group h-full">
                         <!-- Asset type indicator -->
                         <div class="absolute top-4 right-4 z-10">
                             <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-100/90 dark:bg-amber-900/50 text-amber-700 dark:text-amber-400 text-xs font-semibold backdrop-blur-sm">
                                 <i class="pi pi-bitcoin text-[10px]"></i>
-                                Crypto
+                                {{ t('modulesDemo.assets.crypto') }}
                             </span>
                         </div>
                         
@@ -156,15 +168,15 @@
                         <!-- Stats -->
                         <div class="grid grid-cols-3 gap-3 py-3 border-t border-gray-200/50 dark:border-gray-700/50 mb-4">
                             <div class="text-center">
-                                <div class="text-xs text-gray-500 mb-1">24h Vol</div>
+                                <div class="text-xs text-gray-500 mb-1">{{ t('modulesDemo.stats.vol_24h') }}</div>
                                 <div class="text-sm font-semibold text-gray-900 dark:text-white">$42.8B</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-xs text-gray-500 mb-1">24h High</div>
+                                <div class="text-xs text-gray-500 mb-1">{{ t('modulesDemo.stats.high_24h') }}</div>
                                 <div class="text-sm font-semibold text-green-600 dark:text-green-400">$105.2K</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-xs text-gray-500 mb-1">24h Low</div>
+                                <div class="text-xs text-gray-500 mb-1">{{ t('modulesDemo.stats.low_24h') }}</div>
                                 <div class="text-sm font-semibold text-red-600 dark:text-red-400">$101.8K</div>
                             </div>
                         </div>
@@ -173,15 +185,15 @@
                         <div class="mt-auto">
                             <div class="flex items-center gap-2 mb-2">
                                 <i class="pi pi-sparkles text-amber-500"></i>
-                                <span class="text-sm font-semibold text-gray-900 dark:text-white">AI Analysis</span>
+                                <span class="text-sm font-semibold text-gray-900 dark:text-white">{{ t('modulesDemo.ai_analysis') }}</span>
                             </div>
                             <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
-                                Breaking above $100K resistance with strong institutional inflows. ETF volumes at record highs.
+                                {{ t('modulesDemo.insights.crypto') }}
                             </p>
                             <div class="mt-3 p-2 bg-gray-50/50 dark:bg-gray-800/30 rounded-lg">
                                 <div class="flex justify-between text-xs mb-1">
-                                    <span class="text-gray-500">Sentiment</span>
-                                    <span class="font-semibold text-gray-900 dark:text-white">82% Bullish</span>
+                                    <span class="text-gray-500">{{ t('modulesDemo.sentiment') }}</span>
+                                    <span class="font-semibold text-gray-900 dark:text-white">{{ t('modulesDemo.bullish', { percent: 82 }) }}</span>
                                 </div>
                                 <div class="h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                                     <div class="h-full bg-green-500 rounded-full" style="width: 82%"></div>
@@ -192,13 +204,16 @@
                 </div>
                 
                 <!-- ETF Card -->
-                <div class="fade-up stagger-4">
+                <div 
+                    ref="card2"
+                    @click="scrollToCard(2)"
+                    class="flex-shrink-0 w-[80vw] sm:w-[65vw] lg:w-auto snap-center fade-up stagger-4 cursor-pointer lg:cursor-default">
                     <div class="demo-card etf group h-full">
                         <!-- Asset type indicator -->
                         <div class="absolute top-4 right-4 z-10">
                             <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-teal-100/90 dark:bg-teal-900/50 text-teal-700 dark:text-teal-400 text-xs font-semibold backdrop-blur-sm">
                                 <i class="pi pi-chart-pie text-[10px]"></i>
-                                ETF
+                                {{ t('modulesDemo.assets.etf') }}
                             </span>
                         </div>
                         
@@ -241,15 +256,15 @@
                         <!-- Stats -->
                         <div class="grid grid-cols-3 gap-3 py-3 border-t border-gray-200/50 dark:border-gray-700/50 mb-4">
                             <div class="text-center">
-                                <div class="text-xs text-gray-500 mb-1">AUM</div>
+                                <div class="text-xs text-gray-500 mb-1">{{ t('modulesDemo.stats.aum') }}</div>
                                 <div class="text-sm font-semibold text-gray-900 dark:text-white">$562B</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-xs text-gray-500 mb-1">Exp. Ratio</div>
+                                <div class="text-xs text-gray-500 mb-1">{{ t('modulesDemo.stats.exp_ratio') }}</div>
                                 <div class="text-sm font-semibold text-gray-900 dark:text-white">0.09%</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-xs text-gray-500 mb-1">52W Range</div>
+                                <div class="text-xs text-gray-500 mb-1">{{ t('modulesDemo.stats.range_52w') }}</div>
                                 <div class="text-sm font-semibold text-gray-900 dark:text-white">$480-$605</div>
                             </div>
                         </div>
@@ -258,15 +273,15 @@
                         <div class="mt-auto">
                             <div class="flex items-center gap-2 mb-2">
                                 <i class="pi pi-sparkles text-teal-500"></i>
-                                <span class="text-sm font-semibold text-gray-900 dark:text-white">AI Analysis</span>
+                                <span class="text-sm font-semibold text-gray-900 dark:text-white">{{ t('modulesDemo.ai_analysis') }}</span>
                             </div>
                             <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
-                                Broad market rally continues with tech leading gains. Fed rate cut expectations driving positive sentiment.
+                                {{ t('modulesDemo.insights.etf') }}
                             </p>
                             <div class="mt-3 p-2 bg-gray-50/50 dark:bg-gray-800/30 rounded-lg">
                                 <div class="flex justify-between text-xs mb-1">
-                                    <span class="text-gray-500">Sentiment</span>
-                                    <span class="font-semibold text-gray-900 dark:text-white">72% Bullish</span>
+                                    <span class="text-gray-500">{{ t('modulesDemo.sentiment') }}</span>
+                                    <span class="font-semibold text-gray-900 dark:text-white">{{ t('modulesDemo.bullish', { percent: 72 }) }}</span>
                                 </div>
                                 <div class="h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                                     <div class="h-full bg-green-500 rounded-full" style="width: 72%"></div>
@@ -277,19 +292,96 @@
                 </div>
             </div>
             
+            <!-- Mobile scroll indicator (visible until lg breakpoint) -->
+            <div class="flex lg:hidden justify-center gap-2 mt-4">
+                <button 
+                    v-for="(_, index) in 3" 
+                    :key="index"
+                    @click="scrollToCard(index)"
+                    class="transition-all duration-300 rounded-full h-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    :class="[
+                        activeCard === index 
+                            ? 'w-8 bg-indigo-500' 
+                            : 'w-2 bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
+                    ]"
+                    :aria-label="`Go to card ${index + 1}`"
+                />
+            </div>
+            
             <!-- CTA -->
-            <div class="text-center mt-12 fade-up stagger-5">
-                <router-link to="/signup">
-                    <Button label="Start Tracking Your Assets" icon="pi pi-arrow-right" iconPos="right" class="!bg-gradient-to-r !from-indigo-600 !to-purple-600 !border-0 !shadow-lg !text-lg !px-8 !py-3" />
+            <div class="text-center mt-8 md:mt-12 fade-up stagger-5 px-4 md:px-0">
+                <router-link to="/auth/signup">
+                    <Button :label="t('modulesDemo.cta.button')" icon="pi pi-arrow-right" iconPos="right" class="w-full sm:w-auto !bg-gradient-to-r !from-indigo-600 !to-purple-600 !border-0 !shadow-lg !text-base sm:!text-lg !px-6 sm:!px-8 !py-3" />
                 </router-link>
-                <p class="text-sm text-gray-500 mt-3">Free to start • No credit card required</p>
+                <p class="text-sm text-gray-500 mt-3">{{ t('modulesDemo.cta.subtitle') }}</p>
             </div>
         </div>
     </section>
 </template>
 
 <script setup>
+import { ref, onMounted, onUnmounted } from 'vue';
+import { useI18n } from 'vue-i18n';
 import Button from 'primevue/button';
+
+const { t } = useI18n();
+
+// Carousel state
+const carouselRef = ref(null);
+const card0 = ref(null);
+const card1 = ref(null);
+const card2 = ref(null);
+const activeCard = ref(0);
+
+// Scroll to specific card
+const scrollToCard = (index) => {
+    if (!carouselRef.value || window.innerWidth >= 1024) return;
+    
+    const cards = carouselRef.value.children;
+    if (cards[index]) {
+        const card = cards[index];
+        const scrollLeft = card.offsetLeft - (carouselRef.value.offsetWidth - card.offsetWidth) / 2;
+        carouselRef.value.scrollTo({
+            left: scrollLeft,
+            behavior: 'smooth'
+        });
+    }
+};
+
+// Track scroll position
+let scrollTimeout;
+const onCarouselScroll = () => {
+    if (!carouselRef.value || window.innerWidth >= 1024) return;
+    
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+        const container = carouselRef.value;
+        const scrollLeft = container.scrollLeft;
+        const containerWidth = container.offsetWidth;
+        
+        // Find which card is most visible
+        const cards = Array.from(container.children);
+        let closestIndex = 0;
+        let closestDistance = Infinity;
+        
+        cards.forEach((card, index) => {
+            const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+            const viewCenter = scrollLeft + containerWidth / 2;
+            const distance = Math.abs(cardCenter - viewCenter);
+            
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestIndex = index;
+            }
+        });
+        
+        activeCard.value = closestIndex;
+    }, 50);
+};
+
+onUnmounted(() => {
+    clearTimeout(scrollTimeout);
+});
 </script>
 
 <style scoped>
@@ -348,6 +440,26 @@ import Button from 'primevue/button';
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+
+/* Hide scrollbar but keep scroll functionality */
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* Mobile touch improvements */
+@media (max-width: 767px) {
+    .demo-card {
+        min-height: auto;
+    }
+    
+    .demo-card:hover {
+        transform: none;
+    }
 }
 </style>
 

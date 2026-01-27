@@ -126,12 +126,12 @@ defineProps({
 
 .app-dark .mesh-gradient {
     background: 
-        radial-gradient(at 40% 20%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
-        radial-gradient(at 80% 10%, rgba(167, 139, 250, 0.10) 0px, transparent 50%),
-        radial-gradient(at 10% 60%, rgba(236, 72, 153, 0.08) 0px, transparent 50%),
-        radial-gradient(at 90% 50%, rgba(20, 184, 166, 0.08) 0px, transparent 50%),
-        radial-gradient(at 20% 90%, rgba(245, 158, 11, 0.06) 0px, transparent 50%),
-        radial-gradient(at 70% 80%, rgba(99, 102, 241, 0.10) 0px, transparent 50%);
+        radial-gradient(at 40% 20%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
+        radial-gradient(at 80% 10%, rgba(167, 139, 250, 0.06) 0px, transparent 50%),
+        radial-gradient(at 10% 60%, rgba(236, 72, 153, 0.04) 0px, transparent 50%),
+        radial-gradient(at 90% 50%, rgba(20, 184, 166, 0.04) 0px, transparent 50%),
+        radial-gradient(at 20% 90%, rgba(245, 158, 11, 0.03) 0px, transparent 50%),
+        radial-gradient(at 70% 80%, rgba(99, 102, 241, 0.06) 0px, transparent 50%);
 }
 
 /* Gradient overlays */
@@ -171,10 +171,10 @@ defineProps({
 .orb-6 { background: linear-gradient(to top left, rgba(168, 85, 247, 0.10), rgba(139, 92, 246, 0.05)); }
 
 /* Floating orbs - dark mode */
-.app-dark .orb-1 { background: linear-gradient(to bottom right, rgba(139, 92, 246, 0.12), rgba(99, 102, 241, 0.06)); }
-.app-dark .orb-2 { background: linear-gradient(to bottom left, rgba(168, 85, 247, 0.12), rgba(236, 72, 153, 0.06)); }
-.app-dark .orb-3 { background: linear-gradient(to right, rgba(99, 102, 241, 0.10), rgba(6, 182, 212, 0.05)); }
-.app-dark .orb-4 { background: linear-gradient(to left, rgba(20, 184, 166, 0.10), rgba(16, 185, 129, 0.05)); }
-.app-dark .orb-5 { background: linear-gradient(to top right, rgba(245, 158, 11, 0.10), rgba(249, 115, 22, 0.05)); }
-.app-dark .orb-6 { background: linear-gradient(to top left, rgba(168, 85, 247, 0.12), rgba(139, 92, 246, 0.06)); }
+.app-dark .orb-1 { background: linear-gradient(to bottom right, rgba(139, 92, 246, 0.06), rgba(99, 102, 241, 0.03)); }
+.app-dark .orb-2 { background: linear-gradient(to bottom left, rgba(168, 85, 247, 0.06), rgba(236, 72, 153, 0.03)); }
+.app-dark .orb-3 { background: linear-gradient(to right, rgba(99, 102, 241, 0.05), rgba(6, 182, 212, 0.025)); }
+.app-dark .orb-4 { background: linear-gradient(to left, rgba(20, 184, 166, 0.05), rgba(16, 185, 129, 0.025)); }
+.app-dark .orb-5 { background: linear-gradient(to top right, rgba(245, 158, 11, 0.05), rgba(249, 115, 22, 0.025)); }
+.app-dark .orb-6 { background: linear-gradient(to top left, rgba(168, 85, 247, 0.06), rgba(139, 92, 246, 0.03)); }
 </style>

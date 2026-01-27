@@ -75,49 +75,45 @@ const chartColor = computed(() => {
         @click="emit('view-details', module)" 
         :class="['demo-card', assetType, 'group h-full cursor-pointer']"
     >
-        <!-- Asset type indicator -->
-        <div class="absolute top-3 right-3 z-10">
-            <span v-if="isCrypto" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-100/90 dark:bg-amber-900/50 text-amber-700 dark:text-amber-400 text-[10px] font-semibold backdrop-blur-sm">
-                <i class="pi pi-bitcoin text-[8px]"></i>
+        <!-- Asset type indicator - smaller on mobile -->
+        <div class="absolute top-2 right-2 sm:top-3 sm:right-3 z-10">
+            <span v-if="isCrypto" class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-amber-100/90 dark:bg-amber-900/50 text-amber-700 dark:text-amber-400 text-[8px] sm:text-[10px] font-semibold backdrop-blur-sm">
                 Crypto
             </span>
-            <span v-else class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-indigo-100/90 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-400 text-[10px] font-semibold backdrop-blur-sm">
-                <i class="pi pi-building text-[8px]"></i>
+            <span v-else class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-indigo-100/90 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-400 text-[8px] sm:text-[10px] font-semibold backdrop-blur-sm">
                 Stock
             </span>
         </div>
         
-        <!-- Header -->
-        <div class="mb-3 pr-14">
-            <h3 class="text-xl font-bold text-gray-900 dark:text-white">{{ displaySymbol }}</h3>
-            <p class="text-xs text-gray-600 dark:text-gray-400 truncate">{{ module.name }}</p>
+        <!-- Header - tighter for mobile -->
+        <div class="mb-1 sm:mb-2 pr-12 sm:pr-14">
+            <h3 class="text-base sm:text-lg font-bold text-gray-900 dark:text-white leading-tight">{{ displaySymbol }}</h3>
+            <p class="text-[10px] sm:text-[11px] text-gray-500 dark:text-gray-400 truncate">{{ module.name }}</p>
         </div>
         
-        <!-- Price -->
-        <div class="mb-3">
+        <!-- Price - compact -->
+        <div class="mb-1.5 sm:mb-2">
             <div class="flex items-baseline gap-0.5">
-                <span class="text-sm text-gray-500">$</span>
-                <span class="text-2xl font-bold text-gray-900 dark:text-white">{{ formattedPrice.whole }}</span>
-                <span class="text-base text-gray-500">.{{ formattedPrice.decimal }}</span>
+                <span class="text-[10px] sm:text-xs text-gray-500">$</span>
+                <span class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">{{ formattedPrice.whole }}</span>
+                <span class="text-xs sm:text-sm text-gray-500">.{{ formattedPrice.decimal }}</span>
             </div>
-            <div class="flex items-center gap-2 mt-0.5">
-                <span 
-                    v-if="typeof module.percentChange === 'number'"
-                    :class="[
-                        'inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold',
-                        module.percentChange >= 0 
-                            ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400' 
-                            : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400'
-                    ]"
-                >
-                    <i :class="['pi text-[8px] mr-0.5', module.percentChange >= 0 ? 'pi-arrow-up' : 'pi-arrow-down']"></i>
-                    {{ Math.abs(module.percentChange).toFixed(2) }}%
-                </span>
-            </div>
+            <span 
+                v-if="typeof module.percentChange === 'number'"
+                :class="[
+                    'inline-flex items-center px-1 py-0.5 rounded text-[9px] sm:text-[10px] font-semibold mt-0.5',
+                    module.percentChange >= 0 
+                        ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400' 
+                        : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400'
+                ]"
+            >
+                <i :class="['pi text-[7px] sm:text-[8px] mr-0.5', module.percentChange >= 0 ? 'pi-arrow-up' : 'pi-arrow-down']"></i>
+                {{ Math.abs(module.percentChange).toFixed(2) }}%
+            </span>
         </div>
         
-        <!-- Mini chart -->
-        <div class="h-16 mb-3 bg-gray-50/50 dark:bg-gray-800/30 rounded-lg p-1.5">
+        <!-- Mini chart - smaller on mobile -->
+        <div class="h-10 sm:h-12 mb-1.5 sm:mb-2 bg-gray-50/50 dark:bg-gray-800/30 rounded p-0.5 sm:p-1">
             <svg viewBox="0 0 100 40" preserveAspectRatio="none" class="w-full h-full">
                 <defs>
                     <linearGradient :id="'grad-' + module.id" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -130,39 +126,36 @@ const chartColor = computed(() => {
             </svg>
         </div>
         
-        <!-- Stats -->
-        <div class="grid grid-cols-3 gap-2 py-2 border-t border-gray-200/50 dark:border-gray-700/50 mb-3">
+        <!-- Stats - 2 cols on mobile, 3 on larger -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-1.5 py-1.5 sm:py-2 border-t border-gray-200/50 dark:border-gray-700/50 mb-2 sm:mb-2.5">
             <div class="text-center">
-                <div class="text-[10px] text-gray-500">{{ isCrypto ? '24h Vol' : 'Mkt Cap' }}</div>
-                <div class="text-xs font-semibold text-gray-900 dark:text-white">
+                <div class="text-[8px] sm:text-[9px] text-gray-500 mb-0.5">{{ isCrypto ? 'Vol' : 'Cap' }}</div>
+                <div class="text-[10px] sm:text-[11px] font-semibold text-gray-900 dark:text-white">
                     {{ isCrypto ? formatVolume(module.volume) : formatMarketCap(module.marketCap) }}
                 </div>
             </div>
-            <div class="text-center">
-                <div class="text-[10px] text-gray-500">{{ isCrypto ? '24h High' : 'P/E' }}</div>
-                <div class="text-xs font-semibold text-gray-900 dark:text-white">
+            <div class="hidden sm:block text-center">
+                <div class="text-[8px] sm:text-[9px] text-gray-500 leading-tight">{{ isCrypto ? 'High' : 'P/E' }}</div>
+                <div class="text-[10px] sm:text-[11px] font-semibold text-gray-900 dark:text-white">
                     {{ isCrypto ? (module.dayHigh ? '$' + module.dayHigh.toFixed(0) : '...') : (module.peRatio ? module.peRatio.toFixed(1) : '...') }}
                 </div>
             </div>
             <div class="text-center">
-                <div class="text-[10px] text-gray-500">{{ isCrypto ? '24h Low' : 'Volume' }}</div>
-                <div class="text-xs font-semibold text-gray-900 dark:text-white">
+                <div class="text-[8px] sm:text-[9px] text-gray-500 leading-tight">{{ isCrypto ? 'Low' : 'Vol' }}</div>
+                <div class="text-[10px] sm:text-[11px] font-semibold text-gray-900 dark:text-white">
                     {{ isCrypto ? (module.dayLow ? '$' + module.dayLow.toFixed(0) : '...') : formatVolume(module.volume) }}
                 </div>
             </div>
         </div>
         
-        <!-- Sentiment bar (compact) -->
+        <!-- Sentiment bar - simplified on mobile -->
         <div class="mt-auto">
-            <div class="p-2 bg-gray-50/50 dark:bg-gray-800/30 rounded-lg">
-                <div class="flex justify-between text-[10px] mb-1">
-                    <span class="text-gray-500 flex items-center gap-1">
-                        <i :class="['pi pi-sparkles', isCrypto ? 'text-amber-500' : 'text-indigo-500']" style="font-size: 8px;"></i>
-                        Sentiment
-                    </span>
-                    <span class="font-semibold text-gray-900 dark:text-white">{{ module.sentiment }}% Bullish</span>
+            <div class="p-1.5 sm:p-2 bg-gray-50/50 dark:bg-gray-800/30 rounded-lg">
+                <div class="flex justify-between text-[8px] sm:text-[9px] mb-1 sm:mb-1.5">
+                    <span class="text-gray-500">Sentiment</span>
+                    <span class="font-semibold text-gray-900 dark:text-white">{{ module.sentiment }}%</span>
                 </div>
-                <div class="h-1 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                <div class="h-1 sm:h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                     <div 
                         class="h-full rounded-full transition-all duration-500"
                         :style="{ width: module.sentiment + '%', backgroundColor: getSentimentColor(module.sentiment) }"
@@ -179,12 +172,25 @@ const chartColor = computed(() => {
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(0, 0, 0, 0.05);
-    border-radius: 1.5rem;
-    padding: 1rem;
+    border-radius: 0.875rem;
+    padding: 0.5rem;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
     overflow: hidden;
+}
+
+@media (min-width: 576px) {
+    .demo-card {
+        border-radius: 1.25rem;
+        padding: 0.75rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .demo-card {
+        padding: 1rem;
+    }
 }
 
 .demo-card::before {
