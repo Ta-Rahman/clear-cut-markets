@@ -142,17 +142,17 @@
                 </div>
                 
                 <!-- Asset class badges -->
-                <div class="flex justify-center gap-3 mt-6">
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400 text-xs font-medium">
-                        <i class="pi pi-building text-[10px]"></i>
+                <div class="flex justify-center gap-2 sm:gap-3 mt-6 px-2">
+                    <span class="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400 text-[10px] sm:text-xs font-medium">
+                        <i class="pi pi-building text-[8px] sm:text-[10px]"></i>
                         {{ t('hero.asset_badges.stocks') }}
                     </span>
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-xs font-medium">
-                        <i class="pi pi-bitcoin text-[10px]"></i>
+                    <span class="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-[10px] sm:text-xs font-medium">
+                        <i class="pi pi-bitcoin text-[8px] sm:text-[10px]"></i>
                         {{ t('hero.asset_badges.crypto') }}
                     </span>
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-400 text-xs font-medium">
-                        <i class="pi pi-chart-pie text-[10px]"></i>
+                    <span class="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-400 text-[10px] sm:text-xs font-medium">
+                        <i class="pi pi-chart-pie text-[8px] sm:text-[10px]"></i>
                         {{ t('hero.asset_badges.etfs') }}
                     </span>
                 </div>
@@ -160,7 +160,7 @@
         </div>
         
         <!-- Scroll indicator -->
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <div class="absolute bottom-12 sm:bottom-8 left-1/2 -translate-x-1/2 animate-bounce" style="padding-bottom: env(safe-area-inset-bottom, 0px);">
             <div class="w-6 h-10 rounded-full border-2 border-gray-400 dark:border-gray-600 flex justify-center pt-2">
                 <div class="w-1.5 h-2.5 bg-gray-400 dark:bg-gray-600 rounded-full animate-scroll-down"></div>
             </div>

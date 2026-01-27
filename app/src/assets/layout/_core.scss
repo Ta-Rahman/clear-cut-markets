@@ -2,6 +2,8 @@ html {
     height: 100%;
     font-size: 14px;
     line-height: 1.2;
+    /* iOS Safari fix for 100vh */
+    height: -webkit-fill-available;
 }
 
 body {
@@ -11,14 +13,33 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100%;
+    min-height: -webkit-fill-available;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     /* iOS safe area support */
     padding-bottom: env(safe-area-inset-bottom);
 }
 
+/* Ensure #app fills the screen properly on iOS */
+#app {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+}
+
 a {
     text-decoration: none;
+}
+
+/* Prevent iOS Safari auto-zoom on input focus */
+@supports (-webkit-touch-callout: none) {
+    input, textarea, select {
+        font-size: 16px !important;
+    }
+    
+    /* PrimeVue InputText */
+    .p-inputtext {
+        font-size: 16px !important;
+    }
 }
 
 .layout-wrapper {
