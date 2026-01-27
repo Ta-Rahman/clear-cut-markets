@@ -399,6 +399,10 @@
     "unlock_title": "Erschließe einen mächtigen Vorteil",
     "unlock_subtitle": "Steige auf den Advanced-Plan um, um Cross-Investment-Korrelationsalarme zu erhalten.",
     "upgrade_button": "Jetzt upgraden",
+    "loader": {
+      "title": "Assets werden geladen",
+      "subtitle": "Echtzeit-Marktdaten werden abgerufen..."
+    },
     "card": {
       "ai_analysis": "KI-Analyse",
       "sentiment": "Stimmung",
@@ -410,6 +414,7 @@
       "title": "Modul-Konfigurator",
       "modules_used": "Genutzte Module",
       "current_modules": "Aktuelle Module",
+      "drag_to_reorder": "Ziehen zum Sortieren",
       "no_modules_added": "Du hast noch keine Module hinzugefügt.",
       "add_new_module": "Neues Modul hinzufügen",
       "search_placeholder": "Suche nach einem Asset...",

@@ -7,17 +7,19 @@ import DashboardModuleCard from '@/components/dashboard/DashboardModuleCard.vue'
 import DashboardAddModuleCard from '@/components/dashboard/DashboardAddModuleCard.vue';
 import ModuleConfiguratorModal from '@/components/dashboard/ModuleConfiguratorModal.vue';
 import DashboardDetailModal from '@/components/dashboard/DashboardDetailModal.vue';
+import DashboardLoader from '@/components/shared/DashboardLoader.vue';
 import { useI18n } from 'vue-i18n';
 import { useModuleManager } from '@/composables/useModuleManager';
 
 const { t } = useI18n();
 const { profile } = useUser();
-const { modules, isLoading, fetchAllModuleData } = useModuleManager();
+const { modules, isLoading, loadingProgress, fetchAllModuleData } = useModuleManager();
 
 const isConfigModalVisible = ref(false);
 const isDetailModalVisible = ref(false);
 const selectedModuleForDetail = ref(null);
 const activeTab = ref('portfolio');
+const showLoader = ref(true);
 
 const formattedUserName = computed(() => {
     const name = profile.value?.first_name || 'User';
@@ -57,17 +59,34 @@ const handleRemoveModule = async (moduleToRemove) => {
     }
 };
 
+const handleReorderModules = (reorderedModules) => {
+    // Update local state with new order
+    modules.value = reorderedModules;
+};
+
+const onLoaderComplete = () => {
+    showLoader.value = false;
+};
+
 onMounted(() => {
     fetchAllModuleData(supabase, addPlaceholderMetrics);
 });
 </script>
 
 <template>
+    <!-- Loading Screen -->
+    <DashboardLoader 
+        :isLoading="isLoading" 
+        :progress="loadingProgress"
+        :minDisplayTime="1200"
+        @complete="onLoaderComplete"
+    />
+
     <div class="max-w-[1600px] mx-auto space-y-4 sm:space-y-6">
         <!-- Header -->
         <div class="flex items-center justify-between gap-3 py-2 sm:py-4">
-            <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">
-                {{ t('dashboard.welcome') }} <span class="text-gradient">{{ formattedUserName }}</span>
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white">
+                {{ t('dashboard.welcome') }} <span class="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">{{ formattedUserName }}</span>
             </h1>
             
             <!-- Module count + config button -->
@@ -138,6 +157,7 @@ onMounted(() => {
                     v-for="(module, index) in modules" 
                     :key="index" 
                     :module="module"
+                    :isSelected="selectedModuleForDetail?.id === module.id && isDetailModalVisible"
                     @view-details="openDetailModal" 
                 />
                 <DashboardAddModuleCard v-if="canAddModule" @click="isConfigModalVisible = true" />
@@ -235,6 +255,7 @@ onMounted(() => {
             @close="isConfigModalVisible = false"
             @add-module="handleModuleAdded"
             @remove-module="handleRemoveModule"
+            @reorder-modules="handleReorderModules"
         />
     </div>
 </template>
@@ -245,6 +266,15 @@ onMounted(() => {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+
+.animate-gradient {
+    animation: gradient-shift 3s ease infinite;
+}
+
+@keyframes gradient-shift {
+    0%, 100% { background-position: 0% center; }
+    50% { background-position: 100% center; }
 }
 
 .info-card {

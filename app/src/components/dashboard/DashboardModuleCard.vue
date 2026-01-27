@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { formatMarketCap, formatVolume, getDisplaySymbol, isCryptoSymbol } from '@/utils/formatters';
 
@@ -9,16 +9,27 @@ const props = defineProps({
     module: {
         type: Object,
         required: true
+    },
+    isSelected: {
+        type: Boolean,
+        default: false
     }
 });
 
 const displaySymbol = computed(() => getDisplaySymbol(props.module.asset_symbol));
-const isCrypto = computed(() => isCryptoSymbol(props.module.asset_symbol));
 
+// Use asset_type from module data (set by useModuleManager or API)
 const assetType = computed(() => {
-    if (isCrypto.value) return 'crypto';
+    // Priority: API response assetType > module asset_type > fallback detection
+    if (props.module.assetType) return props.module.assetType;
+    if (props.module.asset_type) return props.module.asset_type;
+    if (props.module.isCrypto) return 'crypto';
+    if (props.module.isEtf) return 'etf';
     return 'stock';
 });
+
+const isCrypto = computed(() => assetType.value === 'crypto');
+const isEtf = computed(() => assetType.value === 'etf');
 
 const formattedPrice = computed(() => {
     const price = props.module.lastPrice;
@@ -73,12 +84,15 @@ const chartColor = computed(() => {
 <template>
     <div 
         @click="emit('view-details', module)" 
-        :class="['demo-card', assetType, 'group h-full cursor-pointer']"
+        :class="['demo-card', assetType, 'group h-full cursor-pointer', { 'is-selected': isSelected }]"
     >
         <!-- Asset type indicator - smaller on mobile -->
         <div class="absolute top-2 right-2 sm:top-3 sm:right-3 z-10">
             <span v-if="isCrypto" class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-amber-100/90 dark:bg-amber-900/50 text-amber-700 dark:text-amber-400 text-[8px] sm:text-[10px] font-semibold backdrop-blur-sm">
                 Crypto
+            </span>
+            <span v-else-if="isEtf" class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-teal-100/90 dark:bg-teal-900/50 text-teal-700 dark:text-teal-400 text-[8px] sm:text-[10px] font-semibold backdrop-blur-sm">
+                ETF
             </span>
             <span v-else class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-indigo-100/90 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-400 text-[8px] sm:text-[10px] font-semibold backdrop-blur-sm">
                 Stock
@@ -209,18 +223,39 @@ const chartColor = computed(() => {
 .demo-card.crypto::before { background: linear-gradient(90deg, #f59e0b, #ea580c); }
 .demo-card.etf::before { background: linear-gradient(90deg, #14b8a6, #06b6d4); }
 
-.demo-card:hover::before {
+/* Only apply hover effects on devices that support hover (not touch) */
+@media (hover: hover) and (pointer: fine) {
+    .demo-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    .demo-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+    }
+
+    .demo-card.stock:hover { border-color: rgba(99, 102, 241, 0.3); }
+    .demo-card.crypto:hover { border-color: rgba(245, 158, 11, 0.3); }
+    .demo-card.etf:hover { border-color: rgba(20, 184, 166, 0.3); }
+}
+
+/* Selected state - shows light bar when detail modal is open */
+.demo-card.is-selected::before {
     transform: scaleX(1);
 }
 
-.demo-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+.demo-card.is-selected.stock { border-color: rgba(99, 102, 241, 0.3); }
+.demo-card.is-selected.crypto { border-color: rgba(245, 158, 11, 0.3); }
+.demo-card.is-selected.etf { border-color: rgba(20, 184, 166, 0.3); }
+
+/* Active state for touch devices */
+.demo-card:active::before {
+    transform: scaleX(1);
 }
 
-.demo-card.stock:hover { border-color: rgba(99, 102, 241, 0.3); }
-.demo-card.crypto:hover { border-color: rgba(245, 158, 11, 0.3); }
-.demo-card.etf:hover { border-color: rgba(20, 184, 166, 0.3); }
+.demo-card:active {
+    transform: scale(0.98);
+}
 </style>
 
 <style>

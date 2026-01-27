@@ -399,6 +399,10 @@
     "unlock_title": "Unlock a Powerful Edge",
     "unlock_subtitle": "Upgrade to the Advanced plan to get Cross-Investment Correlation Alerts.",
     "upgrade_button": "Upgrade Now",
+    "loader": {
+      "title": "Loading Your Assets",
+      "subtitle": "Fetching real-time market data..."
+    },
     "card": {
       "ai_analysis": "AI Analysis",
       "sentiment": "Sentiment",
@@ -410,6 +414,7 @@
       "title": "Module Configurator",
       "modules_used": "Modules Used",
       "current_modules": "Current Modules",
+      "drag_to_reorder": "Drag to reorder",
       "no_modules_added": "You haven't added any modules yet.",
       "add_new_module": "Add New Module",
       "search_placeholder": "Search for an asset...",
