@@ -1,5 +1,5 @@
 <template>
-    <div class="gradient-bg fixed inset-0 -z-10 overflow-hidden">
+    <div class="gradient-bg fixed inset-0 -z-10 overflow-hidden ios-safe-area">
         <!-- Base gradient -->
         <div class="base-gradient absolute inset-0 transition-colors duration-300"></div>
         
@@ -177,4 +177,13 @@ defineProps({
 .app-dark .orb-4 { background: linear-gradient(to left, rgba(20, 184, 166, 0.05), rgba(16, 185, 129, 0.025)); }
 .app-dark .orb-5 { background: linear-gradient(to top right, rgba(245, 158, 11, 0.05), rgba(249, 115, 22, 0.025)); }
 .app-dark .orb-6 { background: linear-gradient(to top left, rgba(168, 85, 247, 0.06), rgba(139, 92, 246, 0.03)); }
+
+/* iOS safe area - extend background to cover notch/home indicator areas */
+.ios-safe-area {
+    /* Extend beyond safe area insets */
+    top: calc(-1 * env(safe-area-inset-top, 0px));
+    bottom: calc(-1 * env(safe-area-inset-bottom, 0px));
+    left: calc(-1 * env(safe-area-inset-left, 0px));
+    right: calc(-1 * env(safe-area-inset-right, 0px));
+}
 </style>

@@ -239,6 +239,7 @@ const handleRemoveModule = (module) => {
                     <draggable 
                         v-model="localModules" 
                         item-key="id"
+                        handle=".drag-handle"
                         ghost-class="ghost-card"
                         fallback-class="drag-fallback-hidden"
                         :animation="200"
@@ -250,9 +251,9 @@ const handleRemoveModule = (module) => {
                         class="space-y-2 pr-1"
                     >
                         <template #item="{ element: module, index }">
-                            <div class="module-item flex items-center justify-between p-3 rounded-xl group cursor-grab active:cursor-grabbing">
-                                <!-- Drag indicator -->
-                                <div class="p-1 -ml-1 mr-2 text-gray-300 dark:text-gray-600 flex flex-col gap-0.5">
+                            <div class="module-item flex items-center justify-between p-3 rounded-xl group">
+                                <!-- Drag handle -->
+                                <div class="drag-handle p-2 -ml-1 mr-2 text-gray-400 hover:text-indigo-500 dark:text-gray-500 dark:hover:text-indigo-400 flex flex-col gap-0.5 cursor-grab active:cursor-grabbing rounded-lg hover:bg-indigo-50 dark:hover:bg-indigo-900/30 transition-colors">
                                     <span class="w-4 h-0.5 bg-current rounded-full"></span>
                                     <span class="w-4 h-0.5 bg-current rounded-full"></span>
                                     <span class="w-4 h-0.5 bg-current rounded-full"></span>

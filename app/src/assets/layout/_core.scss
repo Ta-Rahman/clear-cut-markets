@@ -13,6 +13,8 @@ body {
     min-height: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* iOS safe area support */
+    padding-bottom: env(safe-area-inset-bottom);
 }
 
 a {
@@ -21,4 +23,6 @@ a {
 
 .layout-wrapper {
     min-height: 100vh;
+    /* Extend to fill safe areas on iOS */
+    min-height: -webkit-fill-available;
 }
