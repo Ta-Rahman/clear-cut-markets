@@ -8,6 +8,7 @@ import DashboardAddModuleCard from '@/components/dashboard/DashboardAddModuleCar
 import ModuleConfiguratorModal from '@/components/dashboard/ModuleConfiguratorModal.vue';
 import DashboardDetailModal from '@/components/dashboard/DashboardDetailModal.vue';
 import DashboardLoader from '@/components/shared/DashboardLoader.vue';
+import NewsTab from '@/components/dashboard/NewsTab.vue';
 import { useI18n } from 'vue-i18n';
 import { useModuleManager } from '@/composables/useModuleManager';
 
@@ -131,7 +132,6 @@ onMounted(() => {
             >
                 <i class="pi pi-megaphone mr-1"></i>
                 News
-                <span class="px-1.5 py-0.5 text-[10px] rounded-full bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-400 font-semibold">Soon</span>
             </button>
             <button 
                 v-if="profile?.subscription_tier === 'advanced' || profile?.subscription_tier === 'professional'"
@@ -178,26 +178,9 @@ onMounted(() => {
             </div>
         </div>
 
-        <!-- News Tab Content (Coming Soon) -->
+        <!-- News Tab Content -->
         <div v-show="activeTab === 'news'" class="min-h-[300px]">
-            <div class="info-card p-6 sm:p-8 text-center">
-                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30 flex items-center justify-center mx-auto mb-4">
-                    <i class="pi pi-megaphone text-2xl sm:text-3xl text-amber-600 dark:text-amber-400"></i>
-                </div>
-                <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-2">AI News Intelligence</h3>
-                <p class="text-gray-600 dark:text-gray-400 text-sm sm:text-base max-w-md mx-auto mb-4">
-                    Get real-time news alerts filtered by AI that directly impact your tracked assets. No noise, just actionable insights.
-                </p>
-                <div class="flex flex-wrap items-center justify-center gap-2 mb-6">
-                    <span class="px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-xs font-medium">Real-time alerts</span>
-                    <span class="px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-xs font-medium">Sentiment analysis</span>
-                    <span class="px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-xs font-medium">Source credibility</span>
-                </div>
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-sm font-medium">
-                    <i class="pi pi-clock"></i>
-                    Coming Q2 2026
-                </div>
-            </div>
+            <NewsTab />
         </div>
 
         <!-- Insights Tab Content (Pro Users) -->
@@ -217,7 +200,7 @@ onMounted(() => {
                 </div>
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-400 text-sm font-medium">
                     <i class="pi pi-clock"></i>
-                    Coming Q2 2026
+                    Coming Soon
                 </div>
             </div>
         </div>
