@@ -29,6 +29,9 @@
         
         <!-- Subtle dot pattern -->
         <div class="dot-pattern absolute inset-0"></div>
+        
+        <!-- Noise texture overlay (dark mode only) -->
+        <div class="noise-texture absolute inset-0"></div>
     </div>
 </template>
 
@@ -101,16 +104,24 @@ defineProps({
 <style>
 /* Unscoped styles for proper dark mode support */
 
-/* Base gradient */
+/* Base gradient - Light mode */
 .base-gradient {
     background: linear-gradient(to bottom right, #f9fafb, #ffffff);
 }
 
+/* Base gradient - Dark mode: More neutral charcoal grey */
 .app-dark .base-gradient {
-    background: linear-gradient(to bottom right, #030712, #111827);
+    background: linear-gradient(
+        160deg,
+        #09090b 0%,
+        #0c0c0e 25%,
+        #111113 50%,
+        #0f0f11 75%,
+        #0a0a0c 100%
+    );
 }
 
-/* Mesh gradient */
+/* Mesh gradient - Light mode */
 .mesh-gradient {
     position: absolute;
     inset: -20%;
@@ -124,17 +135,18 @@ defineProps({
     animation: mesh-move 30s ease infinite;
 }
 
+/* Mesh gradient - Dark mode: Very subtle, mostly grey with hint of color */
 .app-dark .mesh-gradient {
     background: 
-        radial-gradient(at 40% 20%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
-        radial-gradient(at 80% 10%, rgba(167, 139, 250, 0.06) 0px, transparent 50%),
-        radial-gradient(at 10% 60%, rgba(236, 72, 153, 0.04) 0px, transparent 50%),
-        radial-gradient(at 90% 50%, rgba(20, 184, 166, 0.04) 0px, transparent 50%),
-        radial-gradient(at 20% 90%, rgba(245, 158, 11, 0.03) 0px, transparent 50%),
-        radial-gradient(at 70% 80%, rgba(99, 102, 241, 0.06) 0px, transparent 50%);
+        radial-gradient(at 40% 20%, rgba(99, 102, 241, 0.04) 0px, transparent 50%),
+        radial-gradient(at 80% 10%, rgba(148, 163, 184, 0.03) 0px, transparent 50%),
+        radial-gradient(at 10% 60%, rgba(100, 116, 139, 0.025) 0px, transparent 50%),
+        radial-gradient(at 90% 50%, rgba(71, 85, 105, 0.03) 0px, transparent 50%),
+        radial-gradient(at 20% 90%, rgba(51, 65, 85, 0.025) 0px, transparent 50%),
+        radial-gradient(at 70% 80%, rgba(99, 102, 241, 0.03) 0px, transparent 50%);
 }
 
-/* Gradient overlays */
+/* Gradient overlays - Light mode */
 .gradient-overlay-top {
     background: linear-gradient(to bottom, rgba(139, 92, 246, 0.05), transparent);
 }
@@ -143,23 +155,46 @@ defineProps({
     background: linear-gradient(to top, rgba(168, 85, 247, 0.05), transparent);
 }
 
+/* Gradient overlays - Dark mode: Subtle grey with tiny indigo hint */
 .app-dark .gradient-overlay-top {
-    background: linear-gradient(to bottom, rgba(139, 92, 246, 0.08), transparent);
+    background: linear-gradient(
+        to bottom, 
+        rgba(99, 102, 241, 0.025), 
+        transparent 60%
+    );
 }
 
 .app-dark .gradient-overlay-bottom {
-    background: linear-gradient(to top, rgba(168, 85, 247, 0.08), transparent);
+    background: linear-gradient(
+        to top, 
+        rgba(71, 85, 105, 0.04), 
+        transparent 60%
+    );
 }
 
-/* Dot pattern - very subtle grid overlay */
+/* Dot pattern - Light mode */
 .dot-pattern {
     background-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
     background-size: 24px 24px;
 }
 
+/* Dot pattern - Dark mode */
 .app-dark .dot-pattern {
-    background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
     background-size: 24px 24px;
+}
+
+/* Noise texture - adds subtle grain for depth */
+.noise-texture {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.app-dark .noise-texture {
+    opacity: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    mix-blend-mode: overlay;
 }
 
 /* Floating orbs - light mode */
@@ -170,11 +205,11 @@ defineProps({
 .orb-5 { background: linear-gradient(to top right, rgba(245, 158, 11, 0.08), rgba(249, 115, 22, 0.04)); }
 .orb-6 { background: linear-gradient(to top left, rgba(168, 85, 247, 0.10), rgba(139, 92, 246, 0.05)); }
 
-/* Floating orbs - dark mode */
-.app-dark .orb-1 { background: linear-gradient(to bottom right, rgba(139, 92, 246, 0.06), rgba(99, 102, 241, 0.03)); }
-.app-dark .orb-2 { background: linear-gradient(to bottom left, rgba(168, 85, 247, 0.06), rgba(236, 72, 153, 0.03)); }
-.app-dark .orb-3 { background: linear-gradient(to right, rgba(99, 102, 241, 0.05), rgba(6, 182, 212, 0.025)); }
-.app-dark .orb-4 { background: linear-gradient(to left, rgba(20, 184, 166, 0.05), rgba(16, 185, 129, 0.025)); }
-.app-dark .orb-5 { background: linear-gradient(to top right, rgba(245, 158, 11, 0.05), rgba(249, 115, 22, 0.025)); }
-.app-dark .orb-6 { background: linear-gradient(to top left, rgba(168, 85, 247, 0.06), rgba(139, 92, 246, 0.03)); }
+/* Floating orbs - dark mode: Much more muted, grey-tinted */
+.app-dark .orb-1 { background: linear-gradient(to bottom right, rgba(99, 102, 241, 0.03), rgba(71, 85, 105, 0.02)); }
+.app-dark .orb-2 { background: linear-gradient(to bottom left, rgba(100, 116, 139, 0.03), rgba(71, 85, 105, 0.02)); }
+.app-dark .orb-3 { background: linear-gradient(to right, rgba(71, 85, 105, 0.025), rgba(51, 65, 85, 0.015)); }
+.app-dark .orb-4 { background: linear-gradient(to left, rgba(51, 65, 85, 0.025), rgba(71, 85, 105, 0.015)); }
+.app-dark .orb-5 { background: linear-gradient(to top right, rgba(100, 116, 139, 0.025), rgba(71, 85, 105, 0.015)); }
+.app-dark .orb-6 { background: linear-gradient(to top left, rgba(99, 102, 241, 0.03), rgba(71, 85, 105, 0.02)); }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <Transition name="loader-fade">
         <div v-if="isVisible" class="loader-overlay">
-            <!-- Animated background -->
+            <!-- Animated background - muted and professional -->
             <div class="loader-bg">
                 <div class="gradient-orb orb-1"></div>
                 <div class="gradient-orb orb-2"></div>
@@ -65,7 +65,7 @@ const props = defineProps({
     },
     minDisplayTime: {
         type: Number,
-        default: 1500 // Minimum time to show loader (ms)
+        default: 1500
     }
 });
 
@@ -79,7 +79,6 @@ const displayedSubtitle = ref('');
 const title = computed(() => t('dashboard.loader.title', 'Loading Your Portfolio'));
 const subtitle = computed(() => t('dashboard.loader.subtitle', 'Fetching real-time market data...'));
 
-// Typing animation for subtitle
 let typingInterval = null;
 const startTypingAnimation = () => {
     let index = 0;
@@ -95,7 +94,6 @@ const startTypingAnimation = () => {
     }, 50);
 };
 
-// Handle loader visibility
 watch(() => props.isLoading, (loading) => {
     if (!loading) {
         const elapsed = Date.now() - startTime.value;
@@ -126,12 +124,8 @@ onUnmounted(() => {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
     overflow: hidden;
-}
-
-.app-dark .loader-overlay {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
 }
 
 /* Animated background orbs */
@@ -144,47 +138,46 @@ onUnmounted(() => {
 .gradient-orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.5;
-    animation: float 8s ease-in-out infinite;
+    filter: blur(100px);
+    animation: float 12s ease-in-out infinite;
 }
 
+/* Light mode orbs - very subtle, desaturated */
 .orb-1 {
-    width: 400px;
-    height: 400px;
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    top: -100px;
-    left: -100px;
+    width: 500px;
+    height: 500px;
+    background: linear-gradient(135deg, #94a3b8, #cbd5e1);
+    opacity: 0.25;
+    top: -150px;
+    left: -150px;
     animation-delay: 0s;
 }
 
 .orb-2 {
-    width: 300px;
-    height: 300px;
-    background: linear-gradient(135deg, #ec4899, #f472b6);
-    bottom: -50px;
-    right: -50px;
-    animation-delay: -2s;
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(135deg, #a5b4c7, #c7d2e0);
+    opacity: 0.2;
+    bottom: -100px;
+    right: -100px;
+    animation-delay: -3s;
 }
 
 .orb-3 {
-    width: 250px;
-    height: 250px;
-    background: linear-gradient(135deg, #14b8a6, #22d3ee);
+    width: 350px;
+    height: 350px;
+    background: linear-gradient(135deg, #9ca3af, #d1d5db);
+    opacity: 0.15;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation-delay: -4s;
-}
-
-.app-dark .gradient-orb {
-    opacity: 0.3;
+    animation-delay: -6s;
 }
 
 @keyframes float {
     0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(30px, -30px) scale(1.1); }
-    66% { transform: translate(-20px, 20px) scale(0.9); }
+    33% { transform: translate(20px, -20px) scale(1.05); }
+    66% { transform: translate(-15px, 15px) scale(0.95); }
 }
 
 /* Content container */
@@ -211,7 +204,7 @@ onUnmounted(() => {
 .logo-ring {
     position: absolute;
     inset: 0;
-    border: 3px solid transparent;
+    border: 2px solid transparent;
     border-top-color: #6366f1;
     border-radius: 50%;
     animation: spin 1.5s linear infinite;
@@ -219,7 +212,7 @@ onUnmounted(() => {
 
 .logo-ring.ring-2 {
     inset: 12px;
-    border-top-color: #8b5cf6;
+    border-top-color: #818cf8;
     animation-direction: reverse;
     animation-duration: 2s;
 }
@@ -232,7 +225,7 @@ onUnmounted(() => {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 10px 40px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 10px 40px rgba(99, 102, 241, 0.2);
     animation: pulse 2s ease-in-out infinite;
 }
 
@@ -291,9 +284,8 @@ onUnmounted(() => {
 .loader-title {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #1e293b;
     margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -303,10 +295,6 @@ onUnmounted(() => {
     font-size: 0.95rem;
     color: #64748b;
     min-height: 1.5em;
-}
-
-.app-dark .loader-subtitle {
-    color: #94a3b8;
 }
 
 .cursor {
@@ -332,7 +320,7 @@ onUnmounted(() => {
     position: relative;
     width: 100%;
     height: 4px;
-    background: rgba(99, 102, 241, 0.2);
+    background: rgba(99, 102, 241, 0.15);
     border-radius: 2px;
     overflow: visible;
 }
@@ -348,12 +336,12 @@ onUnmounted(() => {
     position: absolute;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     background: #8b5cf6;
     border-radius: 50%;
-    filter: blur(10px);
-    opacity: 0.6;
+    filter: blur(8px);
+    opacity: 0.5;
     transition: left 0.3s ease-out;
 }
 
@@ -424,5 +412,71 @@ onUnmounted(() => {
     .progress-glow {
         transition: none;
     }
+}
+</style>
+
+<!-- Non-scoped styles for dark mode (app-dark is on parent element) -->
+<style>
+.app-dark .loader-overlay {
+    background: linear-gradient(135deg, #030712 0%, #0f172a 100%);
+}
+
+/* Dark mode orbs - very dark and subtle */
+.app-dark .orb-1 {
+    background: linear-gradient(135deg, #1e293b, #334155);
+    opacity: 0.4;
+}
+
+.app-dark .orb-2 {
+    background: linear-gradient(135deg, #1e3a5f, #1e293b);
+    opacity: 0.3;
+}
+
+.app-dark .orb-3 {
+    background: linear-gradient(135deg, #312e81, #1e1b4b);
+    opacity: 0.25;
+}
+
+.app-dark .logo-ring {
+    border-top-color: #818cf8;
+}
+
+.app-dark .logo-ring.ring-2 {
+    border-top-color: #6366f1;
+}
+
+.app-dark .logo-icon {
+    box-shadow: 0 10px 40px rgba(99, 102, 241, 0.15);
+}
+
+.app-dark .bar {
+    background: linear-gradient(to top, #4f46e5, #818cf8);
+}
+
+.app-dark .loader-title {
+    background: linear-gradient(135deg, #818cf8, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.app-dark .loader-subtitle {
+    color: #94a3b8;
+}
+
+.app-dark .cursor {
+    color: #818cf8;
+}
+
+.app-dark .progress-track {
+    background: rgba(99, 102, 241, 0.2);
+}
+
+.app-dark .progress-glow {
+    opacity: 0.4;
+}
+
+.app-dark .progress-text {
+    color: #818cf8;
 }
 </style>
