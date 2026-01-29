@@ -1,0 +1,448 @@
+{
+  "nav": {
+    "features": "Funktionen",
+    "features_desc": "Entdecken Sie unser Angebot",
+    "pricing": "Preise",
+    "pricing_desc": "Einfache, transparente Preise",
+    "login": "Anmelden",
+    "faq": "FAQ",
+    "faq_desc": "Häufig gestellte Fragen",
+    "menu": "Menü",
+    "join_waitlist": "Warteliste beitreten",
+    "settings": "Einstellungen",
+    "language": "Sprache",
+    "dark_mode": "Dunkelmodus",
+    "sidebar_footer": "© 2026 Clear Cut Markets"
+  },
+  "hero": {
+    "badge": "KI-gestützte Nachrichten-Intelligenz für Investoren",
+    "headline_1": "Deine Assets.",
+    "headline_2": "Globale Einblicke.",
+    "headline_3": "Kein Rauschen.",
+    "subtitle": "Unsere KI durchsucht globale Nachrichten und zeigt dir genau, was deine Aktien, Krypto und ETFs beeinflusst — damit du handeln kannst, bevor der Markt reagiert.",
+    "form": {
+      "placeholder": "Deine E-Mail-Adresse",
+      "button": "Warteliste beitreten",
+      "button_beta": "Beta beitreten"
+    },
+    "waitlist_count": "{count} Personen auf der Warteliste",
+    "social_proof": "Dein KI-Investmentanalyst, der niemals schläft",
+    "stats": {
+      "waitlist": "Auf der Warteliste",
+      "news_sources": "15+",
+      "news_sources_text": "Nachrichtenquellen",
+      "monitoring": "24/7",
+      "monitoring_text": "KI-Überwachung",
+      "alert_speed": "<5 Min",
+      "alert_speed_text": "Alarmgeschwindigkeit"
+    },
+    "asset_badges": {
+      "stocks": "Aktien",
+      "crypto": "Krypto",
+      "etfs": "ETFs"
+    },
+    "messages": {
+      "invalid_email": "Bitte gib eine gültige E-Mail-Adresse ein",
+      "already_on_waitlist": "Diese E-Mail ist bereits auf der Warteliste!",
+      "success": "Du stehst auf der Warteliste! Wir benachrichtigen dich, wenn wir starten.",
+      "error": "Etwas ist schiefgelaufen. Bitte versuche es erneut."
+    }
+  },
+  "modulesDemo": {
+    "badge": "Personalisiertes Dashboard",
+    "title": "Alle deine Assets.",
+    "title_highlight": "Eine Ansicht.",
+    "subtitle": "Verfolge Aktien, Krypto und ETFs nebeneinander mit KI-gestützten Einblicken, die auf jeden Asset-Typ zugeschnitten sind.",
+    "placeholder_text": "(Demodaten unten gezeigt)",
+    "dashboard_button": "Das könnte dein Dashboard sein",
+    "waitlist_prompt": "Tritt der Warteliste bei, um mit der Verfolgung deiner Anlagen zu beginnen",
+    "assets": {
+      "stock": "Aktie",
+      "crypto": "Krypto",
+      "etf": "ETF"
+    },
+    "stats": {
+      "mkt_cap": "Marktkap.",
+      "pe": "KGV",
+      "volume": "Volumen",
+      "vol_24h": "24h Vol.",
+      "high_24h": "24h Hoch",
+      "low_24h": "24h Tief",
+      "aum": "AUM",
+      "exp_ratio": "Kostenquote",
+      "range_52w": "52W-Spanne"
+    },
+    "ai_analysis": "KI-Analyse",
+    "sentiment": "Stimmung",
+    "bullish": "{percent}% Bullish",
+    "insights": {
+      "stock": "Starkes Gewinnmomentum mit 14% YoY Wachstum im Dienstleistungsbereich. iPhone 16-Zyklus zeigt überdurchschnittliche Nachfrage.",
+      "crypto": "Durchbruch über $100K Widerstand mit starken institutionellen Zuflüssen. ETF-Volumen auf Rekordhöhe.",
+      "etf": "Breite Marktrallye setzt sich fort, angeführt von Tech. Fed-Zinssenkungserwartungen treiben positive Stimmung."
+    },
+    "cta": {
+      "button": "Starte das Tracking deiner Assets",
+      "subtitle": "Kostenlos starten • Keine Kreditkarte erforderlich"
+    }
+  },
+  "usp": {
+    "badge": "So funktioniert's",
+    "title": "Starte in",
+    "title_highlight": "3 einfachen Schritten",
+    "subtitle": "Von der Anmeldung zu Einblicken in unter 2 Minuten. Keine komplizierte Einrichtung erforderlich.",
+    "steps": {
+      "step1": {
+        "title": "Konto erstellen",
+        "description": "Melde dich in Sekunden mit deiner E-Mail an. Keine Kreditkarte erforderlich."
+      },
+      "step2": {
+        "title": "Assets hinzufügen",
+        "description": "Suche und füge beliebige Aktien, Krypto oder ETFs hinzu, die du verfolgen möchtest."
+      },
+      "step3": {
+        "title": "KI-Einblicke erhalten",
+        "description": "Erhalte personalisierte Analysen und bleibe Marktbewegungen voraus."
+      }
+    },
+    "demo_url": "app.clearcutmarkets.com/dashboard",
+    "market_event": "Marktereignis",
+    "impact_title": "Mögliche Auswirkungen auf dein Portfolio",
+    "news_title": "Globaler Chipmangel verschärft sich",
+    "news_source": "Quelle: Global Tech Times",
+    "potential_decline": "Möglicher Rückgang",
+    "alert_title": "Clear Cut Alarm:",
+    "alert_text": "Eine Verschärfung des Chipmangels könnte sich negativ auf deine **TSLA**- und **NVDA**-Bestände auswirken.",
+    "alert_link": "KI-Analyse ansehen"
+  },
+  "features": {
+    "badge": "Leistungsstarke Funktionen",
+    "title": "Alles was du brauchst um",
+    "title_highlight": "Voraus zu sein",
+    "subtitle": "Leistungsstarke Tools für moderne Investoren, die mehr von ihrer Marktintelligenz erwarten.",
+    "cards": {
+      "news_aggregation": {
+        "title": "Intelligente Nachrichtenaggregation",
+        "description": "Wir scannen über 15 vertrauenswürdige Quellen einschließlich Reuters, Bloomberg, SEC-Einreichungen und Social Sentiment — und filtern das Rauschen heraus, um nur das zu zeigen, was für deine Bestände wichtig ist.",
+        "tags": {
+          "financial_news": "Finanznachrichten",
+          "sec_filings": "SEC-Einreichungen",
+          "social_sentiment": "Social Sentiment"
+        }
+      },
+      "ai_analysis": {
+        "title": "KI-gestützte Analyse",
+        "description": "Unsere KI liest und fasst Artikel zusammen, extrahiert Stimmungen und erklärt potenzielle Auswirkungen verständlich.",
+        "powered_by": "Powered by GPT-4"
+      },
+      "alerts": {
+        "title": "Sofortige Alarme",
+        "description": "Werde innerhalb von Minuten benachrichtigt, wenn Nachrichten erscheinen, die dein Portfolio betreffen könnten. Per E-Mail und In-App-Benachrichtigung."
+      },
+      "multi_asset": {
+        "title": "Multi-Asset-Unterstützung",
+        "description": "Verfolge Aktien, Krypto und ETFs in einem einheitlichen Dashboard mit asset-spezifischen Einblicken."
+      },
+      "access": {
+        "title": "Zugriff von überall",
+        "description": "Funktioniert hervorragend auf Desktop, Tablet und Handy. Deine Daten werden nahtlos über alle Geräte synchronisiert."
+      },
+      "digest": {
+        "title": "Wöchentliche Zusammenfassung",
+        "description": "Bevorzugst du eine Übersicht? Erhalte eine wöchentliche E-Mail mit den wichtigsten Nachrichten und Einblicken für dein Portfolio."
+      },
+      "security": {
+        "title": "Privacy-First-Design",
+        "description": "Wir verbinden uns nie mit deinem Broker. Du sagst uns nur, was wir verfolgen sollen — keine sensiblen Finanzdaten erforderlich. Deine E-Mail und Einstellungen sind verschlüsselt.",
+        "no_brokerage": "Kein Broker-Zugang",
+        "gdpr": "DSGVO-konform"
+      },
+      "tracking": {
+        "title": "Fokussiertes Modul-Tracking",
+        "description": "Vermeide Ablenkungen, indem du nur die 3-9 Investments überwachst, die für dich am wichtigsten sind."
+      },
+      "insights": {
+        "title": "KI-gestützte Einblicke",
+        "description": "Erhalte automatisierte Stimmungsanalysen und verständliche Zusammenfassungen aus über 15 Nachrichten- und Datenquellen."
+      },
+      "power": {
+        "title": "Bezahlbare Leistung",
+        "description": "Erhalte professionelle Werkzeuge und Einblicke ohne den Preis eines Unternehmensprodukts."
+      }
+    }
+  },
+  "stockModal": {
+    "subtitle": "Platzhalterdaten - Live-Daten in der Vollversion verfügbar.",
+    "price": "Marktpreis",
+    "market_cap": "Marktkap.",
+    "pe_ratio": "KGV",
+    "sentiment": "Stimmung",
+    "bullish": "Bullish"
+  },
+  "newsModal": {
+    "title": "KI-Nachrichtenanalyse",
+    "subtitle": "Platzhalterdaten - Live-Analyse in der Vollversion verfügbar.",
+    "source_article": "Quellartikel",
+    "source_name": "Global Tech Times",
+    "summary": "KI-generierte Zusammenfassung:",
+    "summary_text": "Der Artikel beleuchtet eine sich verschärfende globale Halbleiterknappheit, die vor allem die Automobil- und Unterhaltungselektronikbranche betrifft. Es wird erwartet, dass die Störungen in der Lieferkette anhalten, was zu potenziellen Produktionsverzögerungen und erhöhten Kosten für große Hersteller wie Tesla und NVIDIA führen wird.",
+    "sentiment_analysis": "Stimmungsanalyse:",
+    "sentiment_title": "Sehr Negativ (85% Konfidenz)",
+    "sentiment_text": "Die allgemeine Stimmung ist aufgrund der breiten Diskussion über Produktionskürzungen und finanzielle Verluste stark bärisch."
+  },
+  "useCases": {
+    "title": "Ist Clear Cut Markets das Richtige für dich?",
+    "subtitle": "Finde heraus, ob unser Ansatz zu deinem Anlagestil passt.",
+    "focused_title": "Du bist ein fokussierter Investor",
+    "focused_text": "Du glaubst an die Philosophie \"weniger ist mehr\". Du hast Anlagen, von denen du überzeugt bist, und möchtest sie tiefgreifend verstehen, ohne vom Lärm des breiteren Marktes abgelenkt zu werden.",
+    "cross_asset_title": "Du bist ein Cross-Asset-Analyst",
+    "cross_asset_text": "Du verstehst, dass eine politische Änderung in Asien sowohl deine Tech-Aktien als auch dein Krypto-Portfolio beeinflussen kann. Du brauchst ein Tool, das die Verbindungen zwischen verschiedenen Anlageklassen herstellt.",
+    "time_strapped_title": "Du bist ein Profi mit wenig Zeit",
+    "time_strapped_text": "Deine Zeit ist dein wertvollstes Gut. Du brauchst einen KI-Copiloten, der die schwere Arbeit übernimmt und dir wichtige Einblicke liefert, damit du schneller fundierte Entscheidungen treffen kannst."
+  },
+  "pricing": {
+    "badge": "Einfache Preise",
+    "title": "Starte kostenlos.",
+    "title_highlight": "Upgrade wenn du bereit bist.",
+    "subtitle": "Probiere Clear Cut Markets ohne Verpflichtung. Upgrade zu Pro, wenn du für das volle Erlebnis bereit bist.",
+    "plans": {
+      "free": {
+        "name": "Kostenlos",
+        "description": "Starten und erkunden",
+        "period": "für immer",
+        "cta": "Kostenlos starten",
+        "features": {
+          "modules": {
+            "title": "1 Modul",
+            "description": "Verfolge eine Aktie, Krypto oder ETF"
+          },
+          "ai": {
+            "title": "Basis KI-Analyse",
+            "description": "3 KI-Einblicke pro Woche"
+          },
+          "digest": {
+            "title": "Tägliche Nachrichten-Zusammenfassung",
+            "description": "Kuratierte Nachrichten für dein Asset"
+          },
+          "no_cross_asset": "Cross-Asset-Alarme",
+          "no_priority": "Vorrangiger Support"
+        }
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Volle Power für ernsthafte Investoren",
+        "badge": "Am beliebtesten",
+        "period": "/ Monat",
+        "trial": "14 Tage kostenlos testen inklusive",
+        "cta": "14 Tage kostenlos testen",
+        "features": {
+          "modules": {
+            "title": "6 Module",
+            "description": "Verfolge dein gesamtes Portfolio"
+          },
+          "ai": {
+            "title": "Unbegrenzte KI-Analyse",
+            "description": "Echtzeit-Einblicke für alle Assets"
+          },
+          "news": {
+            "title": "Volle Nachrichten-Intelligenz",
+            "description": "15+ Quellen, Echtzeit-Alarme"
+          },
+          "correlation": {
+            "title": "Cross-Asset-Korrelations-Alarme",
+            "description": "KI findet Verbindungen, die andere übersehen"
+          },
+          "support": {
+            "title": "Vorrangiger Support",
+            "description": "Hilfe, wenn du sie brauchst"
+          },
+          "thresholds": {
+            "title": "Anpassbare Alarmschwellen",
+            "description": "Stelle deine eigenen Empfindlichkeitsstufen ein"
+          }
+        }
+      }
+    },
+    "trust_badges": {
+      "no_card": "Keine Kreditkarte für kostenlose Stufe",
+      "cancel": "Jederzeit kündbar",
+      "secure": "Sichere Zahlungen über Stripe"
+    },
+    "enterprise": {
+      "title": "Brauchst du mehr als 6 Module?",
+      "description": "Wir bieten individuelle Pläne für Power-User und Teams an. Lass uns über deine Bedürfnisse sprechen.",
+      "cta": "Kontaktiere uns"
+    }
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Häufige",
+    "title_highlight": "Fragen",
+    "subtitle": "Alles, was du über Clear Cut Markets wissen musst.",
+    "q1": "Ersetzt das mein Broker-Konto?",
+    "a1": "Überhaupt nicht. Clear Cut Markets ist ein Nachrichten-Intelligenz-Tool, kein Broker. Du verwaltest deine Trades auf deiner bevorzugten Plattform — wir liefern die KI-gestützten Einblicke, damit du schneller fundierte Entscheidungen treffen kannst.",
+    "q2": "Wie funktioniert die KI-Nachrichtenanalyse?",
+    "a2": "Unser System scannt kontinuierlich über 15 vertrauenswürdige Quellen, darunter Reuters, Bloomberg, SEC-Einreichungen und Social-Sentiment-Plattformen. Wir verwenden fortschrittliche KI, um jeden Artikel zu analysieren, Stimmungen zu extrahieren, zu identifizieren, welche deiner Bestände betroffen sind, und die potenziellen Auswirkungen in verständlicher Sprache zu erklären.",
+    "q3": "Was unterscheidet das von Google Alerts oder Nachrichtenaggregatoren?",
+    "a3": "Normale Aggregatoren filtern nur nach Schlüsselwörtern. Clear Cut verwendet KI, um den Kontext zu verstehen und versteckte Verbindungen zu finden. Zum Beispiel könnte ein Chipmangel in Taiwan Tesla nicht erwähnen — aber unsere KI weiß, dass Tesla von diesen Chips abhängt und wird dich auf die Verbindung aufmerksam machen.",
+    "q4": "Welche Assets kann ich verfolgen?",
+    "a4": "Du kannst Aktien (US-Börsen), wichtige Kryptowährungen (BTC, ETH und mehr) und beliebte ETFs verfolgen. Wir erweitern ständig unsere Abdeckung basierend auf Nutzeranfragen.",
+    "q5": "Wie funktioniert die kostenlose Testversion?",
+    "a5": "Die kostenlose Stufe ist für immer kostenlos mit 1 Modul und begrenzter KI-Analyse. Wenn du das volle Erlebnis willst, kommt Pro mit einer 14-tägigen kostenlosen Testversion — keine Kreditkarte erforderlich. Jederzeit kündbar.",
+    "q6": "Wie schnell erhalte ich Alarme?",
+    "a6": "Unser System verarbeitet Nachrichten innerhalb von Minuten nach der Veröffentlichung. Bei bedeutenden Ereignissen, die dein Portfolio betreffen, erhältst du typischerweise innerhalb von 5 Minuten einen Alarm per E-Mail und In-App-Benachrichtigung.",
+    "contact_cta": {
+      "text": "Noch Fragen?",
+      "link": "Kontaktiere unser Support-Team"
+    }
+  },
+  "tooltips": {
+    "alerts": "Benutzerdefinierte Preis- und Stimmungsalarme festlegen",
+    "details": "Details anzeigen",
+    "settings": "Moduleinstellungen anpassen"
+  },
+  "stickyCTA": {
+    "title": "Bereit loszulegen?",
+    "subtitle": "Schließe dich Tausenden von Investoren an, die KI-gestützte Einblicke nutzen.",
+    "join_waitlist": "Warteliste beitreten",
+    "login": "Anmelden"
+  },
+  "footer": {
+    "tagline": "KI-gestützte Einblicke für Aktien, Krypto und ETFs. Durchdringe das Rauschen und konzentriere dich auf das Wesentliche.",
+    "product": {
+      "title": "Produkt",
+      "features": "Funktionen",
+      "pricing": "Preise",
+      "faq": "FAQ",
+      "login": "Anmelden"
+    },
+    "company": {
+      "title": "Unternehmen",
+      "about": "Über uns",
+      "blog": "Blog",
+      "careers": "Karriere",
+      "contact": "Kontakt"
+    },
+    "legal": {
+      "privacy": "Datenschutzerklärung",
+      "terms": "AGB"
+    },
+    "copyright": "Alle Rechte vorbehalten."
+  },
+  "contactModal": {
+    "title": "Vertrieb kontaktieren",
+    "subtitle": "Lass uns einen Plan besprechen, der deinen Bedürfnissen entspricht.",
+    "name_label": "Dein Name",
+    "name_placeholder": "z.B. Max Mustermann",
+    "email_label": "Deine E-Mail",
+    "email_placeholder": "Deine E-Mail-Adresse",
+    "message_label": "Deine Nachricht",
+    "message_placeholder": "Erzähl uns von deinen Anforderungen...",
+    "cancel_button": "Abbrechen",
+    "send_button": "Nachricht senden"
+  },
+  "login": {
+    "branding_title": "Willkommen bei Clear Cut Markets",
+    "branding_subtitle": "Konzentriere dich auf das Wesentliche. Dein KI-Copilot für klügeres Investieren.",
+    "testimonial_text": "Das ist das erste Tool, das mir wirklich hilft, die Zusammenhänge zwischen meinen verschiedenen Anlagen zu erkennen. Es ist ein Game-Changer.",
+    "testimonial_author": "- Früher Beta-Tester",
+    "form_title": "Bei deinem Konto anmelden",
+    "form_subtitle": "Noch kein Konto? ",
+    "create_link": "Jetzt erstellen",
+    "email_label": "E-Mail",
+    "email_placeholder": "Deine E-Mail-Adresse",
+    "password_label": "Passwort",
+    "password_placeholder": "Dein Passwort",
+    "remember_me": "Angemeldet bleiben",
+    "forgot_password": "Passwort vergessen?",
+    "submit_button": "Anmelden",
+    "or_continue": "oder",
+    "error_enter_credentials": "Bitte gib sowohl E-Mail als auch Passwort ein.",
+    "error_unknown": "Ein unbekannter Fehler ist aufgetreten.",
+    "back_to_home": "Zurück zur Startseite"
+  },
+  "signup": {
+    "title": "Tritt der Beta-Warteliste bei",
+    "subtitle": "Erhalte frühzeitigen Zugang zu Clear Cut Markets.",
+    "badge": "Begrenzte Plätze verfügbar",
+    "branding_title": "Die Zukunft des Investierens",
+    "branding_subtitle": "Sei unter den Ersten, die KI-gestützte Investment-Insights erleben.",
+    "benefit_1": "Frühzeitiger Zugang zu allen Funktionen",
+    "benefit_2": "Exklusive Gründerpreise",
+    "benefit_3": "Direkter Einfluss auf die Produktentwicklung",
+    "stat_waitlist": "Auf Warteliste",
+    "stat_sources": "Nachrichtenquellen",
+    "stat_monitoring": "KI-Überwachung",
+    "email_label": "E-Mail",
+    "email_placeholder": "Deine E-Mail-Adresse eingeben",
+    "submit_button": "Warteliste beitreten",
+    "success_title": "Du bist auf der Liste!",
+    "success_message": "Wir werden uns bald mit deiner Beta-Einladung bei dir melden.",
+    "trust_secure": "Sicher",
+    "trust_no_spam": "Kein Spam",
+    "trust_unsubscribe": "Jederzeit abmelden",
+    "or": "oder",
+    "error_email_exists": "Diese E-Mail ist bereits auf der Warteliste.",
+    "error_generic": "Ein Fehler ist aufgetreten. Bitte versuche es erneut.",
+    "error_invalid_email": "Bitte gib eine gültige E-Mail-Adresse ein.",
+    "already_on_list": "Bereits auf der Liste?",
+    "sign_in_link": "Anmelden"
+  },
+  "dashboard": {
+    "welcome": "Willkommen,",
+    "subtitle": "Hier ist dein Investment-Dashboard im Überblick.",
+    "your_modules": "Deine Module",
+    "module_configurator": "Modul-Konfigurator",
+    "no_modules": "Du hast noch keine Module hinzugefügt. Klicke oben, um zu starten!",
+    "add_first_module": "Füge dein erstes Modul hinzu",
+    "correlation_insights": "Cross-Investment Korrelationseinblicke",
+    "correlation_placeholder": "Deine KI-gestützten Korrelationseinblicke werden hier erscheinen.",
+    "unlock_title": "Erschließe einen mächtigen Vorteil",
+    "unlock_subtitle": "Steige auf den Advanced-Plan um, um Cross-Investment-Korrelationsalarme zu erhalten.",
+    "upgrade_button": "Jetzt upgraden",
+    "loader": {
+      "title": "Assets werden geladen",
+      "subtitle": "Echtzeit-Marktdaten werden abgerufen..."
+    },
+    "card": {
+      "ai_analysis": "KI-Analyse",
+      "sentiment": "Stimmung",
+      "bullish": "Bullish",
+      "add_module_title": "Neues Modul hinzufügen",
+      "add_module_subtitle": "Klicke, um deine Module zu konfigurieren."
+    },
+    "configurator": {
+      "title": "Modul-Konfigurator",
+      "modules_used": "Genutzte Module",
+      "current_modules": "Aktuelle Module",
+      "drag_to_reorder": "Ziehen zum Sortieren",
+      "no_modules_added": "Du hast noch keine Module hinzugefügt.",
+      "add_new_module": "Neues Modul hinzufügen",
+      "search_placeholder": "Suche nach einem Asset...",
+      "add_button": "Hinzufügen",
+      "limit_reached": "Du hast dein Modul-Limit erreicht. Erweitere deinen Plan, um mehr hinzuzufügen."
+    },
+    "detailModal": {
+      "price": "Preis",
+      "market_cap": "Marktkap.",
+      "volume": "Volumen",
+      "pe_ratio": "KGV",
+      "day_high": "Tageshoch",
+      "day_low": "Tagestief",
+      "52_week_high": "52-Wochen-Hoch",
+      "52_week_low": "52-Wochen-Tief",
+      "day_change": "Tagesveränderung"
+    }
+  },
+  "topbar": {
+    "dashboard": "Dashboard",
+    "settings": "Einstellungen",
+    "logout": "Abmelden",
+    "menu": "Menü",
+    "display_options": "Anzeigeoptionen",
+    "account": "Konto",
+    "theme": "Thema",
+    "light_mode": "Wechsel zum Hellen Modus",
+    "dark_mode": "Wechsel zum Dunklen Modus",
+    "language": "Sprache"
+  }
+}

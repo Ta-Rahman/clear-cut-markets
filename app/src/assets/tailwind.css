@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global scroll animations */
+@layer utilities {
+    /* Base state for animated elements */
+    .fade-up,
+    .fade-in,
+    .fade-left,
+    .fade-right,
+    .scale-in {
+        opacity: 0;
+        transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    }
+
+    .fade-up {
+        transform: translateY(20px);
+    }
+
+    .fade-left {
+        transform: translateX(-20px);
+    }
+
+    .fade-right {
+        transform: translateX(20px);
+    }
+
+    .scale-in {
+        transform: scale(0.95);
+    }
+
+    /* Animated state */
+    .fade-up.animate-in,
+    .fade-in.animate-in,
+    .fade-left.animate-in,
+    .fade-right.animate-in,
+    .scale-in.animate-in {
+        opacity: 1;
+        transform: translateY(0) translateX(0) scale(1);
+    }
+
+    /* Stagger classes - kept for backwards compatibility but delays handled by JS */
+    .stagger-1, .stagger-2, .stagger-3, .stagger-4, 
+    .stagger-5, .stagger-6, .stagger-7, .stagger-8 {
+        /* No transition-delay - JS controls timing */
+    }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.3);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.5);
+}
+
+/* Selection color */
+::selection {
+    background: rgba(99, 102, 241, 0.3);
+}

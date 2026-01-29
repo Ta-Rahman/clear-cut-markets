@@ -1,0 +1,448 @@
+{
+  "nav": {
+    "features": "Features",
+    "features_desc": "Discover what we offer",
+    "pricing": "Pricing",
+    "pricing_desc": "Simple, transparent pricing",
+    "login": "Login",
+    "faq": "FAQ",
+    "faq_desc": "Common questions answered",
+    "menu": "Menu",
+    "join_waitlist": "Join Waitlist",
+    "settings": "Settings",
+    "language": "Language",
+    "dark_mode": "Dark Mode",
+    "sidebar_footer": "© 2026 Clear Cut Markets"
+  },
+  "hero": {
+    "badge": "AI-Powered News Intelligence for Investors",
+    "headline_1": "Your Assets.",
+    "headline_2": "Global Insights.",
+    "headline_3": "Zero Noise.",
+    "subtitle": "Our AI scans global news and tells you exactly what impacts your stocks, crypto, and ETFs — so you can act before the market catches on.",
+    "form": {
+      "placeholder": "Enter your email",
+      "button": "Join Waitlist",
+      "button_beta": "Join The Beta"
+    },
+    "waitlist_count": "{count} people on the waitlist",
+    "social_proof": "Your AI investment analyst that never sleeps",
+    "stats": {
+      "waitlist": "On Waitlist",
+      "news_sources": "15+",
+      "news_sources_text": "News Sources",
+      "monitoring": "24/7",
+      "monitoring_text": "AI Monitoring",
+      "alert_speed": "<5min",
+      "alert_speed_text": "Alert Speed"
+    },
+    "asset_badges": {
+      "stocks": "Stocks",
+      "crypto": "Crypto",
+      "etfs": "ETFs"
+    },
+    "messages": {
+      "invalid_email": "Please enter a valid email address",
+      "already_on_waitlist": "This email is already on the waitlist!",
+      "success": "You're on the waitlist! We'll notify you when we launch.",
+      "error": "Something went wrong. Please try again."
+    }
+  },
+  "modulesDemo": {
+    "badge": "Personalized Dashboard",
+    "title": "All Your Assets.",
+    "title_highlight": "One View.",
+    "subtitle": "Track stocks, crypto, and ETFs side by side with AI-powered insights tailored to each asset type.",
+    "placeholder_text": "(Demo data shown below)",
+    "dashboard_button": "This could be your dashboard",
+    "waitlist_prompt": "Join the waitlist to start tracking your investments",
+    "assets": {
+      "stock": "Stock",
+      "crypto": "Crypto",
+      "etf": "ETF"
+    },
+    "stats": {
+      "mkt_cap": "Mkt Cap",
+      "pe": "P/E",
+      "volume": "Volume",
+      "vol_24h": "24h Vol",
+      "high_24h": "24h High",
+      "low_24h": "24h Low",
+      "aum": "AUM",
+      "exp_ratio": "Exp. Ratio",
+      "range_52w": "52W Range"
+    },
+    "ai_analysis": "AI Analysis",
+    "sentiment": "Sentiment",
+    "bullish": "{percent}% Bullish",
+    "insights": {
+      "stock": "Strong earnings momentum with services revenue growing 14% YoY. iPhone 16 cycle showing above-average demand.",
+      "crypto": "Breaking above $100K resistance with strong institutional inflows. ETF volumes at record highs.",
+      "etf": "Broad market rally continues with tech leading gains. Fed rate cut expectations driving positive sentiment."
+    },
+    "cta": {
+      "button": "Start Tracking Your Assets",
+      "subtitle": "Free to start • No credit card required"
+    }
+  },
+  "usp": {
+    "badge": "How It Works",
+    "title": "Get Started in",
+    "title_highlight": "3 Simple Steps",
+    "subtitle": "From sign-up to insights in under 2 minutes. No complex setup required.",
+    "steps": {
+      "step1": {
+        "title": "Create Account",
+        "description": "Sign up with your email in seconds. No credit card required to get started."
+      },
+      "step2": {
+        "title": "Add Your Assets",
+        "description": "Search and add any stocks, crypto, or ETFs you want to track."
+      },
+      "step3": {
+        "title": "Get AI Insights",
+        "description": "Receive personalized analysis and stay ahead of market movements."
+      }
+    },
+    "demo_url": "app.clearcutmarkets.com/dashboard",
+    "market_event": "Market Event",
+    "impact_title": "Potential Impact On Your Portfolio",
+    "news_title": "Global Chip Shortage Worsens",
+    "news_source": "Source: Global Tech Times",
+    "potential_decline": "Potential Decline",
+    "alert_title": "Clear Cut Alert:",
+    "alert_text": "Worsening chip shortages may negatively impact your **TSLA** and **NVDA** holdings.",
+    "alert_link": "See AI Analysis"
+  },
+  "features": {
+    "badge": "Powerful Features",
+    "title": "Everything You Need to",
+    "title_highlight": "Stay Ahead",
+    "subtitle": "Powerful tools designed for modern investors who demand more from their market intelligence.",
+    "cards": {
+      "news_aggregation": {
+        "title": "Smart News Aggregation",
+        "description": "We scan 15+ trusted sources including Reuters, Bloomberg, SEC filings, and social sentiment — filtering out the noise to show only what matters to your holdings.",
+        "tags": {
+          "financial_news": "Financial News",
+          "sec_filings": "SEC Filings",
+          "social_sentiment": "Social Sentiment"
+        }
+      },
+      "ai_analysis": {
+        "title": "AI-Powered Analysis",
+        "description": "Our AI reads and summarizes articles, extracts sentiment, and explains potential impact in plain English.",
+        "powered_by": "Powered by GPT-4"
+      },
+      "alerts": {
+        "title": "Instant Alerts",
+        "description": "Get notified within minutes when news breaks that could affect your portfolio. Email and in-app alerts."
+      },
+      "multi_asset": {
+        "title": "Multi-Asset Support",
+        "description": "Track stocks, crypto, and ETFs all in one unified dashboard with asset-specific insights."
+      },
+      "access": {
+        "title": "Access Anywhere",
+        "description": "Works beautifully on desktop, tablet, and mobile. Your data syncs seamlessly across all devices."
+      },
+      "digest": {
+        "title": "Weekly Digest",
+        "description": "Prefer a summary? Get a weekly email with the most important news and insights for your portfolio."
+      },
+      "security": {
+        "title": "Privacy-First Design",
+        "description": "We never connect to your brokerage. You just tell us what to track — no sensitive financial data required. Your email and preferences are encrypted.",
+        "no_brokerage": "No brokerage access",
+        "gdpr": "GDPR compliant"
+      },
+      "tracking": {
+        "title": "Focused Module Tracking",
+        "description": "Eliminate noise by monitoring only the 3-9 investments that matter most to you."
+      },
+      "insights": {
+        "title": "AI-Powered Insights",
+        "description": "Get automated sentiment analysis and digestible summaries from 15+ news and data sources."
+      },
+      "power": {
+        "title": "Affordable Power",
+        "description": "Get institutional-grade tools and insights without the enterprise price tag."
+      }
+    }
+  },
+  "stockModal": {
+    "subtitle": "Placeholder Data - Live data available in the full version.",
+    "price": "Market Price",
+    "market_cap": "Market Cap",
+    "pe_ratio": "P/E Ratio",
+    "sentiment": "Sentiment",
+    "bullish": "Bullish"
+  },
+  "newsModal": {
+    "title": "AI News Analysis",
+    "subtitle": "Placeholder Data - Live analysis in the full version.",
+    "source_article": "Source Article",
+    "source_name": "Global Tech Times",
+    "summary": "AI-Generated Summary:",
+    "summary_text": "The article highlights a deepening global semiconductor shortage, primarily affecting automotive and consumer electronics. Supply chain disruptions are expected to persist, leading to potential production delays and increased costs for major manufacturers like Tesla and NVIDIA.",
+    "sentiment_analysis": "Sentiment Analysis:",
+    "sentiment_title": "Highly Negative (85% Confidence)",
+    "sentiment_text": "The overall sentiment is strongly bearish due to widespread discussion of production cuts and financial losses."
+  },
+  "useCases": {
+    "title": "Is Clear Cut Markets the right fit for you?",
+    "subtitle": "See if our approach matches your investment style.",
+    "focused_title": "You are a Focused Investor",
+    "focused_text": "You believe in a \"less is more\" philosophy. You have high-conviction picks and want to deeply understand them without the distraction of the broader market's noise.",
+    "cross_asset_title": "You are a Cross-Asset Analyst",
+    "cross_asset_text": "You understand that a policy change in Asia can impact both your tech stocks and your crypto portfolio. You need a tool that connects the dots across different asset classes.",
+    "time_strapped_title": "You are a Time-Strapped Professional",
+    "time_strapped_text": "Your time is your most valuable asset. You need an AI co-pilot to do the heavy lifting, delivering critical insights so you can make informed decisions, faster."
+  },
+  "pricing": {
+    "badge": "Simple Pricing",
+    "title": "Start Free.",
+    "title_highlight": "Upgrade When Ready.",
+    "subtitle": "Try Clear Cut Markets with no commitment. Upgrade to Pro when you're ready for the full experience.",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "description": "Get started and explore",
+        "period": "forever",
+        "cta": "Start Free",
+        "features": {
+          "modules": {
+            "title": "1 Module",
+            "description": "Track one stock, crypto, or ETF"
+          },
+          "ai": {
+            "title": "Basic AI Analysis",
+            "description": "3 AI insights per week"
+          },
+          "digest": {
+            "title": "Daily News Digest",
+            "description": "Curated news for your asset"
+          },
+          "no_cross_asset": "Cross-asset alerts",
+          "no_priority": "Priority support"
+        }
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Full power for serious investors",
+        "badge": "Most Popular",
+        "period": "/ month",
+        "trial": "14-day free trial included",
+        "cta": "Start 14-Day Trial",
+        "features": {
+          "modules": {
+            "title": "6 Modules",
+            "description": "Track your full portfolio"
+          },
+          "ai": {
+            "title": "Unlimited AI Analysis",
+            "description": "Real-time insights for all assets"
+          },
+          "news": {
+            "title": "Full News Intelligence",
+            "description": "15+ sources, real-time alerts"
+          },
+          "correlation": {
+            "title": "Cross-Asset Correlation Alerts",
+            "description": "AI finds connections others miss"
+          },
+          "support": {
+            "title": "Priority Support",
+            "description": "Get help when you need it"
+          },
+          "thresholds": {
+            "title": "Custom Alert Thresholds",
+            "description": "Set your own sensitivity levels"
+          }
+        }
+      }
+    },
+    "trust_badges": {
+      "no_card": "No credit card for free tier",
+      "cancel": "Cancel anytime",
+      "secure": "Secure payments via Stripe"
+    },
+    "enterprise": {
+      "title": "Need more than 6 modules?",
+      "description": "We offer custom plans for power users and teams. Let's talk about your needs.",
+      "cta": "Contact Us"
+    }
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Common",
+    "title_highlight": "Questions",
+    "subtitle": "Everything you need to know about Clear Cut Markets.",
+    "q1": "Is this a replacement for my brokerage account?",
+    "a1": "Not at all. Clear Cut Markets is a news intelligence tool, not a broker. You manage your trades on your preferred platform — we provide the AI-powered insights to help you make informed decisions faster.",
+    "q2": "How does the AI news analysis work?",
+    "a2": "Our system continuously scans 15+ trusted sources including Reuters, Bloomberg, SEC filings, and social sentiment platforms. We use advanced AI to analyze each article, extract sentiment, identify which of your holdings are affected, and explain the potential impact in plain English.",
+    "q3": "What makes this different from Google Alerts or news aggregators?",
+    "a3": "Regular aggregators just filter by keywords. Clear Cut uses AI to understand context and find hidden connections. For example, a chip shortage in Taiwan might not mention Tesla — but our AI knows Tesla depends on those chips and will alert you to the connection.",
+    "q4": "What assets can I track?",
+    "a4": "You can track stocks (US exchanges), major cryptocurrencies (BTC, ETH, and more), and popular ETFs. We're constantly expanding coverage based on user requests.",
+    "q5": "How does the free trial work?",
+    "a5": "The Free tier is free forever with 1 module and limited AI analysis. If you want the full experience, Pro comes with a 14-day free trial — no credit card required. Cancel anytime.",
+    "q6": "How quickly will I get alerts?",
+    "a6": "Our system processes news within minutes of publication. For significant events affecting your portfolio, you'll typically receive an alert within 5 minutes via email and in-app notification.",
+    "contact_cta": {
+      "text": "Still have questions?",
+      "link": "Contact our support team"
+    }
+  },
+  "tooltips": {
+    "alerts": "Set custom price and sentiment alerts",
+    "details": "View Details",
+    "settings": "Customize module settings"
+  },
+  "stickyCTA": {
+    "title": "Ready to get started?",
+    "subtitle": "Join thousands of investors using AI-powered insights.",
+    "join_waitlist": "Join Waitlist",
+    "login": "Login"
+  },
+  "footer": {
+    "tagline": "AI-powered insights for stocks, crypto, and ETFs. Cut through the noise and focus on what matters.",
+    "product": {
+      "title": "Product",
+      "features": "Features",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "login": "Login"
+    },
+    "company": {
+      "title": "Company",
+      "about": "About",
+      "blog": "Blog",
+      "careers": "Careers",
+      "contact": "Contact"
+    },
+    "legal": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    },
+    "copyright": "All rights reserved."
+  },
+  "contactModal": {
+    "title": "Contact Sales",
+    "subtitle": "Let's discuss a plan that fits your needs.",
+    "name_label": "Your Name",
+    "name_placeholder": "e.g. Alex Doe",
+    "email_label": "Your Email",
+    "email_placeholder": "Your email address",
+    "message_label": "Your Message",
+    "message_placeholder": "Tell us about your requirements...",
+    "cancel_button": "Cancel",
+    "send_button": "Send Message"
+  },
+  "login": {
+    "branding_title": "Welcome to Clear Cut Markets",
+    "branding_subtitle": "Focus on what matters. Your AI co-pilot for smarter investing.",
+    "testimonial_text": "This is the first tool that actually helps me see the connections between my different assets. It's a game-changer.",
+    "testimonial_author": "- Early Beta Tester",
+    "form_title": "Sign In to Your Account",
+    "form_subtitle": "Don't have an account? ",
+    "create_link": "Create today",
+    "email_label": "Email",
+    "email_placeholder": "Your email address",
+    "password_label": "Password",
+    "password_placeholder": "Your password",
+    "remember_me": "Remember me",
+    "forgot_password": "Forgot password?",
+    "submit_button": "Sign In",
+    "or_continue": "or",
+    "error_enter_credentials": "Please enter both email and password.",
+    "error_unknown": "An unknown error occurred.",
+    "back_to_home": "Back to home"
+  },
+  "signup": {
+    "title": "Join the Beta Waitlist",
+    "subtitle": "Get early access to Clear Cut Markets.",
+    "badge": "Limited spots available",
+    "branding_title": "Join the Future of Investing",
+    "branding_subtitle": "Be among the first to experience AI-powered investment insights.",
+    "benefit_1": "Early access to all features",
+    "benefit_2": "Exclusive founding member pricing",
+    "benefit_3": "Direct input on product development",
+    "stat_waitlist": "On Waitlist",
+    "stat_sources": "News Sources",
+    "stat_monitoring": "AI Monitoring",
+    "email_label": "Email",
+    "email_placeholder": "Enter your email address",
+    "submit_button": "Join Waitlist",
+    "success_title": "You're on the list!",
+    "success_message": "We'll be in touch soon with your beta invitation.",
+    "trust_secure": "Secure",
+    "trust_no_spam": "No spam",
+    "trust_unsubscribe": "Unsubscribe anytime",
+    "or": "or",
+    "error_email_exists": "This email is already on the waitlist.",
+    "error_generic": "An error occurred. Please try again.",
+    "error_invalid_email": "Please enter a valid email address.",
+    "already_on_list": "Already on the list?",
+    "sign_in_link": "Sign In"
+  },
+  "dashboard": {
+    "welcome": "Welcome,",
+    "subtitle": "Here is your investment dashboard overview.",
+    "your_modules": "Your Modules",
+    "module_configurator": "Module Configurator",
+    "no_modules": "You haven't added any modules yet. Click the card above to get started!",
+    "add_first_module": "Add Your First Module",
+    "correlation_insights": "Cross-Investment Correlation Insights",
+    "correlation_placeholder": "Your AI-powered correlation insights will appear here.",
+    "unlock_title": "Unlock a Powerful Edge",
+    "unlock_subtitle": "Upgrade to the Advanced plan to get Cross-Investment Correlation Alerts.",
+    "upgrade_button": "Upgrade Now",
+    "loader": {
+      "title": "Loading Your Assets",
+      "subtitle": "Fetching real-time market data..."
+    },
+    "card": {
+      "ai_analysis": "AI Analysis",
+      "sentiment": "Sentiment",
+      "bullish": "Bullish",
+      "add_module_title": "Add New Module",
+      "add_module_subtitle": "Click to configure your modules."
+    },
+    "configurator": {
+      "title": "Module Configurator",
+      "modules_used": "Modules Used",
+      "current_modules": "Current Modules",
+      "drag_to_reorder": "Drag to reorder",
+      "no_modules_added": "You haven't added any modules yet.",
+      "add_new_module": "Add New Module",
+      "search_placeholder": "Search for an asset...",
+      "add_button": "Add",
+      "limit_reached": "You've reached your module limit. Upgrade your plan to add more."
+    },
+    "detailModal": {
+      "price": "Price",
+      "market_cap": "Market Cap",
+      "volume": "Volume",
+      "pe_ratio": "P/E Ratio",
+      "day_high": "Day's High",
+      "day_low": "Day's Low",
+      "52_week_high": "52-Week High",
+      "52_week_low": "52-Week Low",
+      "day_change": "Day's Change"
+    }
+  },
+  "topbar": {
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "logout": "Logout",
+    "menu": "Menu",
+    "display_options": "Display Options",
+    "account": "Account",
+    "theme": "Theme",
+    "light_mode": "Switch to Light Mode",
+    "dark_mode": "Switch to Dark Mode",
+    "language": "Language"
+  }
+}
